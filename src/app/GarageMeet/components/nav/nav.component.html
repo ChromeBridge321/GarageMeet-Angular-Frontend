@@ -1,0 +1,13 @@
+ <p-menubar [styleClass]="styleClass" [style]="classes" [model]="items" class="border-b border-zinc-700 sticky top-0 z-50 ">
+    <ng-template #end>
+      <span class="text-xl sm:2xl: md:text-3xl font-bold">GarageMeet</span>
+    </ng-template>
+    <ng-template #item let-item>
+      <div class="justify-end-safe items-end-safe font-bold text-xl">
+        <a [routerLink]="[item.routerLink]" routerLinkActive="router-link-active"  [href]="item.url" pRipple class="p-menubar-item-link">
+          <span>{{ item.label }}</span>
+          <i [class]="item.icon"></i>
+        </a>
+      </div>
+    </ng-template>
+  </p-menubar>
