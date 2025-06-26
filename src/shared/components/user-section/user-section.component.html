@@ -1,0 +1,18 @@
+<div class="user-section">
+  <div class="user-info">
+    <p class="user-name">{{ getUserData()?.email || 'Usuario' }}</p>
+    <p class="user-role">{{ getWorkshopData()?.name || 'Propietario de Taller' }}</p>
+  </div>
+  <p-avatar
+    icon="pi pi-user"
+    size="large"
+    shape="circle"
+    [style]="{ 'background-color': '#3b82f6', 'color': 'white' }">
+  </p-avatar>
+  <p-button
+    icon="pi pi-sign-out"
+    severity="secondary"
+    [text]="true"
+    (onClick)="logout()">
+  </p-button>
+</div>

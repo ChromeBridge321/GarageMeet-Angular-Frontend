@@ -1,0 +1,74 @@
+<!-- Desktop Sidebar -->
+<aside class="sidebar desktop-sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <i class="pi pi-wrench"></i>
+      GarageMeet
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    @for (item of navigationItems(); track item.label) {
+      <button
+        class="nav-item"
+        [class.active]="item.active"
+        (click)="setActiveNavItem(item); navigateTo(item.route)">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </button>
+    }
+  </nav>
+</aside>
+
+<!-- Mobile Sidebar -->
+<p-sidebar
+  [(visible)]="sidebarVisible"
+  position="left"
+  [modal]="true"
+  styleClass="w-80 mobile-sidebar-light">
+  <ng-template pTemplate="header">
+    <div class="sidebar-logo">
+      <i class="pi pi-wrench"></i>
+      GarageMeet
+    </div>
+  </ng-template>
+
+  <nav class="sidebar-nav">
+    @for (item of navigationItems(); track item.label) {
+      <button
+        class="nav-item"
+        [class.active]="item.active"
+        (click)="setActiveNavItem(item); navigateTo(item.route)">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </button>
+    }
+  </nav>
+</p-sidebar>
+
+<!-- Alternative: Mobile Drawer (uncomment to use instead of sidebar)
+<p-drawer
+  [(visible)]="sidebarVisible"
+  position="left"
+  [modal]="true"
+  styleClass="w-80 mobile-sidebar-light">
+  <ng-template pTemplate="header">
+    <div class="sidebar-logo">
+      <i class="pi pi-wrench"></i>
+      GarageMeet
+    </div>
+  </ng-template>
+
+  <nav class="sidebar-nav">
+    @for (item of navigationItems(); track item.label) {
+      <button
+        class="nav-item"
+        [class.active]="item.active"
+        (click)="setActiveNavItem(item); navigateTo(item.route)">
+        <i [class]="item.icon"></i>
+        <span>{{ item.label }}</span>
+      </button>
+    }
+  </nav>
+</p-drawer>
+-->

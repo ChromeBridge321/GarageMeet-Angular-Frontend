@@ -1,0 +1,59 @@
+/* Dashboard Panel Content Styles */
+
+/* Welcome Section */
+.welcome-section {
+  margin-bottom: 2rem;
+}
+
+.welcome-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.welcome-subtitle {
+  color: #6b7280;
+  margin: 0 0 3rem 0;
+}
+
+/* Placeholder Content */
+.placeholder-content {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  color: #6b7280;
+}
+
+.placeholder-text {
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.placeholder-subtext {
+  margin: 0;
+  font-size: 1rem;
+  color: #9ca3af;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+
+  .placeholder-content {
+    padding: 3rem 1rem;
+  }
+
+  .placeholder-text {
+    font-size: 1.125rem;
+  }
+}

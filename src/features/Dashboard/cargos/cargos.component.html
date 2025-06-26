@@ -1,0 +1,148 @@
+<app-dashboard-layout>
+  <div class="positions-container">
+    <!-- Header Section -->
+    <div class="content-header">
+      <h1 class="page-title">
+        <i class="pi pi-users"></i>
+        Gestión de Cargos
+      </h1>
+      <p class="page-subtitle">Administra los cargos disponibles en tu taller mecánico</p>
+
+      <div class="header-actions">
+        <p-button
+          label="Nuevo Cargo"
+          icon="pi pi-plus"
+          severity="success"
+          (onClick)="openNew()"
+          class="new-button">
+        </p-button>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-container">
+      <p-table
+        [value]="positions()"
+        [loading]="loading()"
+        [paginator]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} cargos"
+        [rowsPerPageOptions]="[5, 10, 25]"
+        styleClass="p-datatable-sm"
+        responsiveLayout="scroll">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th>ID</th>
+            <th>Nombre del Cargo</th>
+            <th>Fecha de Creación</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-position>
+          <tr>
+            <td>{{ position.positions_id }}</td>
+            <td>
+              <span class="position-name">{{ position.name }}</span>
+            </td>
+            <td>{{ position.created_at | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>
+              <div class="action-buttons">
+                <p-button
+                  icon="pi pi-pencil"
+                  severity="info"
+                  size="small"
+                  [text]="true"
+                  [rounded]="true"
+                  pTooltip="Editar"
+                  (onClick)="editPosition(position)">
+                </p-button>
+                <p-button
+                  icon="pi pi-trash"
+                  severity="danger"
+                  size="small"
+                  [text]="true"
+                  [rounded]="true"
+                  pTooltip="Eliminar"
+                  (onClick)="deletePosition(position)">
+                </p-button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4" class="text-center">
+              <div class="empty-state">
+                <i class="pi pi-users" style="font-size: 3rem; color: #6b7280;"></i>
+                <p>No hay cargos registrados</p>
+                <p-button
+                  label="Crear Primer Cargo"
+                  icon="pi pi-plus"
+                  severity="success"
+                  (onClick)="openNew()">
+                </p-button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <!-- Dialog for Create/Edit Position -->
+    <p-dialog
+      [(visible)]="positionDialogVisible"
+      [header]="isEditing() ? 'Editar Cargo' : 'Nuevo Cargo'"
+      [modal]="true"
+      [closable]="false"
+      [style]="{width: '450px'}"
+      styleClass="position-dialog">
+
+      <div class="dialog-content">
+        <div class="field">
+          <label for="positionName" class="field-label">
+            Nombre del Cargo <span class="required">*</span>
+          </label>
+          <input
+            pInputText
+            id="positionName"
+            [(ngModel)]="currentPosition.name"
+            placeholder="Ej: Mecánico, Supervisor, etc."
+            class="form-input"
+            maxlength="100"
+            [autofocus]="true" />
+        </div>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <div class="dialog-footer">
+          <p-button
+            label="Cancelar"
+            icon="pi pi-times"
+            [text]="true"
+            severity="secondary"
+            (onClick)="hideDialog()">
+          </p-button>
+          <p-button
+            [label]="isEditing() ? 'Actualizar' : 'Crear'"
+            [icon]="isEditing() ? 'pi pi-check' : 'pi pi-plus'"
+            severity="success"
+            (onClick)="savePosition()">
+          </p-button>
+        </div>
+      </ng-template>
+    </p-dialog>
+
+    <!-- Toast Messages -->
+    <p-toast position="top-right"></p-toast>
+
+    <!-- Confirmation Dialog -->
+    <p-confirmDialog
+      styleClass="confirm-dialog"
+      [style]="{width: '425px'}">
+    </p-confirmDialog>
+  </div>
+</app-dashboard-layout>

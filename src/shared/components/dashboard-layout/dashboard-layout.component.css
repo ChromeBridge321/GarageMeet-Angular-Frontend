@@ -1,0 +1,136 @@
+/* Dashboard Layout Styles */
+
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  margin-left: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  background: white;
+  border-bottom: 1px solid #e0e7ff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mobile-logo {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.mobile-logo i {
+  font-size: 1.5rem;
+  color: #3b82f6;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.mobile-menu-btn:hover {
+  color: #3b82f6;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+
+  .mobile-logo {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .dashboard-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .header-content {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+
+  .header-left {
+    order: 1;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dashboard-content {
+    padding: 1rem;
+  }
+}
+
+/* Smaller mobile screens */
+@media (max-width: 480px) {
+  .dashboard-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .header-content {
+    gap: 0.5rem;
+  }
+
+  .mobile-logo {
+    font-size: 1.125rem;
+  }
+
+  .mobile-logo i {
+    font-size: 1.25rem;
+  }
+
+  .mobile-menu-btn {
+    padding: 0.375rem;
+    font-size: 1.25rem;
+  }
+
+  .dashboard-content {
+    padding: 0.75rem;
+  }
+}

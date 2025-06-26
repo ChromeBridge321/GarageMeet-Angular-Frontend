@@ -1,0 +1,177 @@
+aqui se muestra lo necesario para crear un crud para empleados y cargos. cabe aclarar que primero debe existir un cargo para poder crear un empleado y asignarle un cargo.
+
+Modelo para cargo (creacion)
+{
+    "name":string,
+    "mechanical_workshops_id":number
+}
+
+modelo para cargo (actualizacion)
+{
+    "positions_id": number,
+    "name": string
+}
+modelo para cargo (eliminacion)
+{
+    "positions_id": number
+}
+modelo para cargo (listar)
+{
+    "mechanical_workshops_id": number
+}
+
+endpoins de Cargos:
+POST: http://127.0.0.1:8000/api/positions/create
+POST: http://127.0.0.1:8000/api/positions/update
+DELETE: http://127.0.0.1:8000/api/positions/delete
+GET: http://127.0.0.1:8000/api/positions/all
+
+
+Modelo para empleados (creacion)
+{
+    "name": string,
+    "last_name": string,
+    "email": string,
+    "cellphone_number": string,
+    "positions_id": number,
+    "mechanicals_id": number
+}
+modelo para empleados (actualizacion)
+{
+    "name": string,
+    "last_name": string,
+    "email": string,
+    "cellphone_number": string,
+    "positions_id":number,
+    "peoples_id": number,
+    "employees_id":number
+}
+modelo para empleados (eliminacion)
+{
+    "peoples_id": 17,
+    "employees_id": number
+}
+modelo para empleados (listar)
+{
+    "mechanical_workshops_id": number
+}
+
+endpoins de empleados:
+POST: http://127.0.0.1:8000/api/employees/create
+POST: http://127.0.0.1:8000/api/employees/update
+DELETE: http://127.0.0.1:8000/api/employees/delete
+GET: http://127.0.0.1:8000/api/employees/all
+
+
+cabe recalcar que para hacer estas peticiones tanto de cargos como empleados se requieren de un bearer token. este token se pasa a travez de los headers y son de tipo aplication json.
+
+
+las respuestas que se optienen al hacer la peticion son las siguientes
+cargos:
+Creacion:
+{
+    "message": "Position created successfully",
+    "data": {
+        "positions_id": 8,
+        "name": "Hojalatero",
+        "mechanical_workshops_id": 2
+    }
+}
+
+Actualizacion:
+{
+    "message": "Position updated successfully",
+    "data": {
+        "positions_id": 2,
+        "name": "Hojalatero 2",
+        "mechanical_workshops_id": 1,
+        "created_at": "2025-06-17T06:39:25.000000Z",
+        "updated_at": "2025-06-24T22:16:32.000000Z"
+    }
+}
+
+Eliminacion:
+{
+    "message": "Position deleted successfully"
+}
+
+Listar:
+{
+    "message": "Positions retrieved successfully",
+    "data": [
+        {
+            "positions_id": 2,
+            "name": "Hojalatero 2",
+            "mechanical_workshops_id": 1,
+            "created_at": "2025-06-17T06:39:25.000000Z",
+            "updated_at": "2025-06-24T22:16:32.000000Z"
+        }
+    ]
+}
+
+Empleados:
+Creacion:
+{
+    "message": "Employee created successfully",
+    "Person": {
+        "peoples_id": 37,
+        "name": "David",
+        "last_name": "Garcia",
+        "email": "correo@ejemplo.com",
+        "cellphone_number": "9361140117"
+    },
+    "Employee": {
+        "employees_id": 12,
+        "mechanical_workshops_id": 1,
+        "peoples_id": 37
+    }
+}
+
+Actualizacion:
+{
+    "message": "Employee updated successfully",
+    "Person": {
+        "peoples_id": 10,
+        "name": "Pedro Adrian",
+        "last_name": "Martinez Sierra",
+        "email": "correo@ejemplo.com",
+        "cellphone_number": "9361140117"
+    },
+    "Employee": {
+        "employees_id": 1,
+        "mechanical_workshops_id": 1,
+        "peoples_id": 10
+    }
+}
+
+Eliminacion:
+{
+    "message": "Employee deleted successfully"
+}
+
+Listar:
+[
+    {
+        "employees_id": 1,
+        "mechanical_workshops_id": 1,
+        "peoples_id": 10,
+        "created_at": "2025-06-22T05:13:49.000000Z",
+        "updated_at": "2025-06-22T05:13:49.000000Z",
+        "person": {
+            "peoples_id": 10,
+            "name": "Pedro Adrian",
+            "last_name": "Martinez Sierra",
+            "email": "correo@ejemplo.com",
+            "cellphone_number": "9361140117",
+            "created_at": "2025-06-22T05:13:49.000000Z",
+            "updated_at": "2025-06-23T01:05:22.000000Z"
+        }
+    }
+]
+
+¿Los empleados tienen una relación con cargos?
+si, empleados hace referencia a cargos.
+¿Hay otras tablas relacionadas?
+empleados hace referencia a talleres mecanicos.
+¿Qué campos son obligatorios vs opcionales?
+todos los que te proporcione son obligatorios.

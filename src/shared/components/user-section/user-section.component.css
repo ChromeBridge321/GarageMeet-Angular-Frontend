@@ -1,0 +1,101 @@
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info {
+  text-align: right;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.user-role {
+  color: #6b7280;
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+/* Mobile and tablet responsive design */
+@media (max-width: 768px) {
+  .user-section {
+    order: 2;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+  }
+
+  .user-info {
+    text-align: left;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .user-name {
+    font-size: 0.8rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-role {
+    font-size: 0.7rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Make avatar smaller on mobile */
+  .user-section ::ng-deep .p-avatar {
+    width: 2rem !important;
+    height: 2rem !important;
+    font-size: 1rem !important;
+  }
+
+  /* Make logout button smaller on mobile */
+  .user-section ::ng-deep .p-button {
+    padding: 0.375rem !important;
+    font-size: 0.875rem !important;
+    min-width: auto !important;
+  }
+
+  .user-section ::ng-deep .p-button .p-button-icon {
+    font-size: 1rem !important;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .user-section {
+    gap: 0.5rem;
+  }
+
+  .user-name {
+    font-size: 0.75rem;
+  }
+
+  .user-role {
+    font-size: 0.65rem;
+  }
+
+  .user-section ::ng-deep .p-avatar {
+    width: 1.75rem !important;
+    height: 1.75rem !important;
+    font-size: 0.875rem !important;
+  }
+
+  .user-section ::ng-deep .p-button {
+    padding: 0.25rem !important;
+  }
+
+  .user-section ::ng-deep .p-button .p-button-icon {
+    font-size: 0.875rem !important;
+  }
+}
