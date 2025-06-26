@@ -2,6 +2,3 @@
 @import "primeicons/primeicons.css";
 @import "tailwindcss";
 
-h1:hover {
-  background-color: aliceblue;
-}

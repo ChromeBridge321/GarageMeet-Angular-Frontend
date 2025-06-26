@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavComponent } from "../../components/nav/nav.component";
+import { NavComponent } from '../../shared/components/nav/nav.component';
 import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-search',

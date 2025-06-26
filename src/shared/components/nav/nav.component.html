@@ -1,0 +1,22 @@
+<p-menubar [model]="items"
+  class="sticky top-0 z-50">
+  <ng-template #end >
+    <div class=" ">
+      <span class="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+        GarageMeet
+      </span>
+    </div>
+  </ng-template>
+  <ng-template #item let-item>
+    <div class="flex items-center">
+      <a [routerLink]="[item.routerLink]"
+         routerLinkActive="router-link-active"
+         [href]="item.url"
+         pRipple
+         class="p-menubar-item-link text-gray-300 hover:text-white transition-colors duration-300 font-medium">
+        <span>{{ item.label }}</span>
+        <i [class]="item.icon" *ngIf="item.icon" class="ml-2"></i>
+      </a>
+    </div>
+  </ng-template>
+</p-menubar>

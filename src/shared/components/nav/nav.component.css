@@ -1,0 +1,26 @@
+:host ::ng-deep .p-menubar {
+  background-color: black !important;
+  justify-content: space-between;
+  flex-direction: row-reverse;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+:host ::ng-deep .p-menubar-item-content:hover {
+  background-color: rgb(17, 17, 17) !important;
+}
+
+:host ::ng-deep .p-menubar-end {
+  margin-left: 0;
+}
+
+
+
+/* Responsive Styles */
+@media screen and (max-width: 960px) {
+  :host ::ng-deep .p-menubar-root-list {
+    background-color: black !important;
+    border-left: 0rem;
+    border-right: 0rem;
+  }
+}
