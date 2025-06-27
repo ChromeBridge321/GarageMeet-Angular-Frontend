@@ -1,19 +1,138 @@
 <app-dashboard-layout>
-  <div class="vehiculos-container">
-    <div class="page-header">
-      <h1>Gestión de Vehículos</h1>
-      <p>Administra el inventario de vehículos en tu taller</p>
-    </div>
-
-    <div class="content-section">
-      <h2>Lista de Vehículos</h2>
-      <p>Aquí podrás ver y gestionar todos los vehículos que están siendo atendidos en tu taller.</p>
-
-      <!-- TODO: Implementar la gestión completa de vehículos -->
-      <div class="placeholder-content">
-        <i class="pi pi-car" style="font-size: 3rem; color: #6b7280;"></i>
-        <p>Funcionalidad en desarrollo</p>
+  <div class="max-w-7xl mx-auto">
+    <!-- Header Section -->
+    <div class="mb-8">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div class="mb-4 sm:mb-0">
+          <h1 class="text-3xl font-bold text-gray-900 flex items-center">
+            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+              <i class="pi pi-car text-blue-600 text-xl"></i>
+            </div>
+            Gestión de Vehículos
+          </h1>
+          <p class="mt-1 text-sm text-gray-500">Administra todos los vehículos registrados en tu taller mecánico</p>
+        </div>
       </div>
     </div>
+
+    <!-- Table Card -->
+    <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">Lista de Vehículos</h3>
+        <p class="mt-1 text-sm text-gray-500">Todos los vehículos registrados por los clientes</p>
+      </div>
+
+      <p-table
+        [value]="vehicles()"
+        [loading]="loading()"
+        [paginator]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} vehículos"
+        [rowsPerPageOptions]="[5, 10, 25]"
+        styleClass="p-datatable-sm"
+        responsiveLayout="stack"
+        [breakpoint]="'768px'">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="vehicles_id" class="hidden-mobile">
+              ID <p-sortIcon field="vehicles_id"></p-sortIcon>
+            </th>
+            <th pSortableColumn="plates">
+              Placas <p-sortIcon field="plates"></p-sortIcon>
+            </th>
+            <th pSortableColumn="make">
+              Marca <p-sortIcon field="make"></p-sortIcon>
+            </th>
+            <th pSortableColumn="model" class="hidden-mobile">
+              Modelo <p-sortIcon field="model"></p-sortIcon>
+            </th>
+            <th class="hidden-mobile">Propietario</th>
+            <th class="hidden-mobile">Contacto</th>
+            <th class="hidden-mobile">Fecha de Registro</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-vehicle>
+          <tr class="hover:bg-gray-50">
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">ID:</span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                #{{ vehicle.vehicles_id }}
+              </span>
+            </td>
+            <td>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Placas:</span>
+              <div class="flex items-center">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                  <i class="pi pi-car text-blue-600 text-sm"></i>
+                </div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                  {{ vehicle.plates }}
+                </span>
+              </div>
+            </td>
+            <td>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Marca:</span>
+              <div class="flex flex-col">
+                <span class="text-sm font-medium text-gray-900">{{ vehicle.make }}</span>
+                <span class="mobile-only text-sm text-gray-500 mt-1">{{ vehicle.model }}</span>
+              </div>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Modelo:</span>
+              <span class="text-sm text-gray-600">{{ vehicle.model }}</span>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Propietario:</span>
+              <ng-container *ngIf="vehicle.client?.person; else noOwner">
+                <div class="flex items-center">
+                  <div class="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mr-2">
+                    <i class="pi pi-user text-purple-600 text-xs"></i>
+                  </div>
+                  <span class="text-sm text-gray-900">
+                    {{ vehicle.client.person.name }} {{ vehicle.client.person.last_name }}
+                  </span>
+                </div>
+              </ng-container>
+              <ng-template #noOwner>
+                <span class="text-sm text-gray-400">No asignado</span>
+              </ng-template>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Contacto:</span>
+              <ng-container *ngIf="vehicle.client?.person?.cellphone_number; else noContact">
+                <span class="text-sm text-gray-600">{{ vehicle.client.person.cellphone_number }}</span>
+              </ng-container>
+              <ng-template #noContact>
+                <span class="text-sm text-gray-400">-</span>
+              </ng-template>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Fecha:</span>
+              <span class="text-sm text-gray-600">{{ vehicle.created_at | date:'dd/MM/yyyy' }}</span>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7" class="text-center py-8">
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                  <i class="pi pi-car text-gray-400 text-2xl"></i>
+                </div>
+                <p class="text-gray-500 text-lg font-medium mb-2">No hay vehículos registrados</p>
+                <p class="text-gray-400 text-sm mb-4">Los vehículos se registran al crear clientes con vehículos</p>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <!-- Toast Messages -->
+    <p-toast position="top-right"></p-toast>
   </div>
 </app-dashboard-layout>

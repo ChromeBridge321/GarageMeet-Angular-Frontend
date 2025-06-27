@@ -1,19 +1,301 @@
 <app-dashboard-layout>
-  <div class="clientes-container">
-    <div class="page-header">
-      <h1>Gestión de Clientes</h1>
-      <p>Administra la información de tus clientes y su historial de servicios</p>
-    </div>
+  <div class="max-w-7xl mx-auto">
+    <!-- Header Section -->
+    <div class="mb-8">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div class="mb-4 sm:mb-0">
+          <h1 class="text-3xl font-bold text-gray-900 flex items-center">
+            <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+              <i class="pi pi-users text-purple-600 text-xl"></i>
+            </div>
+            Gestión de Clientes
+          </h1>
+          <p class="mt-1 text-sm text-gray-500">Administra los clientes de tu taller mecánico y sus vehículos</p>
+        </div>
 
-    <div class="content-section">
-      <h2>Lista de Clientes</h2>
-      <p>Aquí podrás ver, agregar, editar y eliminar clientes, así como consultar su historial de servicios.</p>
-
-      <!-- TODO: Implementar la gestión completa de clientes -->
-      <div class="placeholder-content">
-        <i class="pi pi-users" style="font-size: 3rem; color: #6b7280;"></i>
-        <p>Funcionalidad en desarrollo</p>
+        <div class="flex-shrink-0">
+          <button
+            (click)="openNew()"
+            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+            <i class="pi pi-plus mr-2"></i>
+            Nuevo Cliente
+          </button>
+        </div>
       </div>
     </div>
+
+    <!-- Table Card -->
+    <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">Lista de Clientes</h3>
+        <p class="mt-1 text-sm text-gray-500">Todos los clientes registrados en tu taller</p>
+      </div>
+      <p-table
+        [value]="clients()"
+        [loading]="loading()"
+        [paginator]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} clientes"
+        styleClass="p-datatable-sm"
+        responsiveLayout="stack"
+        [breakpoint]="'768px'">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="clients_id" class="hidden-mobile">
+              ID <p-sortIcon field="clients_id"></p-sortIcon>
+            </th>
+            <th pSortableColumn="person.name">
+              Nombre Completo <p-sortIcon field="person.name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="person.email" class="hidden-mobile">
+              Email <p-sortIcon field="person.email"></p-sortIcon>
+            </th>
+            <th class="hidden-mobile">Teléfono</th>
+            <th>Vehículo</th>
+            <th class="hidden-mobile">Fecha de Registro</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-client>
+          <tr class="hover:bg-gray-50">
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">ID:</span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                #{{ client.clients_id }}
+              </span>
+            </td>
+            <td>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Cliente:</span>
+              <div class="flex flex-col">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                    <i class="pi pi-user text-purple-600 text-sm"></i>
+                  </div>
+                  <span class="text-sm font-medium text-gray-900">
+                    {{ client.person?.name }} {{ client.person?.last_name }}
+                  </span>
+                </div>
+                <span class="mobile-only text-sm text-gray-500 mt-1 ml-11">{{ client.person?.email }}</span>
+              </div>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Email:</span>
+              <span class="text-sm text-gray-600">{{ client.person?.email }}</span>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Teléfono:</span>
+              <span class="text-sm text-gray-600">{{ client.person?.cellphone_number }}</span>
+            </td>
+            <td>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Vehículo:</span>
+              <ng-container *ngIf="client.vehicles && client.vehicles.length > 0; else noVehicle">
+                <div class="flex flex-col space-y-1">
+                  <div *ngFor="let vehicle of client.vehicles; let i = index"
+                       class="flex items-center text-sm">
+                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      <i class="pi pi-car mr-1"></i>
+                      {{ vehicle.plates }}
+                    </span>
+                    <span class="ml-2 text-gray-600">{{ vehicle.make }} {{ vehicle.model }}</span>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-template #noVehicle>
+                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                  <i class="pi pi-minus mr-1"></i>
+                  Sin vehículo
+                </span>
+              </ng-template>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Fecha:</span>
+              <span class="text-sm text-gray-600">{{ formatDate(client.created_at) }}</span>
+            </td>
+            <td>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Acciones:</span>
+              <div class="flex items-center space-x-2">
+                <button
+                  (click)="editClient(client)"
+                  class="inline-flex items-center p-1.5 border border-transparent rounded text-blue-600 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                  <i class="pi pi-pencil text-sm"></i>
+                </button>
+                <button
+                  (click)="deleteClient(client)"
+                  class="inline-flex items-center p-1.5 border border-transparent rounded text-red-600 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors">
+                  <i class="pi pi-trash text-sm"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="7" class="text-center py-8">
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                  <i class="pi pi-users text-gray-400 text-2xl"></i>
+                </div>
+                <p class="text-gray-500 text-lg font-medium mb-2">No hay clientes registrados</p>
+                <p class="text-gray-400 text-sm mb-4">Comienza agregando tu primer cliente</p>
+                <button
+                  (click)="openNew()"
+                  class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+                  <i class="pi pi-plus mr-2"></i>
+                  Crear Primer Cliente
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <!-- Dialog for Create/Edit Client -->
+    <p-dialog
+      [(visible)]="clientDialogVisible"
+      [header]="isEditing() ? 'Editar Cliente' : 'Nuevo Cliente'"
+      [modal]="true"
+      [closable]="false"
+      [style]="{width: '700px', maxWidth: '95vw'}"
+      styleClass="custom-dialog"
+      [responsive]="true">
+
+      <div class="space-y-6">
+        <p-accordion [multiple]="false" [activeIndex]="0">
+          <!-- Información del Cliente -->
+          <p-accordionTab header="Información del Cliente">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div class="space-y-2">
+                <label for="clientName" class="block text-sm font-medium text-gray-700">
+                  Nombre <span class="text-red-500">*</span>
+                </label>
+                <input
+                  pInputText
+                  id="clientName"
+                  [(ngModel)]="currentClient.name"
+                  placeholder="Nombre del cliente"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  maxlength="50"
+                  [autofocus]="true" />
+              </div>
+
+              <div class="space-y-2">
+                <label for="clientLastName" class="block text-sm font-medium text-gray-700">
+                  Apellido <span class="text-red-500">*</span>
+                </label>
+                <input
+                  pInputText
+                  id="clientLastName"
+                  [(ngModel)]="currentClient.last_name"
+                  placeholder="Apellido del cliente"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  maxlength="50" />
+              </div>
+
+              <div class="space-y-2 md:col-span-2">
+                <label for="clientEmail" class="block text-sm font-medium text-gray-700">
+                  Email <span class="text-red-500">*</span>
+                </label>
+                <input
+                  pInputText
+                  id="clientEmail"
+                  type="email"
+                  [(ngModel)]="currentClient.email"
+                  placeholder="ejemplo@correo.com"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  maxlength="100" />
+              </div>
+
+              <div class="space-y-2 md:col-span-2">
+                <label for="clientPhone" class="block text-sm font-medium text-gray-700">
+                  Teléfono <span class="text-red-500">*</span>
+                </label>
+                <input
+                  pInputText
+                  id="clientPhone"
+                  [(ngModel)]="currentClient.cellphone_number"
+                  placeholder="Número de teléfono"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  maxlength="15" />
+              </div>
+            </div>
+          </p-accordionTab>
+
+          <!-- Información del Vehículo -->
+          <p-accordionTab header="Información del Vehículo">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div class="space-y-2">
+                <label for="vehiclePlates" class="block text-sm font-medium text-gray-700">
+                  Placas <span class="text-red-500">*</span>
+                </label>
+                <input
+                  pInputText
+                  id="vehiclePlates"
+                  [(ngModel)]="currentVehicle.plates"
+                  placeholder="Placas del vehículo"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  maxlength="20" />
+              </div>
+
+              <div class="space-y-2">
+                <label for="vehicleMake" class="block text-sm font-medium text-gray-700">
+                  Marca <span class="text-red-500">*</span>
+                </label>
+                <input
+                  pInputText
+                  id="vehicleMake"
+                  [(ngModel)]="currentVehicle.make"
+                  placeholder="Marca del vehículo"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  maxlength="50" />
+              </div>
+
+              <div class="space-y-2 md:col-span-2">
+                <label for="vehicleModel" class="block text-sm font-medium text-gray-700">
+                  Modelo <span class="text-red-500">*</span>
+                </label>
+                <input
+                  pInputText
+                  id="vehicleModel"
+                  [(ngModel)]="currentVehicle.model"
+                  placeholder="Modelo del vehículo"
+                  class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  maxlength="50" />
+              </div>
+            </div>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+          <button
+            (click)="hideDialog()"
+            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+            <i class="pi pi-times mr-2"></i>
+            Cancelar
+          </button>
+          <button
+            (click)="saveClient()"
+            class="px-4 py-2 text-sm font-medium text-white bg-purple-600 border border-transparent rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+            <i class="pi {{ isEditing() ? 'pi-check' : 'pi-plus' }} mr-2"></i>
+            {{ isEditing() ? 'Actualizar' : 'Crear' }}
+          </button>
+        </div>
+      </ng-template>
+    </p-dialog>
+
+    <!-- Toast Messages -->
+    <p-toast position="top-right"></p-toast>
+
+    <!-- Confirmation Dialog -->
+    <p-confirmDialog
+      styleClass="confirm-dialog"
+      [style]="{width: '425px'}">
+    </p-confirmDialog>
   </div>
 </app-dashboard-layout>

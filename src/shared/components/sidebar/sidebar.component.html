@@ -1,22 +1,31 @@
 <!-- Desktop Sidebar -->
-<aside class="sidebar desktop-sidebar">
-  <div class="sidebar-header">
-    <div class="sidebar-logo">
-      <i class="pi pi-wrench"></i>
-      GarageMeet
+<aside class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 lg:block hidden">
+  <!-- Logo -->
+  <div class="flex items-center justify-center h-16 px-6 border-b border-gray-200">
+    <div class="flex items-center space-x-3">
+      <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+        <i class="pi pi-wrench text-white text-lg"></i>
+      </div>
+      <span class="text-xl font-bold text-gray-900">GarageMeet</span>
     </div>
   </div>
 
-  <nav class="sidebar-nav">
-    @for (item of navigationItems(); track item.label) {
-      <button
-        class="nav-item"
-        [class.active]="item.active"
-        (click)="setActiveNavItem(item); navigateTo(item.route)">
-        <i [class]="item.icon"></i>
-        <span>{{ item.label }}</span>
-      </button>
-    }
+  <!-- Navigation -->
+  <nav class="mt-6 px-3">
+    <div class="space-y-1">
+      @for (item of navigationItems(); track item.label) {
+        <button
+          class="w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200"
+          [class]="item.active
+            ? 'bg-blue-50 text-blue-700 border border-blue-200'
+            : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'"
+          (click)="setActiveNavItem(item); navigateTo(item.route)">
+          <i [class]="item.icon + ' mr-3 text-lg'"
+             [ngClass]="item.active ? 'text-blue-600' : 'text-gray-400'"></i>
+          <span>{{ item.label }}</span>
+        </button>
+      }
+    </div>
   </nav>
 </aside>
 
@@ -25,24 +34,31 @@
   [(visible)]="sidebarVisible"
   position="left"
   [modal]="true"
-  styleClass="w-80 mobile-sidebar-light">
+  styleClass="w-80">
   <ng-template pTemplate="header">
-    <div class="sidebar-logo">
-      <i class="pi pi-wrench"></i>
-      GarageMeet
+    <div class="flex items-center space-x-3">
+      <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+        <i class="pi pi-wrench text-white text-lg"></i>
+      </div>
+      <span class="text-xl font-bold text-gray-900">GarageMeet</span>
     </div>
   </ng-template>
 
-  <nav class="sidebar-nav">
-    @for (item of navigationItems(); track item.label) {
-      <button
-        class="nav-item"
-        [class.active]="item.active"
-        (click)="setActiveNavItem(item); navigateTo(item.route)">
-        <i [class]="item.icon"></i>
-        <span>{{ item.label }}</span>
-      </button>
-    }
+  <nav class="mt-6">
+    <div class="space-y-1">
+      @for (item of navigationItems(); track item.label) {
+        <button
+          class="w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200"
+          [class]="item.active
+            ? 'bg-blue-50 text-blue-700 border border-blue-200'
+            : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'"
+          (click)="setActiveNavItem(item); navigateTo(item.route); closeSidebar()">
+          <i [class]="item.icon + ' mr-3 text-lg'"
+             [ngClass]="item.active ? 'text-blue-600' : 'text-gray-400'"></i>
+          <span>{{ item.label }}</span>
+        </button>
+      }
+    </div>
   </nav>
 </p-sidebar>
 

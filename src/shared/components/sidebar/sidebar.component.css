@@ -1,12 +1,17 @@
-/* Desktop Sidebar Styles */
-.sidebar.desktop-sidebar {
-  width: 280px;
+/* Minimal CSS - Most styling handled by Tailwind */
+
+/* PrimeNG Sidebar customizations */
+::ng-deep .p-sidebar {
   background: white;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  position: fixed;
-  height: 100vh;
-  overflow-y: auto;
+}
+
+::ng-deep .p-sidebar .p-sidebar-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+::ng-deep .p-sidebar .p-sidebar-content {
+  padding: 0 1.5rem;
 }
 
 .sidebar-header {

@@ -69,6 +69,10 @@ export class SidebarComponent {
     this.sidebarVisible.set(!this.sidebarVisible());
   }
 
+  closeSidebar() {
+    this.sidebarVisible.set(false);
+  }
+
   setActiveNavItem(selectedItem: any) {
     const items = this.navigationItems();
     items.forEach(item => item.active = false);

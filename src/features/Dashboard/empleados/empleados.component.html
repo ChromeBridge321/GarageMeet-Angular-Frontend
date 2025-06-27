@@ -1,26 +1,35 @@
 <app-dashboard-layout>
-  <div class="employees-container">
+  <div class="max-w-7xl mx-auto">
     <!-- Header Section -->
-    <div class="content-header">
-      <h1 class="page-title">
-        <i class="pi pi-users"></i>
-        Gestión de Empleados
-      </h1>
-      <p class="page-subtitle">Administra los empleados de tu taller mecánico</p>
+    <div class="mb-8">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div class="mb-4 sm:mb-0">
+          <h1 class="text-3xl font-bold text-gray-900 flex items-center">
+            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+              <i class="pi pi-users text-blue-600 text-xl"></i>
+            </div>
+            Gestión de Empleados
+          </h1>
+          <p class="mt-1 text-sm text-gray-500">Administra los empleados de tu taller mecánico</p>
+        </div>
 
-      <div class="header-actions">
-        <p-button
-          label="Nuevo Empleado"
-          icon="pi pi-plus"
-          severity="success"
-          (onClick)="openNew()"
-          class="new-button">
-        </p-button>
+        <div class="flex-shrink-0">
+          <button
+            (click)="openNew()"
+            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+            <i class="pi pi-plus mr-2"></i>
+            Nuevo Empleado
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Table Section -->
-    <div class="table-container">
+    <!-- Table Card -->
+    <div class="bg-white shadow-sm rounded-lg border border-gray-200">
+      <div class="px-6 py-4 border-b border-gray-200">
+        <h3 class="text-lg font-medium text-gray-900">Lista de Empleados</h3>
+        <p class="mt-1 text-sm text-gray-500">Todos los empleados registrados en tu taller</p>
+      </div>
       <p-table
         [value]="employees()"
         [loading]="loading()"
@@ -28,64 +37,82 @@
         [rows]="10"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} empleados"
-        [rowsPerPageOptions]="[5, 10, 25]"
         styleClass="p-datatable-sm"
-        responsiveLayout="scroll">
+        responsiveLayout="stack"
+        [breakpoint]="'768px'">
 
         <ng-template pTemplate="header">
           <tr>
-            <th>ID</th>
-            <th>Nombre Completo</th>
-            <th>Email</th>
-            <th>Teléfono</th>
+            <th pSortableColumn="employees_id" class="hidden-mobile">
+              ID <p-sortIcon field="employees_id"></p-sortIcon>
+            </th>
+            <th pSortableColumn="person.name">
+              Nombre Completo <p-sortIcon field="person.name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="person.email" class="hidden-mobile">
+              Email <p-sortIcon field="person.email"></p-sortIcon>
+            </th>
+            <th class="hidden-mobile">Teléfono</th>
             <th>Cargo</th>
-            <th>Fecha de Registro</th>
+            <th class="hidden-mobile">Fecha de Registro</th>
             <th>Acciones</th>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-employee>
-          <tr>
-            <td>{{ employee.employees_id }}</td>
-            <td>
-              <span class="employee-name">
-                {{ employee.person?.name }} {{ employee.person?.last_name }}
+          <tr class="hover:bg-gray-50">
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">ID:</span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                #{{ employee.employees_id }}
               </span>
             </td>
             <td>
-              <span class="employee-email">{{ employee.person?.email }}</span>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Empleado:</span>
+              <div class="flex flex-col">
+                <div class="flex items-center">
+                  <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                    <i class="pi pi-user text-blue-600 text-sm"></i>
+                  </div>
+                  <span class="text-sm font-medium text-gray-900">
+                    {{ employee.person?.name }} {{ employee.person?.last_name }}
+                  </span>
+                </div>
+                <span class="mobile-only text-sm text-gray-500 mt-1 ml-11">{{ employee.person?.email }}</span>
+              </div>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Email:</span>
+              <span class="text-sm text-gray-600">{{ employee.person?.email }}</span>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Teléfono:</span>
+              <span class="text-sm text-gray-600">{{ employee.person?.cellphone_number }}</span>
             </td>
             <td>
-              <span class="employee-phone">{{ employee.person?.cellphone_number }}</span>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Cargo:</span>
+              <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                <i class="pi pi-exclamation-triangle mr-1"></i>
+                Sin cargo asignado
+              </span>
+            </td>
+            <td class="hidden-mobile">
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Fecha:</span>
+              <span class="text-sm text-gray-600">{{ formatDate(employee.created_at) }}</span>
             </td>
             <td>
-              <p-tag
-                value="Sin cargo asignado"
-                severity="warning"
-                styleClass="position-tag">
-              </p-tag>
-            </td>
-            <td>{{ formatDate(employee.created_at) }}</td>
-            <td>
-              <div class="action-buttons">
-                <p-button
-                  icon="pi pi-pencil"
-                  severity="info"
-                  size="small"
-                  [text]="true"
-                  [rounded]="true"
-                  pTooltip="Editar"
-                  (onClick)="editEmployee(employee)">
-                </p-button>
-                <p-button
-                  icon="pi pi-trash"
-                  severity="danger"
-                  size="small"
-                  [text]="true"
-                  [rounded]="true"
-                  pTooltip="Eliminar"
-                  (onClick)="deleteEmployee(employee)">
-                </p-button>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">Acciones:</span>
+              <div class="flex items-center space-x-2">
+                <button
+                  (click)="editEmployee(employee)"
+                  class="inline-flex items-center p-1.5 border border-transparent rounded text-blue-600 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                  <i class="pi pi-pencil text-sm"></i>
+                </button>
+                <button
+                  (click)="deleteEmployee(employee)"
+                  class="inline-flex items-center p-1.5 border border-transparent rounded text-red-600 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors">
+                  <i class="pi pi-trash text-sm"></i>
+                </button>
               </div>
             </td>
           </tr>
@@ -93,16 +120,19 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="7" class="text-center">
-              <div class="empty-state">
-                <i class="pi pi-users" style="font-size: 3rem; color: #6b7280;"></i>
-                <p>No hay empleados registrados</p>
-                <p-button
-                  label="Crear Primer Empleado"
-                  icon="pi pi-plus"
-                  severity="success"
-                  (onClick)="openNew()">
-                </p-button>
+            <td colspan="7" class="text-center py-8">
+              <div class="flex flex-col items-center">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                  <i class="pi pi-users text-gray-400 text-2xl"></i>
+                </div>
+                <p class="text-gray-500 text-lg font-medium mb-2">No hay empleados registrados</p>
+                <p class="text-gray-400 text-sm mb-4">Comienza agregando tu primer empleado</p>
+                <button
+                  (click)="openNew()"
+                  class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                  <i class="pi pi-plus mr-2"></i>
+                  Crear Primer Empleado
+                </button>
               </div>
             </td>
           </tr>
@@ -116,41 +146,42 @@
       [header]="isEditing() ? 'Editar Empleado' : 'Nuevo Empleado'"
       [modal]="true"
       [closable]="false"
-      [style]="{width: '500px'}"
-      styleClass="employee-dialog">
+      [style]="{width: '600px', maxWidth: '95vw'}"
+      styleClass="custom-dialog"
+      [responsive]="true">
 
-      <div class="dialog-content">
-        <div class="form-grid">
-          <div class="field">
-            <label for="employeeName" class="field-label">
-              Nombre <span class="required">*</span>
+      <div class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div class="space-y-2">
+            <label for="employeeName" class="block text-sm font-medium text-gray-700">
+              Nombre <span class="text-red-500">*</span>
             </label>
             <input
               pInputText
               id="employeeName"
               [(ngModel)]="currentEmployee.name"
               placeholder="Nombre del empleado"
-              class="form-input"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               maxlength="50"
               [autofocus]="true" />
           </div>
 
-          <div class="field">
-            <label for="employeeLastName" class="field-label">
-              Apellido <span class="required">*</span>
+          <div class="space-y-2">
+            <label for="employeeLastName" class="block text-sm font-medium text-gray-700">
+              Apellido <span class="text-red-500">*</span>
             </label>
             <input
               pInputText
               id="employeeLastName"
               [(ngModel)]="currentEmployee.last_name"
               placeholder="Apellido del empleado"
-              class="form-input"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               maxlength="50" />
           </div>
 
-          <div class="field">
-            <label for="employeeEmail" class="field-label">
-              Email <span class="required">*</span>
+          <div class="space-y-2 md:col-span-2">
+            <label for="employeeEmail" class="block text-sm font-medium text-gray-700">
+              Email <span class="text-red-500">*</span>
             </label>
             <input
               pInputText
@@ -158,53 +189,54 @@
               type="email"
               [(ngModel)]="currentEmployee.email"
               placeholder="ejemplo@correo.com"
-              class="form-input"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               maxlength="100" />
           </div>
 
-          <div class="field">
-            <label for="employeePhone" class="field-label">
-              Teléfono <span class="required">*</span>
+          <div class="space-y-2">
+            <label for="employeePhone" class="block text-sm font-medium text-gray-700">
+              Teléfono <span class="text-red-500">*</span>
             </label>
             <input
               pInputText
               id="employeePhone"
               [(ngModel)]="currentEmployee.cellphone_number"
               placeholder="Número de teléfono"
-              class="form-input"
+              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               maxlength="15" />
           </div>
 
-          <div class="field">
-            <label for="employeePosition" class="field-label">
-              Cargo <span class="required">*</span>
+          <div class="space-y-2">
+            <label for="employeePosition" class="block text-sm font-medium text-gray-700">
+              Cargo <span class="text-red-500">*</span>
             </label>
             <p-dropdown
               [options]="positionOptions"
               [(ngModel)]="currentEmployee.positions_id"
               placeholder="Selecciona un cargo"
+              optionLabel="label"
+              optionValue="value"
               [showClear]="true"
-              styleClass="form-dropdown">
+              styleClass="w-full">
             </p-dropdown>
           </div>
         </div>
       </div>
 
       <ng-template pTemplate="footer">
-        <div class="dialog-footer">
-          <p-button
-            label="Cancelar"
-            icon="pi pi-times"
-            [text]="true"
-            severity="secondary"
-            (onClick)="hideDialog()">
-          </p-button>
-          <p-button
-            [label]="isEditing() ? 'Actualizar' : 'Crear'"
-            [icon]="isEditing() ? 'pi pi-check' : 'pi pi-plus'"
-            severity="success"
-            (onClick)="saveEmployee()">
-          </p-button>
+        <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+          <button
+            (click)="hideDialog()"
+            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+            <i class="pi pi-times mr-2"></i>
+            Cancelar
+          </button>
+          <button
+            (click)="saveEmployee()"
+            class="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+            <i class="pi {{ isEditing() ? 'pi-check' : 'pi-plus' }} mr-2"></i>
+            {{ isEditing() ? 'Actualizar' : 'Crear' }}
+          </button>
         </div>
       </ng-template>
     </p-dialog>

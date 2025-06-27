@@ -1,46 +1,316 @@
-.vehiculos-container {
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+/* PrimeNG overrides for better Tailwind integration */
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-bottom: 2px solid #e5e7eb;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #f9fafb;
+}
+
+::ng-deep .p-paginator {
+  background: #f9fafb;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  padding: 1rem;
+}
+.vehicles-container {
   padding: 0;
-  max-width: none;
+  max-width: 100%;
+  width: 100%;
   margin: 0;
+  box-sizing: border-box;
 }
 
-.page-header {
+/* Header Section */
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.page-header h1 {
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 700;
   color: #1f2937;
-  margin: 0 0 0.5rem 0;
-}
-
-.page-header p {
-  color: #6b7280;
   margin: 0;
 }
 
-.content-section {
-  background: white;
-  border-radius: 0.5rem;
-  padding: 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.page-title i {
+  color: #3b82f6;
+  font-size: 1.75rem;
 }
 
-.content-section h2 {
-  font-size: 1.5rem;
+.page-subtitle {
+  color: #6b7280;
+  font-size: 1rem;
+  margin: 0.5rem 0 0 0;
+}
+
+/* Table Container */
+.table-container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Table Customizations */
+::ng-deep .p-datatable {
+  border: none;
+}
+
+::ng-deep .p-datatable .p-datatable-header {
+  background: #f8fafc;
+  border: none;
+  padding: 1rem 1.5rem;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  background: #f8fafc;
+  border: none;
+  color: #374151;
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  border: none;
+  border-bottom: 1px solid #f3f4f6;
+  padding: 1rem 1.5rem;
+  color: #374151;
+  vertical-align: middle;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  background: #f8fafc;
+}
+
+/* Vehicle Styling */
+.vehicle-make {
   font-weight: 600;
   color: #1f2937;
-  margin: 0 0 1rem 0;
 }
 
-.placeholder-content {
+.vehicle-model {
+  font-weight: 500;
+  color: #374151;
+}
+
+.vehicle-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.client-name {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.client-name-mobile {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.client-contact {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Plates Tag Styling */
+.plates-tag {
+  font-size: 0.75rem !important;
+  padding: 0.25rem 0.5rem !important;
+  font-weight: 600 !important;
+}
+
+/* Empty State */
+.empty-state {
   text-align: center;
-  padding: 3rem;
+  padding: 3rem 1rem;
   color: #6b7280;
 }
 
-.placeholder-content p {
-  margin: 1rem 0 0 0;
-  font-size: 1.125rem;
+.empty-state i {
+  margin-bottom: 1rem;
+}
+
+.empty-state p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.empty-suggestion {
+  font-size: 0.875rem !important;
+  color: #9ca3af !important;
+  font-style: italic;
+}
+
+/* Toast Customizations */
+::ng-deep .p-toast {
+  z-index: 10000;
+}
+
+/* Fix dropdown panel z-index and positioning */
+::ng-deep .p-dropdown-panel {
+  z-index: 9999 !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 0.375rem !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+::ng-deep .p-dropdown-items-wrapper {
+  max-height: 200px !important;
+}
+
+::ng-deep .p-dropdown-item {
+  padding: 0.5rem 0.75rem !important;
+  border: none !important;
+  color: #374151 !important;
+}
+
+::ng-deep .p-dropdown-item:hover {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+}
+
+::ng-deep .p-dropdown-item.p-highlight {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+/* Ensure dialog has proper z-index */
+::ng-deep .p-dialog {
+  z-index: 1000 !important;
+}
+
+::ng-deep .p-dialog-mask {
+  z-index: 999 !important;
+}
+
+::ng-deep .p-component-overlay {
+  z-index: 9999 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .vehicles-container {
+    padding: 0;
+    width: 100%;
+  }
+
+  .content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  /* Hide columns on mobile */
+  ::ng-deep .p-datatable .hidden-mobile {
+    display: none !important;
+  }
+
+  /* Show mobile-only content */
+  .mobile-only {
+    display: block !important;
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  /* Stack layout styles */
+  ::ng-deep .p-datatable.p-datatable-responsive-stack .p-datatable-tbody > tr > td {
+    border: none;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+  }
+
+  ::ng-deep .p-datatable.p-datatable-responsive-stack .p-datatable-tbody > tr > td .p-column-title {
+    font-weight: 600;
+    color: #374151;
+    min-width: 30%;
+    display: inline-block;
+  }
+
+  ::ng-deep .p-datatable .p-datatable-thead > tr > th,
+  ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.75rem 1rem;
+  }
+}
+
+/* Hide mobile content on desktop */
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+
+  ::ng-deep .p-datatable .p-column-title {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 1.25rem;
+  }
+
+  .page-title i {
+    font-size: 1.5rem;
+  }
+
+  .vehicles-container {
+    padding: 0.5rem;
+  }
+
+  ::ng-deep .p-datatable.p-datatable-responsive-stack .p-datatable-tbody > tr > td .p-column-title {
+    min-width: 35%;
+    font-size: 0.875rem;
+  }
 }

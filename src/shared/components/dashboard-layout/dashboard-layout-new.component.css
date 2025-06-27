@@ -1,0 +1,84 @@
+/* Minimal CSS - Most styling handled by Tailwind */
+
+/* PrimeNG overrides for light theme */
+::ng-deep .p-datatable {
+  @apply shadow-sm rounded-lg overflow-hidden;
+}
+
+::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  @apply bg-gray-50 border-b border-gray-200 text-gray-600 font-semibold text-sm;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  @apply border-b border-gray-100 text-gray-700;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  @apply bg-gray-50;
+}
+
+::ng-deep .p-dialog .p-dialog-header {
+  @apply bg-white border-b border-gray-200;
+}
+
+::ng-deep .p-dialog .p-dialog-content {
+  @apply bg-white;
+}
+
+::ng-deep .p-button {
+  @apply transition-all duration-200;
+}
+
+::ng-deep .p-button.p-button-success {
+  @apply bg-green-600 border-green-600 hover:bg-green-700 hover:border-green-700;
+}
+
+::ng-deep .p-button.p-button-info {
+  @apply bg-blue-600 border-blue-600 hover:bg-blue-700 hover:border-blue-700;
+}
+
+::ng-deep .p-button.p-button-danger {
+  @apply bg-red-600 border-red-600 hover:bg-red-700 hover:border-red-700;
+}
+
+::ng-deep .p-inputtext {
+  @apply border-gray-300 focus:border-blue-500 focus:ring-blue-500;
+}
+
+::ng-deep .p-dropdown {
+  @apply border-gray-300;
+}
+
+::ng-deep .p-dropdown:not(.p-disabled).p-focus {
+  @apply border-blue-500 ring-1 ring-blue-500;
+}
+
+::ng-deep .p-toast .p-toast-message {
+  @apply shadow-lg;
+}
+
+/* Responsive table improvements */
+::ng-deep .p-datatable.p-datatable-responsive-stack .p-datatable-tbody > tr > td .p-column-title {
+  @apply font-semibold text-gray-600 text-sm;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  ::ng-deep .hidden-mobile {
+    display: none !important;
+  }
+
+  .mobile-only {
+    @apply block text-gray-500 text-sm mt-1;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+
+  ::ng-deep .p-datatable .p-column-title {
+    display: none !important;
+  }
+}
