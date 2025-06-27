@@ -108,20 +108,31 @@ Eliminacion:
 Listar:
 [
     {
-        "clients_id": 2,
+        "clients_id": 8,
         "mechanical_workshops_id": 1,
-        "peoples_id": 23,
-        "created_at": "2025-06-24T22:00:33.000000Z",
-        "updated_at": "2025-06-24T22:00:33.000000Z",
+        "peoples_id": 29,
+        "created_at": "2025-06-24T22:08:38.000000Z",
+        "updated_at": "2025-06-24T22:08:38.000000Z",
         "person": {
-            "peoples_id": 23,
+            "peoples_id": 29,
             "name": "Agustin Shande",
             "last_name": "Martinez Sierra",
             "email": "correo@ejemplo.com",
             "cellphone_number": "9361140117",
-            "created_at": "2025-06-24T22:00:33.000000Z",
-            "updated_at": "2025-06-26T17:15:47.000000Z"
-        }
+            "created_at": "2025-06-24T22:08:38.000000Z",
+            "updated_at": "2025-06-27T04:54:09.000000Z"
+        },
+        "vehicles": [
+            {
+                "vehicles_id": 3,
+                "plates": "ACSP-SXS1",
+                "model": "Civic",
+                "make": "Honda",
+                "clients_id": 8,
+                "created_at": "2025-06-24T22:08:38.000000Z",
+                "updated_at": "2025-06-27T04:54:09.000000Z"
+            }
+        ]
     }
 ]
 

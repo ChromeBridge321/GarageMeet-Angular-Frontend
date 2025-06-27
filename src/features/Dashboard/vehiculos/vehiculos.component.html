@@ -29,15 +29,14 @@
         [rows]="10"
         [showCurrentPageReport]="true"
         currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} vehículos"
-        [rowsPerPageOptions]="[5, 10, 25]"
         styleClass="p-datatable-sm"
         responsiveLayout="stack"
         [breakpoint]="'768px'">
 
         <ng-template pTemplate="header">
           <tr>
-            <th pSortableColumn="vehicles_id" class="hidden-mobile">
-              ID <p-sortIcon field="vehicles_id"></p-sortIcon>
+            <th class="hidden-mobile">
+              #
             </th>
             <th pSortableColumn="plates">
               Placas <p-sortIcon field="plates"></p-sortIcon>
@@ -54,12 +53,12 @@
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-vehicle>
+        <ng-template pTemplate="body" let-vehicle let-rowIndex="rowIndex">
           <tr class="hover:bg-gray-50">
             <td class="hidden-mobile">
-              <span class="p-column-title font-semibold text-gray-600 text-sm">ID:</span>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">#:</span>
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                #{{ vehicle.vehicles_id }}
+                {{ rowIndex + 1 }}
               </span>
             </td>
             <td>

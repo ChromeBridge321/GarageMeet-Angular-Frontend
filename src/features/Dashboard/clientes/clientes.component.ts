@@ -85,7 +85,13 @@ export class ClientesComponent implements OnInit {
       mechanical_workshops_id: workshopId
     }).subscribe({
       next: (clients) => {
-        this.clients.set(clients);
+        console.log('Clientes cargados:', clients);
+        // Asegurar que cada cliente tenga un array de vehículos
+        const clientsWithVehicles = clients.map(client => ({
+          ...client,
+          vehicles: client.vehicles || []
+        }));
+        this.clients.set(clientsWithVehicles);
         this.loading.set(false);
       },
       error: (error) => {
@@ -109,7 +115,8 @@ export class ClientesComponent implements OnInit {
 
   editClient(client: Client) {
     console.log('Editing client:', client); // Para debugging
-    
+    console.log('Client vehicles:', client.vehicles); // Para debugging
+
     this.currentClient = {
       name: client.person?.name || '',
       last_name: client.person?.last_name || '',
@@ -122,15 +129,18 @@ export class ClientesComponent implements OnInit {
 
     // Si hay vehículos, tomar el primero para edición
     if (client.vehicles && client.vehicles.length > 0) {
-      this.currentVehicle = { 
-        vehicles_id: client.vehicles[0].vehicles_id,
-        plates: client.vehicles[0].plates,
-        model: client.vehicles[0].model,
-        make: client.vehicles[0].make
+      const firstVehicle = client.vehicles[0];
+      this.currentVehicle = {
+        vehicles_id: firstVehicle.vehicles_id,
+        plates: firstVehicle.plates,
+        model: firstVehicle.model,
+        make: firstVehicle.make
       };
-      console.log('Current vehicle:', this.currentVehicle); // Para debugging
+      console.log('Current vehicle set:', this.currentVehicle); // Para debugging
+      console.log('Vehicle ID:', firstVehicle.vehicles_id); // Para debugging
     } else {
       this.currentVehicle = {};
+      console.log('No vehicles found for client'); // Para debugging
     }
 
     this.isEditing.set(true);
@@ -177,6 +187,11 @@ export class ClientesComponent implements OnInit {
   }
 
   saveClient() {
+    console.log('saveClient called');
+    console.log('isEditing:', this.isEditing());
+    console.log('currentClient:', this.currentClient);
+    console.log('currentVehicle:', this.currentVehicle);
+
     // Validaciones
     if (!this.currentClient.name?.trim()) {
       this.messageService.add({
@@ -253,6 +268,9 @@ export class ClientesComponent implements OnInit {
       // Solo incluir vehicles_id si existe
       if (this.currentVehicle.vehicles_id) {
         vehicleData.vehicles_id = this.currentVehicle.vehicles_id;
+        console.log('Including vehicle ID:', this.currentVehicle.vehicles_id); // Para debugging
+      } else {
+        console.log('No vehicle ID found, currentVehicle:', this.currentVehicle); // Para debugging
       }
 
       const updateRequest: UpdateClientRequest = {

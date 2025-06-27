@@ -43,8 +43,8 @@
 
         <ng-template pTemplate="header">
           <tr>
-            <th pSortableColumn="employees_id" class="hidden-mobile">
-              ID <p-sortIcon field="employees_id"></p-sortIcon>
+            <th class="hidden-mobile">
+              #
             </th>
             <th pSortableColumn="person.name">
               Nombre Completo <p-sortIcon field="person.name"></p-sortIcon>
@@ -59,12 +59,12 @@
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-employee>
+        <ng-template pTemplate="body" let-employee let-rowIndex="rowIndex">
           <tr class="hover:bg-gray-50">
             <td class="hidden-mobile">
-              <span class="p-column-title font-semibold text-gray-600 text-sm">ID:</span>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">#:</span>
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                #{{ employee.employees_id }}
+                {{ rowIndex + 1 }}
               </span>
             </td>
             <td>

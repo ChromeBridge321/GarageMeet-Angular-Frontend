@@ -44,19 +44,19 @@
 
         <ng-template pTemplate="header">
           <tr>
-            <th class="hidden-mobile">ID</th>
+            <th class="hidden-mobile">#</th>
             <th>Nombre del Cargo</th>
             <th class="hidden-mobile">Fecha de Creación</th>
             <th>Acciones</th>
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-position>
+        <ng-template pTemplate="body" let-position let-rowIndex="rowIndex">
           <tr class="hover:bg-gray-50">
             <td class="hidden-mobile">
-              <span class="p-column-title font-semibold text-gray-600 text-sm">ID:</span>
+              <span class="p-column-title font-semibold text-gray-600 text-sm">#:</span>
               <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                #{{ position.positions_id }}
+                {{ rowIndex + 1 }}
               </span>
             </td>
             <td>
