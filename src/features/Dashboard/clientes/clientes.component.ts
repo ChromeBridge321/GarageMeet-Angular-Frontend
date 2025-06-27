@@ -108,6 +108,8 @@ export class ClientesComponent implements OnInit {
   }
 
   editClient(client: Client) {
+    console.log('Editing client:', client); // Para debugging
+    
     this.currentClient = {
       name: client.person?.name || '',
       last_name: client.person?.last_name || '',
@@ -120,7 +122,13 @@ export class ClientesComponent implements OnInit {
 
     // Si hay vehículos, tomar el primero para edición
     if (client.vehicles && client.vehicles.length > 0) {
-      this.currentVehicle = { ...client.vehicles[0] };
+      this.currentVehicle = { 
+        vehicles_id: client.vehicles[0].vehicles_id,
+        plates: client.vehicles[0].plates,
+        model: client.vehicles[0].model,
+        make: client.vehicles[0].make
+      };
+      console.log('Current vehicle:', this.currentVehicle); // Para debugging
     } else {
       this.currentVehicle = {};
     }
@@ -236,6 +244,17 @@ export class ClientesComponent implements OnInit {
 
     if (this.isEditing()) {
       // Update
+      const vehicleData: any = {
+        plates: this.currentVehicle.plates!.trim(),
+        model: this.currentVehicle.model!.trim(),
+        make: this.currentVehicle.make!.trim()
+      };
+
+      // Solo incluir vehicles_id si existe
+      if (this.currentVehicle.vehicles_id) {
+        vehicleData.vehicles_id = this.currentVehicle.vehicles_id;
+      }
+
       const updateRequest: UpdateClientRequest = {
         name: this.currentClient.name!.trim(),
         last_name: this.currentClient.last_name!.trim(),
@@ -243,13 +262,10 @@ export class ClientesComponent implements OnInit {
         cellphone_number: this.currentClient.cellphone_number!.trim(),
         peoples_id: this.currentClient.peoples_id!,
         clients_id: this.currentClient.clients_id!,
-        vehicle: [{
-          vehicles_id: this.currentVehicle.vehicles_id,
-          plates: this.currentVehicle.plates!.trim(),
-          model: this.currentVehicle.model!.trim(),
-          make: this.currentVehicle.make!.trim()
-        }]
+        vehicle: [vehicleData]
       };
+
+      console.log('Update request:', updateRequest); // Para debugging
 
       this.clientService.updateClient(updateRequest).subscribe({
         next: () => {

@@ -17,6 +17,19 @@ export interface Employee {
   created_at?: string;
   updated_at?: string;
   person?: Person;
+  positions?: EmployeePosition[];
+}
+
+export interface EmployeePosition {
+  positions_id: number;
+  name: string;
+  mechanical_workshops_id: number;
+  created_at?: string;
+  updated_at?: string;
+  pivot?: {
+    employees_id: number;
+    positions_id: number;
+  };
 }
 
 // DTOs para requests
@@ -35,6 +48,7 @@ export interface UpdateEmployeeRequest {
   email: string;
   cellphone_number: string;
   positions_id: number;
+  new_positions_id: number;
   peoples_id: number;
   employees_id: number;
 }

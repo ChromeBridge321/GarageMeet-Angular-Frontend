@@ -91,10 +91,20 @@
             </td>
             <td>
               <span class="p-column-title font-semibold text-gray-600 text-sm">Cargo:</span>
-              <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                <i class="pi pi-exclamation-triangle mr-1"></i>
-                Sin cargo asignado
-              </span>
+              <div *ngIf="hasPositions(employee); else noPosition">
+                <span
+                  *ngFor="let position of employee.positions; let last = last"
+                  class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 mr-1 mb-1">
+                  <i class="pi pi-briefcase mr-1"></i>
+                  {{ position.name }}
+                </span>
+              </div>
+              <ng-template #noPosition>
+                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                  <i class="pi pi-exclamation-triangle mr-1"></i>
+                  Sin cargo asignado
+                </span>
+              </ng-template>
             </td>
             <td class="hidden-mobile">
               <span class="p-column-title font-semibold text-gray-600 text-sm">Fecha:</span>
@@ -206,7 +216,8 @@
               maxlength="15" />
           </div>
 
-          <div class="space-y-2">
+          <!-- Cargo Section - Different for Create vs Edit -->
+          <div class="space-y-2" *ngIf="!isEditing()">
             <label for="employeePosition" class="block text-sm font-medium text-gray-700">
               Cargo <span class="text-red-500">*</span>
             </label>
@@ -219,6 +230,41 @@
               [showClear]="true"
               styleClass="w-full">
             </p-dropdown>
+          </div>
+
+          <!-- Edit Mode - Show current position and new position selector -->
+          <div class="space-y-4" *ngIf="isEditing()">
+            <!-- Current Position Display -->
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-gray-700">
+                Cargo Actual
+              </label>
+              <div class="px-3 py-2 bg-gray-50 border border-gray-300 rounded-md">
+                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                  <i class="pi pi-briefcase mr-1"></i>
+                  {{ getCurrentPositionName() }}
+                </span>
+              </div>
+            </div>
+
+            <!-- New Position Selector -->
+            <div class="space-y-2">
+              <label for="newEmployeePosition" class="block text-sm font-medium text-gray-700">
+                Nuevo Cargo <span class="text-red-500">*</span>
+              </label>
+              <p-dropdown
+                [options]="positionOptions"
+                [(ngModel)]="currentEmployee.new_positions_id"
+                placeholder="Selecciona el nuevo cargo"
+                optionLabel="label"
+                optionValue="value"
+                [showClear]="true"
+                styleClass="w-full">
+              </p-dropdown>
+              <small class="text-gray-500">
+                Selecciona el nuevo cargo que tendrá el empleado
+              </small>
+            </div>
           </div>
         </div>
       </div>
