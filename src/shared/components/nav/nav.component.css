@@ -10,6 +10,12 @@
   background-color: rgb(17, 17, 17) !important;
 }
 
+
+
+:host ::ng-deep .p-menubar-item-content {
+  color: white !important;
+}
+
 :host ::ng-deep .p-menubar-end {
   margin-left: 0;
 }
