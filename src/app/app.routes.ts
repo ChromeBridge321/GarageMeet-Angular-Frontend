@@ -29,7 +29,7 @@ export const routes: Routes = [
   {
     path: 'panel',
     canActivate: [authGuard],
-    component: PanelComponent
+    loadChildren: () => import('../features/Dashboard/dashboard.routes'),
   },
 
   {

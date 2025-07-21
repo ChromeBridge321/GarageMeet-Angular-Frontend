@@ -4,19 +4,18 @@ import { AuthResponse } from '../models/authResponse';
   providedIn: 'root'
 })
 export class AuthService {
-  // Signals para estado reactivo (Angular 17+)
-  private readonly authState = signal<AuthResponse | null>(null);  public token = computed(() => {
+  private readonly authState = signal<AuthResponse | null>(null);
+   public token = computed(() => {
     // Prefer token in authState, fallback to extract from stored response
     if (this.authState()?.access_token) {
       return this.authState()?.access_token;
     }
-
     // Extract token from stored AuthResponse
     const storedResponse = this.getSecureStorage('authResponse');
     return storedResponse?.access_token || sessionStorage.getItem('authToken');
   });
-  public isLoggedIn = computed(() => !!this.token());
-  public currentUser = computed(() => this.authState());
+  //public isLoggedIn = computed(() => !!this.token());
+  //public currentUser = computed(() => this.authState());
 
   // Computed signals para acceso reactivo a datos específicos
   public user = computed(() => this.getUserData());
@@ -31,16 +30,6 @@ export class AuthService {
   // Método para obtener los datos de autenticación completos
   public getAuthData(): AuthResponse | null {
     return this.authState();
-  }
-
-  // Método para obtener información específica del token
-  public getTokenInfo(): { token: string | null; type: string | null; expiresIn: number | null } {
-    const authData = this.getAuthData();
-    return {
-      token: authData?.access_token || null,
-      type: authData?.token_type || null,
-      expiresIn: authData?.expires_in || null
-    };
   }
 
   // Método para verificar si el token ha expirado (si tienes expires_in)

@@ -1,0 +1,51 @@
+<div class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50">
+  <div class="flex justify-center items-center mt-8 w-full">
+    <p-floatlabel class="mx-3 w-1/2">
+      <input class="w-full" pInputText id="nombre" autocomplete="off" />
+      <label class="w-full" for="nombre">Nombre</label>
+    </p-floatlabel>
+    <p-floatlabel class="mx-3 w-1/2">
+      <input class="w-full" pInputText id="apellidos" autocomplete="off" />
+      <label class="w-full" for="apellidos">Apellidos</label>
+    </p-floatlabel>
+  </div>
+  <div class="flex justify-center items-center mt-8 w-full">
+    <p-floatlabel class="mx-3 w-1/2">
+      <input class="w-full" pInputText id="telefono" autocomplete="off" />
+      <label class="w-full" for="telefono">Numero de Telefono</label>
+    </p-floatlabel>
+    <p-floatlabel class="mx-3 w-1/2">
+      <input class="w-full" pInputText id="correo" autocomplete="off" />
+      <label class="w-full" for="correo">Correo</label>
+    </p-floatlabel>
+  </div>
+
+  <div class="flex justify-center items-center mt-8 w-full">
+    <p-select class="mx-3 w-1/2" [options]="makes()" [(ngModel)]="selectedMake" optionLabel="name" [filter]="true"
+      filterBy="name" [showClear]="true" placeholder="Seleccionar Marca" (onFilter)="getMakesByName($event.filter)">
+      <ng-template #selectedItem let-selectedOption>
+        <div class="flex items-center gap-2">
+          <div>{{ selectedOption.name }}</div>
+        </div>
+      </ng-template>
+      <ng-template let-make #item>
+        <div class="flex items-center gap-2">
+          <div>{{ make.name }}</div>
+        </div>
+      </ng-template>
+    </p-select>
+    <p-select class="mx-3 w-1/2" [options]="models()" [(ngModel)]="selectedModel" optionLabel="name" [filter]="true"
+      filterBy="name" [showClear]="true" placeholder="Seleccionar Modelo" (onFilter)="getModelsByName($event.filter)">
+      <ng-template #selectedItem let-selectedOption>
+        <div class="flex items-center gap-2">
+          <div>{{ selectedOption.name }}</div>
+        </div>
+      </ng-template>
+      <ng-template let-model #item>
+        <div class="flex items-center gap-2">
+          <div>{{ model.name }}</div>
+        </div>
+      </ng-template>
+    </p-select>
+  </div>
+</div>

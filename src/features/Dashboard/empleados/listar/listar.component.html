@@ -1,0 +1,31 @@
+<section class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50">
+  <div class="mb-5">
+    <h3 class="text-xl font-bold
+      text-amber-300
+      sm:text-blue-300
+      md:text-emerald-400
+      lg:text-fuchsia-500
+      ">Empleados</h3>
+  </div>
+  <p-table showGridlines [value]="employees" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading">
+    <ng-template #header>
+      <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Teléfono</th>
+        <th>Correo</th>
+        <th>Cargo</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-employee let-index="rowIndex">
+      <tr>
+        <td>{{ index + 1 }}</td>
+        <td>{{ employee.person.name + ' ' + employee.person.last_name}}</td>
+        <td>{{ employee.person.cellphone_number }}</td>
+        <td>{{ employee.person.email }}</td>
+        <td>{{ employee.person.positions.name}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</section>
+
