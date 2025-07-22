@@ -1,7 +1,9 @@
 export interface RESTEmployee {
-  employees_id: number;
-  peoples_id:   number;
-  person:       Person;
+  employees_id:            number;
+  mechanical_workshops_id: number;
+  peoples_id:              number;
+  person:                  Person;
+  positions:               Position[];
 }
 
 export interface Person {
@@ -10,16 +12,16 @@ export interface Person {
   last_name:        string;
   email:            string;
   cellphone_number: string;
-  positions:        Positions;
-  pivot:            Pivot;
+}
+
+export interface Position {
+  positions_id:            number;
+  name:                    string;
+  mechanical_workshops_id: number;
+  pivot:                   Pivot;
 }
 
 export interface Pivot {
   employees_id: number;
   positions_id: number;
-}
-
-export interface Positions {
-  positions_id: number;
-  name:         string;
 }

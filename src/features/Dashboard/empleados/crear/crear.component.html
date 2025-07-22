@@ -1,3 +1,99 @@
-<section class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50">
-  <p>crear works!</p>
-</section>
+<!-- Crear Cliente Form -->
+<form class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50" [formGroup]="employeeForm" (ngSubmit)="createEmployee()">
+
+  <!-- Page Title -->
+  <div class="font-bold flex text-4xl justify-center items-center mt-5">
+    <h1>Registrar Empleado</h1>
+  </div>
+
+  <!-- Personal Information Row -->
+  <div class="flex justify-center items-start mt-8 w-full">
+    <!-- Name Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input type="text" class="w-full" pInputText id="name" autocomplete="off" formControlName="name" />
+        <label class="w-full" for="name">Nombre</label>
+      </p-floatlabel>
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('name')?.invalid && (employeeForm.get('name')?.dirty || employeeForm.get('name')?.touched)">
+        El nombre es requerido
+      </small>
+    </div>
+
+    <!-- Last Name Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input type="text" class="w-full" pInputText id="last_name" autocomplete="off" formControlName="last_name" />
+        <label class="w-full" for="last_name">Apellidos</label>
+      </p-floatlabel>
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('last_name')?.invalid && (employeeForm.get('last_name')?.dirty || employeeForm.get('last_name')?.touched)">
+        Los apellidos son requeridos
+      </small>
+    </div>
+  </div>
+
+  <!-- Contact Information Row -->
+  <div class="flex justify-center items-start mt-8 w-full">
+    <!-- Phone Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <p-inputmask [style]="{'width': '100%'}" id="cellphone_number" autocomplete="off"
+          formControlName="cellphone_number" mask="(999) 999-9999" />
+        <label class="w-full" for="cellphone_number">Número de Teléfono</label>
+      </p-floatlabel>
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('cellphone_number')?.invalid && (employeeForm.get('cellphone_number')?.dirty || employeeForm.get('cellphone_number')?.touched)">
+        El teléfono es requerido
+      </small>
+    </div>
+
+    <!-- Email Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input type="email" class="w-full" pInputText id="email" autocomplete="off" formControlName="email" />
+        <label class="w-full" for="email">Correo</label>
+      </p-floatlabel>
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('email')?.invalid && (employeeForm.get('email')?.dirty || employeeForm.get('email')?.touched)">
+        El correo es requerido
+      </small>
+    </div>
+  </div>
+
+  <!-- Position Information Row -->
+  <div class="flex flex-col justify-center items-start mt-8 w-full">
+    <!-- Positions Selection -->
+    <div class="w-full flex justify-start items-center">
+      <p-select class="mx-3 w-1/2" [options]="positions" optionLabel="name" optionValue="positions_id" [filter]="true"
+        filterBy="name" [showClear]="true" placeholder="Seleccionar Cargo" formControlName="positions_id">
+
+        <ng-template let-position #item>
+          <div class="flex items-center gap-2">
+            <div>{{ position.name }}</div>
+          </div>
+        </ng-template>
+      </p-select>
+      <small class="text-red-500 ml-3 mt-1 w-1/2 mx-3"
+        *ngIf="employeeForm.get('positions_id')?.valid">
+      </small>
+      <small class="text-red-500 ml-3 mt-1 w-1/2 mx-3"
+        *ngIf="employeeForm.get('positions_id')?.invalid && (employeeForm.get('positions_id')?.dirty || employeeForm.get('positions_id')?.touched)">
+        El cargo es requerido
+      </small>
+    </div>
+  </div>
+
+  <!-- Toast Messages -->
+  <p-toast />
+
+  <!-- Action Buttons -->
+  <div class="flex justify-end gap-4 mt-8">
+
+    <p-button type="button" pRipple [routerLink]="['/panel/epleados']" label="Listado de Empleado"
+      severity="secondary" />
+
+    <p-button type="submit" pRipple label="Crear" severity="success" />
+  </div>
+
+</form>

@@ -18,6 +18,10 @@ export const dashboardRoutes: Routes = [
         loadChildren: () => import('./cargos/cargos.routes'),
       },
       {
+        path: 'taller',
+        loadChildren: () => import('./taller/taller.routes'),
+      },
+      {
         path: '**',
         redirectTo: 'panel'
       }

@@ -3,10 +3,12 @@ import { TableModule } from 'primeng/table';
 import { ClientesService } from './clientes.service';
 import { RESTClient } from '../models/clientes.model';
 import { AuthService } from '../../../../core/services/auth.service';
+import { Button } from "primeng/button";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-clientes',
-  imports: [TableModule],
+  imports: [TableModule, Button, RouterLink],
   templateUrl: './clientes.component.html',
 })
 export class ClientesComponent implements OnInit {
@@ -24,7 +26,7 @@ export class ClientesComponent implements OnInit {
   listarClientes() {
     this.loading = true;
     this.clientesService.listar(this.mechanicarWorshopId).subscribe((data) => {
-      this.clients = [data];
+      this.clients = data;
       this.loading = false;
     });
   }

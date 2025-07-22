@@ -25,7 +25,7 @@ export class VehiculosComponent implements OnInit {
   listarClientes() {
     this.loading = true;
     this.clientesService.listar(this.mechanicarWorshopId).subscribe((data) => {
-      this.clients = [data];
+      this.clients = data;
       this.loading = false;
     });
   }

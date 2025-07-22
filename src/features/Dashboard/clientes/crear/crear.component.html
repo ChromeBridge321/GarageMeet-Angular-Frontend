@@ -1,46 +1,139 @@
-<div class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50">
-  <div class="flex justify-center items-center mt-8 w-full">
-    <p-floatlabel class="mx-3 w-1/2">
-      <input class="w-full" pInputText id="nombre" autocomplete="off" />
-      <label class="w-full" for="nombre">Nombre</label>
-    </p-floatlabel>
-    <p-floatlabel class="mx-3 w-1/2">
-      <input class="w-full" pInputText id="apellidos" autocomplete="off" />
-      <label class="w-full" for="apellidos">Apellidos</label>
-    </p-floatlabel>
-  </div>
-  <div class="flex justify-center items-center mt-8 w-full">
-    <p-floatlabel class="mx-3 w-1/2">
-      <input class="w-full" pInputText id="telefono" autocomplete="off" />
-      <label class="w-full" for="telefono">Numero de Telefono</label>
-    </p-floatlabel>
-    <p-floatlabel class="mx-3 w-1/2">
-      <input class="w-full" pInputText id="correo" autocomplete="off" />
-      <label class="w-full" for="correo">Correo</label>
-    </p-floatlabel>
+
+<!-- Crear Cliente Form -->
+<form
+  [formGroup]="clientFrom"
+  (ngSubmit)="createClient()"
+  class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50">
+
+  <!-- Page Title -->
+  <div class="font-bold flex text-4xl justify-center items-center mt-5">
+    <h1>Registrar Cliente</h1>
   </div>
 
-  <div class="flex justify-center items-center mt-8 w-full">
-    <p-select class="mx-3 w-1/2" [options]="makes()" [(ngModel)]="selectedMake" optionLabel="name" [filter]="true"
-      filterBy="name" [showClear]="true" placeholder="Seleccionar Marca" (onFilter)="getMakesByName($event.filter)">
+  <!-- Personal Information Row -->
+  <div class="flex justify-center items-start mt-8 w-full">
+    <!-- Name Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input
+          type="text"
+          class="w-full"
+          pInputText
+          id="name"
+          autocomplete="off"
+          formControlName="name" />
+        <label class="w-full" for="name">Nombre</label>
+      </p-floatlabel>
+      <small
+        class="text-red-500"
+        *ngIf="clientFrom.get('name')?.invalid && (clientFrom.get('name')?.dirty || clientFrom.get('name')?.touched)">
+        El nombre es requerido
+      </small>
+    </div>
+
+    <!-- Last Name Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input
+          type="text"
+          class="w-full"
+          pInputText
+          id="last_name"
+          autocomplete="off"
+          formControlName="last_name" />
+        <label class="w-full" for="last_name">Apellidos</label>
+      </p-floatlabel>
+      <small
+        class="text-red-500"
+        *ngIf="clientFrom.get('last_name')?.invalid && (clientFrom.get('last_name')?.dirty || clientFrom.get('last_name')?.touched)">
+        Los apellidos son requeridos
+      </small>
+    </div>
+  </div>
+
+  <!-- Contact Information Row -->
+  <div class="flex justify-center items-start mt-8 w-full">
+    <!-- Phone Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <p-inputmask
+          [style]="{'width': '100%'}"
+          id="cellphone_number"
+          autocomplete="off"
+          formControlName="cellphone_number"
+          mask="(999) 999-9999" />
+        <label class="w-full" for="cellphone_number">Número de Teléfono</label>
+      </p-floatlabel>
+      <small
+        class="text-red-500"
+        *ngIf="clientFrom.get('cellphone_number')?.invalid && (clientFrom.get('cellphone_number')?.dirty || clientFrom.get('cellphone_number')?.touched)">
+        El teléfono es requerido
+      </small>
+    </div>
+
+    <!-- Email Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input
+          type="email"
+          class="w-full"
+          pInputText
+          id="email"
+          autocomplete="off"
+          formControlName="email" />
+        <label class="w-full" for="email">Correo</label>
+      </p-floatlabel>
+      <small
+        class="text-red-500"
+        *ngIf="clientFrom.get('email')?.invalid && (clientFrom.get('email')?.dirty || clientFrom.get('email')?.touched)">
+        El correo es requerido
+      </small>
+    </div>
+  </div>
+
+  <!-- Vehicle Information Row -->
+  <div class="flex justify-center items-start mt-8 w-full">
+    <!-- Makes Selection -->
+    <p-select
+      class="mx-3 w-1/2"
+      [options]="makes()"
+      optionLabel="name"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      placeholder="Seleccionar Marca"
+      (onFilter)="getMakesByName($event.filter)">
+
       <ng-template #selectedItem let-selectedOption>
         <div class="flex items-center gap-2">
           <div>{{ selectedOption.name }}</div>
         </div>
       </ng-template>
+
       <ng-template let-make #item>
         <div class="flex items-center gap-2">
           <div>{{ make.name }}</div>
         </div>
       </ng-template>
     </p-select>
-    <p-select class="mx-3 w-1/2" [options]="models()" [(ngModel)]="selectedModel" optionLabel="name" [filter]="true"
-      filterBy="name" [showClear]="true" placeholder="Seleccionar Modelo" (onFilter)="getModelsByName($event.filter)">
+
+    <!-- Models Selection -->
+    <p-select
+      class="mx-3 w-1/2"
+      [options]="models()"
+      optionLabel="name"
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true"
+      placeholder="Seleccionar Modelo"
+      (onFilter)="getModelsByName($event.filter)">
+
       <ng-template #selectedItem let-selectedOption>
         <div class="flex items-center gap-2">
           <div>{{ selectedOption.name }}</div>
         </div>
       </ng-template>
+
       <ng-template let-model #item>
         <div class="flex items-center gap-2">
           <div>{{ model.name }}</div>
@@ -48,4 +141,26 @@
       </ng-template>
     </p-select>
   </div>
-</div>
+
+  <!-- Toast Messages -->
+  <p-toast />
+
+  <!-- Action Buttons -->
+  <div class="flex justify-end gap-4 mt-8">
+
+     <p-button
+      type="button"
+      pRipple
+      [routerLink]="['/panel/clientes']"
+      label="Listado de clientes"
+      severity="secondary" />
+
+    <p-button
+      type="submit"
+      pRipple
+      label="Crear"
+      severity="success" />
+
+
+  </div>
+</form>

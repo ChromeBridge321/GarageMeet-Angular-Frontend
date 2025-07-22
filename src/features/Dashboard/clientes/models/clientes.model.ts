@@ -1,5 +1,6 @@
 export interface RESTClient {
   clients_id:              number;
+  mechanical_workshops_id: number;
   peoples_id:              number;
   person:                  Person;
   vehicles:                Vehicle[];
@@ -17,6 +18,7 @@ export interface Vehicle {
   vehicles_id:    number;
   plates:         string;
   makes_model_id: number;
+  clients_id:     number;
   make:           string;
   model:          string;
 }

@@ -12,12 +12,18 @@
       <tr>
         <th>Id</th>
         <th>Nombre</th>
+        <th>Acciones</th>
       </tr>
     </ng-template>
     <ng-template #body let-position let-index="rowIndex">
       <tr>
         <td>{{ index + 1 }}</td>
         <td>{{ position.name }}</td>
+        <td class="flex justify-center items-center">
+          <p-button type="button" pRipple [routerLink]="['/panel/cargos/editar', position.id]" icon="pi pi-pencil"
+            class="mr-2" severity="secondary" tooltip="Editar Cargo" />
+          <p-button type="button" pRipple icon="pi pi-trash" severity="danger" tooltip="Eliminar Cargo" />
+        </td>
     </ng-template>
   </p-table>
 </section>

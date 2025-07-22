@@ -8,7 +8,6 @@ import { AuthService } from '../../../../core/services/auth.service';
   providedIn: 'root'
 })
 export class ClientesService {
-  private baseUrl = `${environment.apiUrl}/clients/all`;
 
   constructor(
     private http: HttpClient,
@@ -24,7 +23,11 @@ export class ClientesService {
   }
 
   listar(mechanical_workshops_id:number) {
-    return this.http.get<RESTClient>(this.baseUrl, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
+    return this.http.get<RESTClient[]>(`${environment.apiUrl}/clients/all`, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
+  }
+
+  crear(cliente: RESTClient) {
+    return this.http.post<RESTClient>(`${environment.apiUrl}/clients/create`, cliente, { headers: this.getHeaders() });
   }
 
 

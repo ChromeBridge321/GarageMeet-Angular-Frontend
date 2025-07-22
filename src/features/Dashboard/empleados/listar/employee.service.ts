@@ -7,7 +7,6 @@ import { RESTEmployee } from '../models/empleados.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-  private baseUrl = `${environment.apiUrl}/employees/all`;
   constructor(private http: HttpClient,
     private authService: AuthService) { }
 
@@ -20,7 +19,10 @@ export class EmployeeService {
   }
 
   listar(mechanical_workshops_id: number) {
-    return this.http.get<RESTEmployee>(this.baseUrl, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
+    return this.http.get<RESTEmployee[]>(`${environment.apiUrl}/employees/all`, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
   }
 
+  crear(employee: RESTEmployee) {
+    return this.http.post<RESTEmployee>(`${environment.apiUrl}/employees/create`, employee, { headers: this.getHeaders() });
+  }
 }

@@ -5,9 +5,12 @@ import { TableModule } from 'primeng/table';
 import { AuthService } from '../../../../core/services/auth.service';
 import { OnInit } from '@angular/core';
 import { inject } from '@angular/core';
+import { Button } from "primeng/button";
+import { RouterLink } from '@angular/router';
+RouterLink
 @Component({
   selector: 'app-listar',
-  imports: [TableModule],
+  imports: [TableModule, Button, RouterLink],
   templateUrl: './listar.component.html',
 })
 export class ListarComponent implements OnInit {
@@ -23,7 +26,7 @@ export class ListarComponent implements OnInit {
   loadEmployees() {
     this.loading = true;
     this.employeesService.listar(this.mechanicarWorshopId).subscribe((data) => {
-      this.employees = [data];
+      this.employees = data;
       this.loading = false;
     });
   }

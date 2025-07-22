@@ -16,7 +16,6 @@ export class AuthService {
   });
   //public isLoggedIn = computed(() => !!this.token());
   //public currentUser = computed(() => this.authState());
-
   // Computed signals para acceso reactivo a datos específicos
   public user = computed(() => this.getUserData());
   public mechanicalWorkshop = computed(() => this.getMechanicalWorkshopData());

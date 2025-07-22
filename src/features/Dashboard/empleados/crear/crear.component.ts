@@ -1,9 +1,107 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 
+// Forms
+import { ReactiveFormsModule, FormGroup, FormBuilder, FormsModule, Validators } from '@angular/forms';
+
+// RxJS
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+
+// PrimeNG Components
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabel } from 'primeng/floatlabel';
+import { SelectModule } from 'primeng/select';
+import { MessageService } from 'primeng/api';
+import { InputMask } from 'primeng/inputmask';
+import { Toast } from 'primeng/toast';
+import { Ripple } from 'primeng/ripple';
+import { ButtonModule } from 'primeng/button';
+
+//models
+import { RESTEmployee } from '../models/empleados.model';
+import { RESTPositions } from '../../cargos/models/cargos.model';
+//services
+import { EmployeeService } from '../listar/employee.service';
+import { AuthService } from '../../../../core/services/auth.service';
+import { CargosService } from '../../cargos/listar/cargos.service';
 @Component({
   selector: 'app-crear',
-  imports: [],
+  imports: [ReactiveFormsModule, InputTextModule, FloatLabel, SelectModule, InputMask, Toast, Ripple, ButtonModule, NgIf, RouterLink, FormsModule],
   templateUrl: './crear.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [MessageService],
 })
-export class CrearComponent { }
+export class CrearComponent implements OnInit {
+
+  employeeForm: FormGroup;
+  positions: RESTPositions[] = [];
+  position_id = signal<number>(0);
+  mechanicalWorkshopId: number;
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly employeeService: EmployeeService,
+    private readonly messageService: MessageService,
+    private readonly router: Router,
+    private readonly authService: AuthService,
+    private readonly cargosService: CargosService
+  ) {
+    this.employeeForm = this.initializeForm();
+    this.mechanicalWorkshopId = this.authService.mechanicalWorkshop()?.id;
+  }
+
+  // Form initialization
+  private initializeForm(): FormGroup {
+    return this.fb.group({
+      name: ['', Validators.required],
+      last_name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(60)]],
+      cellphone_number: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.email]],
+      mechanicals_id: [this.authService.mechanicalWorkshop()?.id, [Validators.required]],
+      positions_id: ['', [Validators.required]]
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadPositions();
+  }
+
+  // Create employee method
+  createEmployee(): void {
+    if (this.employeeForm.invalid) {
+      this.showErrorMessage('Por favor, completa todos los campos correctamente.');
+      return;
+    }
+    const employeeData = this.employeeForm.value;
+    console.log('Employee data to send:', employeeData);
+    this.employeeService.crear(employeeData).subscribe(() => {
+      this.showSuccessMessage('Empleado creado exitosamente.');
+      this.router.navigate(['/panel/empleados/crear']);
+    });
+  }
+
+  // Load positions from service
+  loadPositions(): void {
+    this.cargosService.listar(this.mechanicalWorkshopId).subscribe((data) => {
+      this.positions = data;
+    });
+  }
+
+
+  // Message helpers
+  private showErrorMessage(detail: string): void {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail
+    });
+  }
+
+  private showSuccessMessage(detail: string): void {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Éxito',
+      detail
+    });
+  }
+
+}

@@ -35,6 +35,7 @@ export class PanelComponent implements OnInit {
           {
             label: 'Información',
             icon: 'pi pi-file-edit',
+            routerLink: './taller',
           },
         ]
       },

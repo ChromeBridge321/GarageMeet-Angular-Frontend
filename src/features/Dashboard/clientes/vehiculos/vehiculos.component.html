@@ -15,6 +15,7 @@
         <th>Marca</th>
         <th>Modelo</th>
         <th>Placas</th>
+        <th>Acciones</th>
       </tr>
     </ng-template>
     <ng-template #body let-clients let-index="rowIndex">
@@ -24,6 +25,7 @@
         <td>{{ clients.vehicles[0]?.make }}</td>
         <td>{{ clients.vehicles[0]?.model }}</td>
         <td>{{ clients.vehicles[0]?.plates }}</td>
+        <td></td>
       </tr>
     </ng-template>
   </p-table>

@@ -21,6 +21,6 @@ export class CargosService {
   }
 
   listar(mechanical_workshops_id: number) {
-    return this.http.get<RESTPositions>(this.baseUrl, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
+    return this.http.get<RESTPositions[]>(this.baseUrl, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
   }
 }
