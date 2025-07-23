@@ -73,7 +73,7 @@ export class CrearComponent implements OnInit {
     }
     const employeeData = this.employeeForm.value;
     console.log('Employee data to send:', employeeData);
-    this.employeeService.crear(employeeData).subscribe(() => {
+    this.employeeService.create(employeeData).subscribe(() => {
       this.showSuccessMessage('Empleado creado exitosamente.');
       this.router.navigate(['/panel/empleados/crear']);
     });

@@ -22,13 +22,19 @@ export class ClientesService {
     });
   }
 
-  listar(mechanical_workshops_id:number) {
+  load(mechanical_workshops_id:number) {
     return this.http.get<RESTClient[]>(`${environment.apiUrl}/clients/all`, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
   }
 
-  crear(cliente: RESTClient) {
+  create(cliente: RESTClient) {
     return this.http.post<RESTClient>(`${environment.apiUrl}/clients/create`, cliente, { headers: this.getHeaders() });
   }
 
+  delete(peoples_id: number) {
+    return this.http.delete(`${environment.apiUrl}/clients/delete`, { headers: this.getHeaders(), params: { peoples_id } });
+  }
 
+  update(cliente:any) {
+    return this.http.post(`${environment.apiUrl}/clients/update`, cliente, { headers: this.getHeaders() });
+  }
 }

@@ -18,11 +18,15 @@ export class EmployeeService {
     });
   }
 
-  listar(mechanical_workshops_id: number) {
+  load(mechanical_workshops_id: number) {
     return this.http.get<RESTEmployee[]>(`${environment.apiUrl}/employees/all`, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
   }
 
-  crear(employee: RESTEmployee) {
+  create(employee: RESTEmployee) {
     return this.http.post<RESTEmployee>(`${environment.apiUrl}/employees/create`, employee, { headers: this.getHeaders() });
+  }
+
+  delete(peoples_id: number) {
+    return this.http.delete(`${environment.apiUrl}/employees/delete`, { headers: this.getHeaders(), params: { peoples_id } });
   }
 }

@@ -1,10 +1,7 @@
 <section class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50">
   <div class="mb-5">
     <h3 class="text-xl font-bold
-      text-amber-300
-      sm:text-blue-300
-      md:text-emerald-400
-      lg:text-fuchsia-500
+
       ">Cargos</h3>
   </div>
   <p-table showGridlines [value]="positions" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading">
@@ -19,7 +16,7 @@
       <tr>
         <td>{{ index + 1 }}</td>
         <td>{{ position.name }}</td>
-        <td class="flex justify-center items-center">
+        <td>
           <p-button type="button" pRipple [routerLink]="['/panel/cargos/editar', position.id]" icon="pi pi-pencil"
             class="mr-2" severity="secondary" tooltip="Editar Cargo" />
           <p-button type="button" pRipple icon="pi pi-trash" severity="danger" tooltip="Eliminar Cargo" />
