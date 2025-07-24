@@ -22,7 +22,7 @@ export class ClientesService {
     });
   }
 
-  load(mechanical_workshops_id:number) {
+  load(mechanical_workshops_id: number) {
     return this.http.get<RESTClient[]>(`${environment.apiUrl}/clients/all`, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
   }
 
@@ -34,7 +34,11 @@ export class ClientesService {
     return this.http.delete(`${environment.apiUrl}/clients/delete`, { headers: this.getHeaders(), params: { peoples_id } });
   }
 
-  update(cliente:any) {
+  getById(client_id: number, mechanical_workshops_id: number) {
+    return this.http.get<RESTClient>(`${environment.apiUrl}/clients/getById`, { headers: this.getHeaders(), params: { client_id, mechanical_workshops_id } });
+  }
+
+  update(cliente: RESTClient) {
     return this.http.post(`${environment.apiUrl}/clients/update`, cliente, { headers: this.getHeaders() });
   }
 }

@@ -24,7 +24,7 @@
         <td>{{ client.person.email }}</td>
         <td>{{ client.vehicles[0]?.make + ' ' + client.vehicles[0]?.model }}</td>
         <td>
-          <p-button type="button" pRipple [routerLink]="['/panel/clientes/editar', client.id]" icon="pi pi-pencil" severity="secondary" tooltip="Editar Cliente" />
+          <p-button type="button" pRipple [routerLink]="['/panel/clientes/editar/', client.clients_id]" icon="pi pi-pencil" severity="secondary" tooltip="Editar Cliente" />
           <p-button type="button" pRipple icon="pi pi-trash" severity="danger" tooltip="Eliminar Cliente"  (click)="delete(client.person.peoples_id)"/>
         </td>
       </tr>

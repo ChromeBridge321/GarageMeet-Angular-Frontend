@@ -1,1 +1,205 @@
-<p>editar works!</p>,
+
+<!-- Crear Cliente Form -->
+<form
+  [formGroup]="clientForm"
+  (ngSubmit)="updateClient()"
+  class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50 xl:mx-70  ">
+
+  <!-- Page Title -->
+  <div class="font-bold flex text-4xl justify-center items-center mt-5">
+    <h1
+    class="
+    text-amber-300
+    sm:text-blue-200
+    md:text-cyan-500
+    lg:text-emerald-700
+    xl:text-purple-600
+    "
+    >Registrar Cliente</h1>
+  </div>
+
+  <!-- Personal Information Row -->
+  <div class="flex mt-8 flex-col sm:flex-row sm:justify-center sm:items-start sm:w-full">
+    <!-- Name Field -->
+    <div class="sm:mx-3 sm:w-1/2">
+      <p-floatlabel>
+        <input
+          type="text"
+          class="w-full"
+          pInputText
+          id="name"
+          autocomplete="off"
+          formControlName="name" />
+        <label class="w-full" for="name">Nombre</label>
+      </p-floatlabel>
+      <small
+        class="text-red-500"
+        *ngIf="clientForm.get('name')?.invalid && (clientForm.get('name')?.dirty || clientForm.get('name')?.touched)">
+        El nombre es requerido
+      </small>
+    </div>
+
+    <!-- Last Name Field -->
+    <div class="mt-8 sm:mt-0 sm:mx-3 sm:w-1/2">
+      <p-floatlabel>
+        <input
+          type="text"
+          class="w-full"
+          pInputText
+          id="last_name"
+          autocomplete="off"
+          formControlName="last_name" />
+        <label class="w-full" for="last_name">Apellidos</label>
+      </p-floatlabel>
+      <small
+        class="text-red-500"
+        *ngIf="clientForm.get('last_name')?.invalid && (clientForm.get('last_name')?.dirty || clientForm.get('last_name')?.touched)">
+        Los apellidos son requeridos
+      </small>
+    </div>
+  </div>
+
+  <!-- Contact Information Row -->
+  <div class="flex mt-8 flex-col sm:flex-row sm:justify-center sm:items-start sm:w-full">
+    <!-- Phone Field -->
+    <div class="sm:mx-3 sm:w-1/2">
+      <p-floatlabel>
+        <p-inputmask
+          [style]="{'width': '100%'}"
+          id="cellphone_number"
+          autocomplete="off"
+          formControlName="cellphone_number"
+          mask="(999) 999-9999" />
+        <label class="w-full" for="cellphone_number">Número de Teléfono</label>
+      </p-floatlabel>
+      <small
+        class="text-red-500"
+        *ngIf="clientForm.get('cellphone_number')?.invalid && (clientForm.get('cellphone_number')?.dirty || clientForm.get('cellphone_number')?.touched)">
+        El teléfono es requerido
+      </small>
+    </div>
+
+    <!-- Email Field -->
+    <div class="mt-8 sm:mt-0 sm:mx-3 sm:w-1/2">
+      <p-floatlabel>
+        <input
+          type="email"
+          class="w-full"
+          pInputText
+          id="email"
+          autocomplete="off"
+          formControlName="email" />
+        <label class="w-full" for="email">Correo</label>
+      </p-floatlabel>
+      <small
+        class="text-red-500"
+        *ngIf="clientForm.get('email')?.invalid && (clientForm.get('email')?.dirty || clientForm.get('email')?.touched)">
+        El correo es requerido
+      </small>
+    </div>
+  </div>
+
+  <!-- Vehicle Information -->
+  <div formArrayName="vehicle">
+    <div [formGroupName]="0">
+      <!-- Vehicle Information Row -->
+      <div class="flex flex-col sm:flex-row sm:justify-center sm:items-start  sm:w-full">
+        <!-- Makes Selection -->
+        <p-select
+          class="mt-8 sm:mt-0w-full sm:mx-3 sm:w-1/2 "
+          [options]="searchService.makes()"
+          optionLabel="name"
+          optionValue="make_id"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="Seleccionar Marca"
+          formControlName="make_id"
+          (onFilter)="getMakesByName($event.filter)">
+
+          <ng-template #selectedItem let-selectedOption>
+            <div class="flex items-center gap-2">
+              <div>{{ selectedOption.name }}</div>
+            </div>
+          </ng-template>
+
+          <ng-template let-make #item>
+            <div class="flex items-center gap-2">
+              <div>{{ make.name }}</div>
+            </div>
+          </ng-template>
+        </p-select>
+
+        <!-- Models Selection -->
+        <p-select
+          class="mt-8 w-full sm:mx-3 sm:w-1/2 "
+          [options]="searchService.models()"
+          optionLabel="name"
+          optionValue="model_id"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true"
+          placeholder="Seleccionar Modelo"
+          formControlName="model_id"
+          (onFilter)="getModelsByName($event.filter)">
+
+          <ng-template #selectedItem let-selectedOption>
+            <div class="flex items-center gap-2">
+              <div>{{ selectedOption.name }}</div>
+            </div>
+          </ng-template>
+
+          <ng-template let-model #item>
+            <div class="flex items-center gap-2">
+              <div>{{ model.name }}</div>
+            </div>
+          </ng-template>
+        </p-select>
+      </div>
+
+      <!-- Plates Field -->
+      <div class="mt-8 flex sm:justify-center sm:items-start sm:w-full">
+        <div class=" w-full sm:w-1/2">
+          <p-floatlabel>
+            <input
+              type="text"
+              class="w-full"
+              pInputText
+              id="plates"
+              autocomplete="off"
+              formControlName="plates"
+              style="text-transform: uppercase;"/>
+            <label class="w-full" for="plates">Placas</label>
+          </p-floatlabel>
+          <small
+            class="text-red-500"
+            *ngIf="firstVehicle.get('plates')?.invalid && (firstVehicle.get('plates')?.dirty || firstVehicle.get('plates')?.touched)">
+            <span *ngIf="firstVehicle.get('plates')?.hasError('required')">Las placas son requeridas</span>
+            <span *ngIf="firstVehicle.get('plates')?.hasError('maxlength')">Las placas no pueden tener más de 15 caracteres</span>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Toast Messages -->
+  <p-toast />
+
+  <!-- Action Buttons -->
+  <div class="flex justify-end gap-4 mt-8">
+
+     <p-button
+      type="button"
+      pRipple
+      [routerLink]="['/panel/clientes']"
+      label="Listado de clientes"
+      severity="secondary" />
+
+    <p-button
+      type="submit"
+      pRipple
+      label="Crear"
+      severity="success" />
+
+
+  </div>
+</form>
