@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 // Forms
-import { ReactiveFormsModule, FormGroup, FormsModule, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormsModule, FormBuilder, Validators } from '@angular/forms';
 
 // PrimeNG Components
 import { InputTextModule } from 'primeng/inputtext';
@@ -17,7 +17,8 @@ import { ClientesService } from '../listar/clientes.service';
 import { VehicleSearchService } from '../crear/VehicleSearch.service';
 import { ClientFormService } from '../crear/clienteForm.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { ChangeDetectorRef } from '@angular/core';
+import { VehiculosService } from '../vehiculos/vehiculos.service';
+import { Make, Model } from '../vehiculos/models/vehiculo.model';
 @Component({
   selector: 'app-editar',
   imports: [
@@ -42,6 +43,8 @@ export class EditarComponent implements OnInit {
   clientForm: FormGroup;
   client_id: number;
   mechanical_workshops_id: number;
+  models = signal<Model[]>([]);
+  makes = signal<Make[]>([]);
   constructor(
     private readonly messageService: MessageService,
     private readonly clientesService: ClientesService,
@@ -51,20 +54,24 @@ export class EditarComponent implements OnInit {
     public readonly Router: Router,
     private readonly route: ActivatedRoute,
     private readonly fb: FormBuilder,
-    private cdr: ChangeDetectorRef
+    private readonly vehiculosService: VehiculosService
   ) {
     this.clientForm = this.fb.group({
+      peoples_id: ['', Validators.required],
       name: ['', Validators.required],
+      clients_id: ['', Validators.required],
       last_name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(60)]],
       cellphone_number: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(20)]],
       email: ['', [Validators.required, Validators.email]],
-      mechanicals_id: [this.AuthService.mechanicalWorkshop()?.id, [Validators.required]],
       vehicle: this.fb.array([this.fb.group({
+        vehicles_id: ['', Validators.required],
         make_id: ['', Validators.required],
         model_id: ['', Validators.required],
         plates: ['', [Validators.required, Validators.maxLength(15)]],
       })])
     });
+
+
     this.client_id = Number(this.route.snapshot.paramMap.get('id')); // Initialize with a default value
     this.mechanical_workshops_id = this.AuthService.mechanicalWorkshop()?.id;
   }
@@ -72,61 +79,60 @@ export class EditarComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchService.initializeData();
+    // Usar setTimeout para asegurar que el Toast esté inicializado
+    setTimeout(() => {
+      this.showInfoMessage('Cargando datos del cliente...');
+    }, 100);
     this.loadClientData()
   }
 
   loadClientData(): void {
-    this.clientesService.getById(this.client_id, this.mechanical_workshops_id).subscribe(data => {
-      console.log('Data received:', data); // Para debug
-
-      // Clear the existing vehicle array first
-      this.vehicleFormArray.clear();
-
-      // Push a new FormGroup instead of using setValue
-      this.vehicleFormArray.push(this.fb.group({
-        make_id: [data.vehicles[0]?.make || '', Validators.required],
-        model_id: [data.vehicles[0]?.model || '', Validators.required],
-        plates: [data.vehicles[0]?.plates || '', [Validators.required, Validators.maxLength(15)]],
-      }));
-
-      // Set the rest of the form values
-      this.clientForm.patchValue({
-        name: data.person.name,
-        last_name: data.person.last_name,
-        cellphone_number: data.person.cellphone_number,
-        email: data.person.email,
-        mechanicals_id: data.mechanical_workshops_id,
-      });
-
-      console.log('Form after patch:', this.clientForm.value);
-
-      // Force change detection if needed
-      this.clientForm.updateValueAndValidity();
+    this.clientesService.getById(this.client_id, this.mechanical_workshops_id).subscribe({
+      next: (data) => {
+        this.loadModels();
+        this.clientForm.setValue({
+          name: data.person.name,
+          clients_id: data.clients_id,
+          peoples_id: data.person.peoples_id,
+          last_name: data.person.last_name,
+          email: data.person.email,
+          cellphone_number: data.person.cellphone_number,
+          vehicle: data.vehicles.map(vehicle => ({
+            vehicles_id: vehicle.vehicles_id,
+            make_id: '',
+            model_id: '',
+            plates: vehicle.plates.toUpperCase()
+          }))
+        });
+        this.showSuccessMessage('Datos cargados con éxito.');
+      },
+      error: (error) => {
+        this.showErrorMessage('Error al cargar los datos del cliente.');
+      }
     });
   }
+
+
   ngOnDestroy(): void {
     this.searchService.destroy();
   }
 
-  get vehicleFormArray(): FormArray {
-    return this.clientForm.get('vehicle') as FormArray;
-  }
-
-  get firstVehicle(): FormGroup {
-    return this.vehicleFormArray.at(0) as FormGroup;
-  }
-
   updateClient(): void {
+    console.log(this.clientForm.value);
+    //return;
     if (this.clientForm.invalid) {
       this.showErrorMessage('Por favor, completa todos los campos correctamente.');
       return;
     }
 
-    const client = this.clientForm.value;
-    this.clientesService.create(client).subscribe({
+    const clientData = this.clientForm.value;
+    this.clientesService.update(clientData).subscribe({
       next: () => {
-        this.showSuccessMessage('Cliente creado exitosamente.');
+        this.showSuccessMessage('Cliente actualizado exitosamente.');
         this.resetForm();
+        setTimeout(() => {
+          this.Router.navigate(['/panel/clientes']);
+        }, 1000);
       },
       error: (error) => {
         this.showErrorMessage('Verifique los datos del vehículo seleccionado');
@@ -134,11 +140,35 @@ export class EditarComponent implements OnInit {
     });
   }
   getMakesByName(searchTerm: string): void {
-    this.searchService.searchMakes(searchTerm);
+    if (searchTerm == null || searchTerm.trim() === '') {
+      this.loadMakes();
+      return;
+    }
+    this.vehiculosService.getMakesByName(searchTerm).subscribe(data => {
+      this.makes.set(data);
+    });
   }
 
   getModelsByName(searchTerm: string): void {
-    this.searchService.searchModels(searchTerm);
+    if (searchTerm == null || searchTerm.trim() === '') {
+      this.loadModels();
+      return;
+    }
+    this.vehiculosService.getModelsByName(searchTerm).subscribe(data => {
+      this.models.set(data);
+    });
+  }
+
+  loadModels(): void {
+    this.vehiculosService.getModels().subscribe((data) => {
+      this.models.set(data);
+    });
+  }
+
+  loadMakes(): void {
+    this.vehiculosService.getMakes().subscribe((data) => {
+      this.makes.set(data);
+    });
   }
 
   private resetForm(): void {
@@ -160,5 +190,17 @@ export class EditarComponent implements OnInit {
       summary: 'Éxito',
       detail
     });
+  }
+
+  private showInfoMessage(detail: string): void {
+    this.messageService.add({
+      severity: 'info',
+      summary: 'Información',
+      detail
+    });
+  }
+
+  showSuccess() {
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
   }
 }
