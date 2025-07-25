@@ -31,11 +31,11 @@ export class VehiculosService {
   }
 
   getMakesByName(name: string) {
-    return this.http.get<Make[]>(`${this.baseUrl}/vehiclesService/getMakeByName/${name}`, { headers: this.getHeaders() });
+    return this.http.get<Make[]>(`${this.baseUrl}/vehiclesService/getMakeByName`, { headers: this.getHeaders(), params: { name } });
   }
 
   getModelsByName(name: string) {
-    return this.http.get<Model[]>(`${this.baseUrl}/vehiclesService/getModelByName/${name}`, { headers: this.getHeaders() });
+    return this.http.get<Model[]>(`${this.baseUrl}/vehiclesService/getModelByName`, { headers: this.getHeaders(), params: { name } });
   }
 
 }
