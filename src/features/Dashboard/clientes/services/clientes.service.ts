@@ -39,6 +39,6 @@ export class ClientesService {
   }
 
   update(cliente: RESTClient) {
-    return this.http.post(`${environment.apiUrl}/clients/update`, cliente, { headers: this.getHeaders() });
+    return this.http.put(`${environment.apiUrl}/clients/update`, cliente, { headers: this.getHeaders() });
   }
 }

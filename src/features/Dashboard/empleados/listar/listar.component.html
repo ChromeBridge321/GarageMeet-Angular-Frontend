@@ -3,10 +3,11 @@
     <h3 class="text-xl font-bold
       ">Empleados</h3>
   </div>
+  <p-button type="button" pRipple [routerLink]="['/panel/empleados/crear']" label="Crear Empleado" class="mb-5" />
   <p-table showGridlines [value]="employees" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading">
     <ng-template #header>
       <tr>
-        <th>Id</th>
+        <th>N.</th>
         <th>Nombre</th>
         <th>Teléfono</th>
         <th>Correo</th>
@@ -22,9 +23,10 @@
         <td>{{ employee.person.email }}</td>
         <td>{{ employee.positions[0]?.name }}</td>
         <td class="flex justify-center md:justify-between lg:justify-around">
-          <p-button type="button" pRipple [routerLink]="['/panel/clientes/editar', employee.id]" icon="pi pi-pencil"
+          <p-button type="button" pRipple [routerLink]="['/panel/empleados/editar', employee.employees_id]" icon="pi pi-pencil"
             class="mr-2" severity="secondary" tooltip="Editar Cliente" />
-          <p-button type="button" pRipple icon="pi pi-trash" severity="danger" tooltip="Eliminar Cliente" (click)="delete(employee.person.peoples_id)"/>
+          <p-button type="button" pRipple icon="pi pi-trash" severity="danger" tooltip="Eliminar Cliente"
+            (click)="delete(employee.person.peoples_id)" />
         </td>
       </tr>
     </ng-template>

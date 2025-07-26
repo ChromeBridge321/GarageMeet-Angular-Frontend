@@ -1,9 +1,9 @@
 <!-- Crear Cliente Form -->
-<form class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50" [formGroup]="employeeForm" (ngSubmit)="createEmployee()">
+<form class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()">
 
   <!-- Page Title -->
   <div class="font-bold flex text-4xl justify-center items-center mt-5">
-    <h1>Registrar Empleado</h1>
+    <h1>Editar Empleado</h1>
   </div>
 
   <!-- Personal Information Row -->
@@ -62,11 +62,19 @@
   </div>
 
   <!-- Position Information Row -->
-  <div *ngIf="visible1" class="flex flex-col justify-center items-start mt-8 w-full">
+  <div class="flex justify-center items-start mt-8 w-full">
     <!-- Positions Selection -->
-    <div class="w-full flex justify-start items-center">
-      <p-select class="mx-3 w-1/2" [options]="positions" optionLabel="name" optionValue="positions_id" [filter]="true"
-        filterBy="name" [showClear]="true" placeholder="Seleccionar Cargo" formControlName="positions_id">
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input readonly type="text" class="w-full" pInputText id="positions_name" autocomplete="off"
+          formControlName="positions_name" />
+        <label class="w-full" for="positions_name">Cargo Actual</label>
+      </p-floatlabel>
+    </div>
+
+    <div class="mx-3 w-1/2">
+      <p-select *ngIf="visible1" class="w-full" [options]="positions" optionLabel="name" optionValue="positions_id" [filter]="true"
+        filterBy="name" [showClear]="true" placeholder="Selecciona un cargo nuevo" formControlName="new_positions_id">
 
         <ng-template let-position #item>
           <div class="flex items-center gap-2">
@@ -74,16 +82,12 @@
           </div>
         </ng-template>
       </p-select>
-      <div class="ml-3 mt-1 w-1/2 mx-3">
-        <small class="text-red-500"
-          *ngIf="employeeForm.get('positions_id')?.invalid && (employeeForm.get('positions_id')?.dirty || employeeForm.get('positions_id')?.touched)">
-          El cargo es requerido
-        </small>
-      </div>
-
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('new_new_positions_id')?.invalid && (employeeForm.get('new_positions_id')?.dirty || employeeForm.get('new_positions_id')?.touched)">
+        El cargo es requerido
+      </small>
     </div>
   </div>
-
 
   <!-- Toast Messages -->
   <p-toast />
@@ -94,12 +98,12 @@
     <p-button type="button" pRipple [routerLink]="['/panel/empleados']" label="Listado de Empleado"
       severity="secondary" />
 
-    <p-button type="submit" pRipple label="Crear" severity="success" />
+    <p-button type="submit" pRipple label="Actualizar" severity="success" />
   </div>
   <div *ngIf="visible2"
     class=" flex justify-center items-center px-8 italic text-center mt-8 border-2 border-amber-200 bg-amber-100 rounded-2xl h-20 w-full">
     <h5>
-      Parece que no tienes ningún cargo registrado. Por favor, crea un cargo antes de registrar un empleado. <br />
+      Parece que no tienes ningún cargo registrado. Por favor, crea un cargo antes de actualizar un empleado. <br />
       <a class="text-blue-500 hover:underline" [routerLink]="['/panel/cargos']">Crear Cargo</a>
     </h5>
   </div>

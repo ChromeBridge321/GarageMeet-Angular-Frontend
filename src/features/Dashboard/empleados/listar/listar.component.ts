@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RESTEmployee } from '../models/empleados.model';
-import { EmployeeService } from './employee.service';
+import { EmployeeService } from '../services/employee.service';
 import { TableModule } from 'primeng/table';
 import { AuthService } from '../../../../core/services/auth.service';
 import { OnInit } from '@angular/core';

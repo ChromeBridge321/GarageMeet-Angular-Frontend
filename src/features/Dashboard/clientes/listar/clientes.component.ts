@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { ClientesService } from './clientes.service';
+import { ClientesService } from '../services/clientes.service';
 import { RESTClient } from '../models/clientes.model';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Button } from "primeng/button";
@@ -26,6 +26,7 @@ export class ClientesComponent implements OnInit {
   loading: boolean = true;
   mechanicarWorshopId: number = this.authService.getMechanicalWorkshopData()?.id;
 
+
   ngOnInit(): void {
     this.loadClients();
   }
@@ -38,6 +39,7 @@ export class ClientesComponent implements OnInit {
       this.loading = false;
     });
   }
+
 
   delete(peoples_id: number) {
     this.confirmationService.confirm({

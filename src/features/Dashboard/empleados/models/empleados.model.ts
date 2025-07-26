@@ -3,7 +3,7 @@ export interface RESTEmployee {
   mechanical_workshops_id: number;
   peoples_id:              number;
   person:                  Person;
-  positions:               Position[];
+  positions:               Position[] | [];
 }
 
 export interface Person {

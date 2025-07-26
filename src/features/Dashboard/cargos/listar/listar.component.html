@@ -4,10 +4,11 @@
 
       ">Cargos</h3>
   </div>
+  <p-button (click)="showDialog(false)" type="button" pRipple label="Crear Cargo" class="mb-5" />
   <p-table showGridlines [value]="positions" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading">
     <ng-template #header>
       <tr>
-        <th>Id</th>
+        <th>N.</th>
         <th>Nombre</th>
         <th>Acciones</th>
       </tr>
@@ -17,10 +18,30 @@
         <td>{{ index + 1 }}</td>
         <td>{{ position.name }}</td>
         <td>
-          <p-button type="button" pRipple [routerLink]="['/panel/cargos/editar', position.id]" icon="pi pi-pencil"
+          <p-button  (click)="showDialog(true, position.positions_id)" type="button" pRipple icon="pi pi-pencil"
             class="mr-2" severity="secondary" tooltip="Editar Cargo" />
-          <p-button type="button" pRipple icon="pi pi-trash" severity="danger" tooltip="Eliminar Cargo" />
+          <p-button (click)="delete(position.positions_id)" type="button" pRipple icon="pi pi-trash" severity="danger"
+            tooltip="Eliminar Cargo" />
         </td>
     </ng-template>
   </p-table>
 </section>
+
+<div class="card flex justify-center">
+  <p-dialog header="{{ title.title }}" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+    <form (ngSubmit)="isEdit ? updatePosition() : createPosition()" [formGroup]="positionForm">
+      <span class="p-text-secondary block mb-8">{{ title.subTitle }}</span>
+      <div class="flex items-center gap-4 mb-4">
+        <label for="name" class="font-semibold w-24">Nombre</label>
+        <input pInputText id="name" class="flex-auto" autocomplete="off" formControlName="name" />
+      </div>
+      <div class="flex justify-end gap-2">
+        <p-button label="Cancelar" severity="secondary" (click)="resetForm()" />
+        <p-button label="Guardar" [disabled]="positionForm.invalid" type="submit" />
+      </div>
+    </form>
+  </p-dialog>
+  <!-- Toast Messages -->
+  <p-confirmDialog />
+  <p-toast />
+</div>

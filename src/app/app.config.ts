@@ -5,6 +5,7 @@ import { provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/c
 import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import Aura from '@primeng/themes/aura';
+import { MyPrest } from './MyPreset';
 
 
 export const appConfig: ApplicationConfig = {

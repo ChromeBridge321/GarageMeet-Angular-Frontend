@@ -23,7 +23,7 @@
         <td>{{ clients.vehicles[0]?.model }}</td>
         <td>{{ clients.vehicles[0]?.plates }}</td>
         <td>
-          <p-button type="button" pRipple [routerLink]="['/panel/clientes/editar', clients.id]" icon="pi pi-pencil"
+          <p-button type="button" pRipple [routerLink]="['/panel/clientes/editar', clients.clients_id]" icon="pi pi-pencil"
             class="mr-2" severity="secondary" tooltip="Editar Cliente" />
           <p-button type="button" pRipple icon="pi pi-trash" severity="danger" tooltip="Eliminar Cliente" />
         </td>

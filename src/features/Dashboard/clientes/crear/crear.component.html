@@ -8,13 +8,6 @@
   <!-- Page Title -->
   <div class="font-bold flex text-4xl justify-center items-center mt-5">
     <h1
-    class="
-    text-amber-300
-    sm:text-blue-200
-    md:text-cyan-500
-    lg:text-emerald-700
-    xl:text-purple-600
-    "
     >Registrar Cliente</h1>
   </div>
 
@@ -107,7 +100,7 @@
         <!-- Makes Selection -->
         <p-select
           class="mt-8 sm:mt-0w-full sm:mx-3 sm:w-1/2 "
-          [options]="searchService.makes()"
+          [options]="makes()"
           optionLabel="name"
           optionValue="make_id"
           [filter]="true"
@@ -133,7 +126,7 @@
         <!-- Models Selection -->
         <p-select
           class="mt-8 w-full sm:mx-3 sm:w-1/2 "
-          [options]="searchService.models()"
+          [options]="models()"
           optionLabel="name"
           optionValue="model_id"
           [filter]="true"

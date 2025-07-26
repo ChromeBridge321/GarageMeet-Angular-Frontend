@@ -1,5 +1,5 @@
 // Angular Core
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -14,11 +14,11 @@ import { InputMask } from 'primeng/inputmask';
 import { Toast } from 'primeng/toast';
 import { Ripple } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
-import { ClientesService } from '../listar/clientes.service';
-import { ClientFormService } from './clienteForm.service';
-import { VehicleSearchService } from './VehicleSearch.service';
-
-
+import { ClientesService } from '../services/clientes.service';
+import { ClientFormService } from '../services/clienteForm.service';
+import { VehicleSearchService } from '../services/VehicleSearch.service';
+import { Make, Model } from '../vehiculos/models/vehiculo.model';
+import { VehiculosService } from '../services/vehiculos.service';
 @Component({
   selector: 'app-crear',
   imports: [
@@ -39,12 +39,14 @@ import { VehicleSearchService } from './VehicleSearch.service';
 })
 export class CrearComponent implements OnInit, OnDestroy {
   clientFrom: FormGroup;
-
+  models = signal<Model[]>([]);
+  makes = signal<Make[]>([]);
   constructor(
     private readonly messageService: MessageService,
     private readonly clientesService: ClientesService,
     private readonly formService: ClientFormService,
-    public readonly searchService: VehicleSearchService
+    private readonly searchService: VehicleSearchService,
+    private readonly vehiculosService: VehiculosService
   ) {
     this.clientFrom = this.formService.createClientForm();
   }
@@ -87,11 +89,38 @@ export class CrearComponent implements OnInit, OnDestroy {
 
 
   getMakesByName(searchTerm: string): void {
-    this.searchService.searchMakes(searchTerm);
+    if (searchTerm == null || searchTerm.trim() === '') {
+      this.loadMakes();
+      return;
+    }
+    this.vehiculosService.getMakesByName(searchTerm).subscribe(data => {
+      this.makes.set(data);
+    });
   }
 
+
+
   getModelsByName(searchTerm: string): void {
-    this.searchService.searchModels(searchTerm);
+    if (searchTerm == null || searchTerm.trim() === '') {
+      this.loadModels();
+      return;
+    }
+    this.vehiculosService.getModelsByName(searchTerm).subscribe(data => {
+      this.models.set(data);
+    });
+  }
+
+
+    loadModels(): void {
+    this.vehiculosService.getModels().subscribe((data) => {
+      this.models.set(data);
+    });
+  }
+
+  loadMakes(): void {
+    this.vehiculosService.getMakes().subscribe((data) => {
+      this.makes.set(data);
+    });
   }
 
   private resetForm(): void {

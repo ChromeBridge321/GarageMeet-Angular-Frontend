@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, viewChild } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 // Forms
@@ -13,11 +13,11 @@ import { InputMask } from 'primeng/inputmask';
 import { Toast } from 'primeng/toast';
 import { Ripple } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
-import { ClientesService } from '../listar/clientes.service';
-import { VehicleSearchService } from '../crear/VehicleSearch.service';
-import { ClientFormService } from '../crear/clienteForm.service';
+import { ClientesService } from '../services/clientes.service';
+import { VehicleSearchService } from '../services/VehicleSearch.service';
+import { ClientFormService } from '../services/clienteForm.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { VehiculosService } from '../vehiculos/vehiculos.service';
+import { VehiculosService } from '../services/vehiculos.service';
 import { Make, Model } from '../vehiculos/models/vehiculo.model';
 @Component({
   selector: 'app-editar',
@@ -139,6 +139,8 @@ export class EditarComponent implements OnInit {
       }
     });
   }
+
+
   getMakesByName(searchTerm: string): void {
     if (searchTerm == null || searchTerm.trim() === '') {
       this.loadMakes();
@@ -200,7 +202,4 @@ export class EditarComponent implements OnInit {
     });
   }
 
-  showSuccess() {
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
-  }
 }

@@ -29,4 +29,12 @@ export class EmployeeService {
   delete(peoples_id: number) {
     return this.http.delete(`${environment.apiUrl}/employees/delete`, { headers: this.getHeaders(), params: { peoples_id } });
   }
+
+  getEmployeeById(employee_id: number, mechanical_workshops_id: number) {
+    return this.http.get<RESTEmployee>(`${environment.apiUrl}/employees/getById`, { headers: this.getHeaders(), params: { employee_id, mechanical_workshops_id } });
+  }
+
+  update(employee: RESTEmployee) {
+    return this.http.put<RESTEmployee>(`${environment.apiUrl}/employees/update`, employee, { headers: this.getHeaders() });
+  }
 }

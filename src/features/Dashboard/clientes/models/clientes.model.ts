@@ -21,4 +21,6 @@ export interface Vehicle {
   clients_id:     number;
   make:           string;
   model:          string;
+  model_id:      number;
+  make_id:       number;
 }

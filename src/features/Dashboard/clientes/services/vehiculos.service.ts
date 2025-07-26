@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Model } from './models/vehiculo.model';
-import { Make } from './models/vehiculo.model';
+import { Model } from '../vehiculos/models/vehiculo.model';
+import { Make } from '../vehiculos/models/vehiculo.model';
 import { environment } from '../../../../eviroments/enviroments';
 import { AuthService } from '../../../../core/services/auth.service';
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { DrawerModule } from 'primeng/drawer';
@@ -7,6 +7,7 @@ import { PanelMenu } from 'primeng/panelmenu';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-panel',
   imports: [DrawerModule,
@@ -24,6 +25,7 @@ export class PanelComponent implements OnInit {
   items: MenuItem[] | undefined;
   visible1: boolean = false;
   itemsMenu: MenuItem[] | undefined;
+  authService = inject(AuthService);
   ngOnInit() {
     this.items = [
     ];
@@ -36,6 +38,39 @@ export class PanelComponent implements OnInit {
             label: 'Información',
             icon: 'pi pi-file-edit',
             routerLink: './taller',
+          },
+        ]
+      },
+      {
+        label: 'Cargos',
+        icon: 'pi pi-briefcase',
+        routerLink: './cargos',
+        // items: [
+        //   {
+        //     label: 'Listado',
+        //     icon: 'pi pi-align-justify',
+        //     routerLink: './cargos',
+        //   },
+        //   {
+        //     label: 'Registrar',
+        //     icon: 'pi pi-pen-to-square',
+        //     routerLink: './cargos/crear',
+        //   }
+        // ]
+      },
+      {
+        label: 'Empleados',
+        icon: 'pi pi-users',
+        items: [
+          {
+            label: 'Listado',
+            icon: 'pi pi-align-justify',
+            routerLink: './empleados',
+          },
+          {
+            label: 'Registrar',
+            icon: 'pi pi-pen-to-square',
+            routerLink: './empleados/crear',
           },
         ]
       },
@@ -60,38 +95,12 @@ export class PanelComponent implements OnInit {
           },
         ]
       },
-            {
-        label: 'Empleados',
-        icon: 'pi pi-users',
-        items: [
-          {
-            label: 'Listado',
-            icon: 'pi pi-align-justify',
-            routerLink: './empleados',
-          },
-          {
-            label: 'Registrar',
-            icon: 'pi pi-pen-to-square',
-            routerLink: './empleados/crear',
-          },
-        ]
-      },
-            {
-        label: 'Cargos',
-        icon: 'pi pi-briefcase',
-        items: [
-          {
-            label: 'Listado',
-            icon: 'pi pi-align-justify',
-            routerLink: './cargos',
-          },
-          {
-            label: 'Registrar',
-            icon: 'pi pi-pen-to-square',
-            routerLink: './cargos/crear',
-          }
-        ]
-      },
+      {
+        label: 'Cerrar Sesión',
+        icon: 'pi pi-sign-out',
+        styleClass: 'text-red-500',
+        command: () => this.authService.logout(),
+      }
     ]
   }
 }

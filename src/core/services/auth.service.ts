@@ -1,9 +1,12 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { AuthResponse } from '../models/authResponse';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  router = inject(Router);
   private readonly authState = signal<AuthResponse | null>(null);
    public token = computed(() => {
     // Prefer token in authState, fallback to extract from stored response
@@ -14,7 +17,7 @@ export class AuthService {
     const storedResponse = this.getSecureStorage('authResponse');
     return storedResponse?.access_token || sessionStorage.getItem('authToken');
   });
-  //public isLoggedIn = computed(() => !!this.token());
+  public isLoggedIn = computed(() => !!this.token());
   //public currentUser = computed(() => this.authState());
   // Computed signals para acceso reactivo a datos específicos
   public user = computed(() => this.getUserData());
@@ -135,6 +138,7 @@ export class AuthService {
     this.clearSecureStorage('authResponse');
     this.clearSecureStorage('userData');
     this.clearSecureStorage('mechanicalWorkshopData');
+    this.router.navigate(['/']);
   }
 
   // Almacenamiento seguro (abstracción)

@@ -1,12 +1,8 @@
-import { Component, inject, OnInit, OnDestroy, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-
 // Forms
 import { ReactiveFormsModule, FormGroup, FormBuilder, FormsModule, Validators } from '@angular/forms';
-
-// RxJS
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 // PrimeNG Components
 import { InputTextModule } from 'primeng/inputtext';
@@ -22,7 +18,7 @@ import { ButtonModule } from 'primeng/button';
 import { RESTEmployee } from '../models/empleados.model';
 import { RESTPositions } from '../../cargos/models/cargos.model';
 //services
-import { EmployeeService } from '../listar/employee.service';
+import { EmployeeService } from '../services/employee.service';
 import { AuthService } from '../../../../core/services/auth.service';
 import { CargosService } from '../../cargos/listar/cargos.service';
 @Component({
@@ -37,6 +33,8 @@ export class CrearComponent implements OnInit {
   positions: RESTPositions[] = [];
   position_id = signal<number>(0);
   mechanicalWorkshopId: number;
+  visible1: boolean = false;
+  visible2: boolean = false;
   constructor(
     private readonly fb: FormBuilder,
     private readonly employeeService: EmployeeService,
@@ -75,14 +73,21 @@ export class CrearComponent implements OnInit {
     console.log('Employee data to send:', employeeData);
     this.employeeService.create(employeeData).subscribe(() => {
       this.showSuccessMessage('Empleado creado exitosamente.');
-      this.router.navigate(['/panel/empleados/crear']);
+      this.router.navigate(['/panel/empleados']);
     });
   }
 
   // Load positions from service
   loadPositions(): void {
-    this.cargosService.listar(this.mechanicalWorkshopId).subscribe((data) => {
+    this.cargosService.load(this.mechanicalWorkshopId).subscribe((data) => {
       this.positions = data;
+      if (this.positions.length > 0) {
+        this.visible1 = true;
+        this.visible2 = false;
+      } else {
+        this.visible1 = false;
+        this.visible2 = true;
+      }
     });
   }
 

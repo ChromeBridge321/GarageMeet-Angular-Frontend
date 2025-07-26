@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { OnInit, inject } from '@angular/core';
-import { RESTClient } from '../models/clientes.model';
-import { ClientesService } from '../listar/clientes.service';
-import { AuthService } from '../../../../core/services/auth.service';
+import { RESTClient } from '../../models/clientes.model';
+import { ClientesService } from '../../services/clientes.service';
+import { AuthService } from '../../../../../core/services/auth.service';
 import { TableModule } from 'primeng/table';
 import { Button } from "primeng/button";
 import { RouterLink } from '@angular/router';

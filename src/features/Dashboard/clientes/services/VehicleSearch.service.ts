@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
-import { VehiculosService } from '../vehiculos/vehiculos.service';
+import { VehiculosService } from './vehiculos.service';
 import { Make, Model } from '../vehiculos/models/vehiculo.model';
 
 @Injectable({

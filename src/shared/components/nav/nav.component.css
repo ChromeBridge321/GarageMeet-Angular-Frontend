@@ -4,11 +4,21 @@
   flex-direction: row-reverse;
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
+  border: none !important;
+  border-radius: 0% !important;
 }
 
 :host ::ng-deep .p-menubar-item-content:hover {
   background-color: rgb(17, 17, 17) !important;
 }
+
+
+
+:host ::ng-deep .p-menubar-item-content {
+  color: white !important;
+}
+
+
 
 :host ::ng-deep .p-menubar-end {
   margin-left: 0;
@@ -18,9 +28,11 @@
 
 /* Responsive Styles */
 @media screen and (max-width: 960px) {
+
   :host ::ng-deep .p-menubar-root-list {
     background-color: black !important;
-    border-left: 0rem;
-    border-right: 0rem;
+    border: 0rem !important;
+    border-top: 0.1rem solid rgb(35, 35, 35) !important;
+    border-radius: 0% !important;
   }
 }
