@@ -2,3 +2,310 @@
 @import "primeicons/primeicons.css";
 @import "tailwindcss";
 
+/* =================================
+   GARAGEMEET GLOBAL STYLES
+   Minimalista Design - Verde Claro
+   ================================= */
+
+:root {
+  --primary-50: #f0fdf4;
+  --primary-100: #dcfce7;
+  --primary-200: #bbf7d0;
+  --primary-300: #86efac;
+  --primary-400: #4ade80;
+  --primary-500: #22c55e;
+  --primary-600: #16a34a;
+  --primary-700: #15803d;
+  --primary-800: #166534;
+  --primary-900: #14532d;
+}
+
+/* Body and base styles */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  min-height: 100vh;
+}
+
+/* =================================
+   PRIMENG COMPONENT OVERRIDES
+   ================================= */
+
+/* Button Styles */
+.p-button {
+  border-radius: 12px !important;
+  font-weight: 500 !important;
+  padding: 0.75rem 1.5rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 2px 4px -1px rgba(34, 197, 94, 0.1) !important;
+}
+
+.p-button:not(.p-button-outlined):not(.p-button-text) {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+  border: none !important;
+  color: white !important;
+}
+
+.p-button:not(.p-button-outlined):not(.p-button-text):hover {
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px -2px rgba(34, 197, 94, 0.25) !important;
+}
+
+.p-button-secondary {
+  background: white !important;
+  border: 2px solid #bbf7d0 !important;
+  color: #15803d !important;
+}
+
+.p-button-secondary:hover {
+  background: #f0fdf4 !important;
+  border-color: #86efac !important;
+  transform: translateY(-1px) !important;
+}
+
+.p-button-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  border: none !important;
+}
+
+.p-button-danger:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+}
+
+.p-button-outlined {
+  background: transparent !important;
+  border: 2px solid #bbf7d0 !important;
+  color: #15803d !important;
+}
+
+.p-button-outlined:hover {
+  background: #f0fdf4 !important;
+  border-color: #86efac !important;
+}
+
+/* Input Styles */
+.p-inputtext, .p-inputmask input {
+  border: 2px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  padding: 0.875rem 1rem !important;
+  transition: all 0.3s ease !important;
+  background: white !important;
+  font-size: 0.95rem !important;
+}
+
+.p-inputtext:focus, .p-inputmask input:focus {
+  border-color: #86efac !important;
+  box-shadow: 0 0 0 3px rgba(134, 239, 172, 0.1) !important;
+  outline: none !important;
+}
+
+.p-inputtext:hover, .p-inputmask input:hover {
+  border-color: #bbf7d0 !important;
+}
+
+/* Float Label Styles */
+.p-floatlabel label {
+  color: #6b7280 !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+}
+
+.p-floatlabel .p-inputtext:focus ~ label,
+.p-floatlabel .p-inputtext.p-filled ~ label,
+.p-floatlabel .p-inputmask input:focus ~ label,
+.p-floatlabel .p-inputmask input.p-filled ~ label {
+  color: #16a34a !important;
+  font-size: 0.875rem !important;
+}
+
+/* Select/Dropdown Styles */
+.p-select {
+  border: 2px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  background: white !important;
+  transition: all 0.3s ease !important;
+}
+
+.p-select:hover {
+  border-color: #bbf7d0 !important;
+}
+
+.p-select.p-focus {
+  border-color: #86efac !important;
+  box-shadow: 0 0 0 3px rgba(134, 239, 172, 0.1) !important;
+}
+
+.p-select-overlay {
+  border-radius: 12px !important;
+  border: 1px solid #bbf7d0 !important;
+  box-shadow: 0 10px 25px -5px rgba(34, 197, 94, 0.1) !important;
+}
+
+.p-select-option:hover {
+  background: #f0fdf4 !important;
+  color: #15803d !important;
+}
+
+.p-select-option.p-selected {
+  background: #dcfce7 !important;
+  color: #15803d !important;
+}
+
+/* Table Styles */
+.p-datatable {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 6px -1px rgba(34, 197, 94, 0.05) !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+  color: #15803d !important;
+  font-weight: 600 !important;
+  padding: 1.25rem 1rem !important;
+  border-bottom: 2px solid #bbf7d0 !important;
+  font-size: 0.95rem !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 1rem !important;
+  border-bottom: 1px solid #f3f4f6 !important;
+  color: #374151 !important;
+  font-size: 0.9rem !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background: #f9fafb !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background: #fafafa !important;
+}
+
+/* Menu and Navigation */
+.p-menubar {
+  background: white !important;
+  border: none !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  border-radius: 0 !important;
+  padding: 1rem 1.5rem !important;
+}
+
+.p-menubar .p-menubar-start {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+}
+
+.p-drawer .p-drawer-content {
+  background: white !important;
+  border-right: 1px solid #e5e7eb !important;
+}
+
+.p-drawer .p-drawer-header {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+  border-bottom: 1px solid #bbf7d0 !important;
+  padding: 1.5rem !important;
+}
+
+.p-panelmenu .p-panelmenu-panel {
+  border: none !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.p-panelmenu .p-panelmenu-header > a {
+  background: #f9fafb !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 8px !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+  padding: 0.875rem 1rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.p-panelmenu .p-panelmenu-header > a:hover {
+  background: #f0fdf4 !important;
+  border-color: #bbf7d0 !important;
+  color: #15803d !important;
+}
+
+.p-panelmenu .p-panelmenu-content {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-top: none !important;
+  border-radius: 0 0 8px 8px !important;
+}
+
+/* Dialog Styles */
+.p-dialog {
+  border-radius: 16px !important;
+  border: none !important;
+  box-shadow: 0 25px 50px -12px rgba(34, 197, 94, 0.15) !important;
+}
+
+.p-dialog .p-dialog-header {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+  border-bottom: 1px solid #bbf7d0 !important;
+  border-radius: 16px 16px 0 0 !important;
+  color: #15803d !important;
+  font-weight: 600 !important;
+  padding: 1.5rem !important;
+}
+
+.p-dialog .p-dialog-content {
+  padding: 1.5rem !important;
+  background: white !important;
+}
+
+/* Toast Styles */
+.p-toast .p-toast-message {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+.p-toast .p-toast-message-success {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+  border-color: #bbf7d0 !important;
+  color: #15803d !important;
+}
+
+/* Loading Styles */
+.p-datatable-loading-overlay {
+  background: rgba(240, 253, 244, 0.8) !important;
+}
+
+/* Utility Classes */
+.minimal-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px -1px rgba(34, 197, 94, 0.05);
+  transition: all 0.3s ease;
+}
+
+.minimal-card:hover {
+  box-shadow: 0 8px 25px -5px rgba(34, 197, 94, 0.1);
+  transform: translateY(-2px);
+}
+
+.section-title {
+  color: #15803d;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 3rem;
+  height: 3px;
+  background: linear-gradient(90deg, #22c55e 0%, #86efac 100%);
+  border-radius: 2px;
+}
+

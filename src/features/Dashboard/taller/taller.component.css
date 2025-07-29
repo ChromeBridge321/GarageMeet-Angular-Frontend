@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 .taller-container {
   padding: 0;
   max-width: none;
@@ -43,4 +44,189 @@
 .placeholder-content p {
   margin: 1rem 0 0 0;
   font-size: 1.125rem;
+=======
+/* =================================
+   TALLER COMPONENT STYLES
+   ================================= */
+
+/* Information cards styling */
+.bg-gray-50 {
+  background: #f9fafb !important;
+  transition: all 0.3s ease;
+}
+
+.bg-gray-50:hover {
+  background: #f3f4f6 !important;
+  transform: translateY(-1px);
+}
+
+/* Icon containers for different sections */
+.w-8.h-8.bg-green-100 {
+  background: #dcfce7 !important;
+}
+
+.w-8.h-8.bg-blue-100 {
+  background: #dbeafe !important;
+}
+
+.w-8.h-8.bg-purple-100 {
+  background: #f3e8ff !important;
+}
+
+.w-8.h-8.bg-orange-100 {
+  background: #fed7aa !important;
+}
+
+.w-8.h-8.bg-red-100 {
+  background: #fee2e2 !important;
+}
+
+/* Icon colors */
+.text-green-600 {
+  color: #16a34a !important;
+}
+
+.text-blue-600 {
+  color: #2563eb !important;
+}
+
+.text-purple-600 {
+  color: #9333ea !important;
+}
+
+.text-orange-600 {
+  color: #ea580c !important;
+}
+
+.text-red-600 {
+  color: #dc2626 !important;
+}
+
+/* Google Maps section styling */
+.bg-gradient-to-r.from-red-50 {
+  background: linear-gradient(to right, #fef2f2 0%, #fee2e2 100%) !important;
+  border: 1px solid #fecaca !important;
+}
+
+/* Google Maps button styling */
+.bg-red-500 {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.25) !important;
+}
+
+.bg-red-500:hover {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+  box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.3) !important;
+}
+
+/* Statistics section styling */
+.w-12.h-12.bg-gradient-to-br.from-green-400 {
+  background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%) !important;
+}
+
+.w-12.h-12.bg-gradient-to-br.from-blue-400 {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%) !important;
+}
+
+.w-12.h-12.bg-gradient-to-br.from-purple-400 {
+  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%) !important;
+}
+
+/* Card hover effects */
+.minimal-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.minimal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(34, 197, 94, 0.1), 0 10px 10px -5px rgba(34, 197, 94, 0.04) !important;
+}
+
+/* Information field hover effects */
+.space-y-3 .bg-gray-50 {
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.space-y-3 .bg-gray-50:hover {
+  border-color: #86efac !important;
+  background: #f0fdf4 !important;
+}
+
+/* Statistics cards hover effects */
+.text-center {
+  transition: all 0.3s ease;
+  cursor: default;
+  padding: 1rem;
+  border-radius: 12px;
+}
+
+.text-center:hover {
+  background: #f9fafb;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .grid.grid-cols-1.md\\:grid-cols-2 {
+    gap: 1.5rem !important;
+  }
+
+  .p-8 {
+    padding: 1.5rem !important;
+  }
+
+  .text-4xl {
+    font-size: 2rem !important;
+  }
+
+  .text-xl {
+    font-size: 1.125rem !important;
+  }
+}
+
+/* Animation for content sections */
+.space-y-3,
+.space-y-4 {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animation delays */
+.grid > div:nth-child(1) { animation-delay: 0.1s; }
+.grid > div:nth-child(2) { animation-delay: 0.2s; }
+.grid > div:nth-child(3) { animation-delay: 0.3s; }
+.grid > div:nth-child(4) { animation-delay: 0.4s; }
+
+/* External link icon animation */
+.pi-external-link {
+  transition: transform 0.3s ease;
+}
+
+.bg-red-500:hover .pi-external-link {
+  transform: rotate(12deg) scale(1.1);
+}
+
+/* Border and shadow enhancements */
+.border-gray-200 {
+  border-color: #e5e7eb !important;
+}
+
+.border-green-200 {
+  border-color: #bbf7d0 !important;
+}
+
+.border-red-200 {
+  border-color: #fecaca !important;
+>>>>>>> Stashed changes
 }

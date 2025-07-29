@@ -1,0 +1,244 @@
+<!-- Editar Cliente Form -->
+<div class="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 py-8">
+  <div class="max-w-4xl mx-auto px-6">
+    <!-- Header Section -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl mb-4">
+        <i class="pi pi-user-edit text-white text-2xl"></i>
+      </div>
+      <h1 class="text-4xl font-bold text-green-800 mb-2">Editar Cliente</h1>
+      <p class="text-gray-600">Actualiza la información del cliente</p>
+    </div>
+
+    <!-- Form Card -->
+    <div class="minimal-card bg-white rounded-2xl shadow-xl overflow-hidden">
+      <div class="bg-gradient-to-r from-blue-50 to-blue-100 p-6 border-b border-blue-200">
+        <h2 class="text-xl font-semibold text-blue-800 flex items-center gap-2">
+          <i class="pi pi-info-circle text-blue-600"></i>
+          Actualizar Información
+        </h2>
+      </div>
+
+      <form [formGroup]="clientForm" (ngSubmit)="updateClient()" class="p-8 space-y-8">
+        <!-- Personal Information Section -->
+        <div class="space-y-6">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+              <i class="pi pi-user text-green-600"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800">Información Personal</h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Name Field -->
+            <div class="space-y-2">
+              <p-floatlabel>
+                <input
+                  type="text"
+                  class="w-full !rounded-xl !border-2 !border-gray-200 hover:!border-green-300 focus:!border-green-400 transition-colors"
+                  pInputText
+                  id="name"
+                  autocomplete="off"
+                  formControlName="name" />
+                <label class="!text-gray-600 !font-medium" for="name">Nombre *</label>
+              </p-floatlabel>
+              <small
+                class="text-red-500 text-sm flex items-center gap-1"
+                *ngIf="clientForm.get('name')?.invalid && (clientForm.get('name')?.dirty || clientForm.get('name')?.touched)">
+                <i class="pi pi-exclamation-triangle"></i>
+                El nombre es requerido
+              </small>
+            </div>
+
+            <!-- Last Name Field -->
+            <div class="space-y-2">
+              <p-floatlabel>
+                <input
+                  type="text"
+                  class="w-full !rounded-xl !border-2 !border-gray-200 hover:!border-green-300 focus:!border-green-400 transition-colors"
+                  pInputText
+                  id="last_name"
+                  autocomplete="off"
+                  formControlName="last_name" />
+                <label class="!text-gray-600 !font-medium" for="last_name">Apellidos *</label>
+              </p-floatlabel>
+              <small
+                class="text-red-500 text-sm flex items-center gap-1"
+                *ngIf="clientForm.get('last_name')?.invalid && (clientForm.get('last_name')?.dirty || clientForm.get('last_name')?.touched)">
+                <i class="pi pi-exclamation-triangle"></i>
+                Los apellidos son requeridos
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information Section -->
+        <div class="space-y-6">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+              <i class="pi pi-phone text-blue-600"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800">Información de Contacto</h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Phone Field -->
+            <div class="space-y-2">
+              <p-floatlabel>
+                <p-inputmask
+                  [style]="{'width': '100%'}"
+                  styleClass="!rounded-xl !border-2 !border-gray-200 hover:!border-green-300 focus:!border-green-400 transition-colors"
+                  id="cellphone_number"
+                  autocomplete="off"
+                  formControlName="cellphone_number"
+                  mask="(999) 999-9999" />
+                <label class="!text-gray-600 !font-medium" for="cellphone_number">Número de Teléfono *</label>
+              </p-floatlabel>
+              <small
+                class="text-red-500 text-sm flex items-center gap-1"
+                *ngIf="clientForm.get('cellphone_number')?.invalid && (clientForm.get('cellphone_number')?.dirty || clientForm.get('cellphone_number')?.touched)">
+                <i class="pi pi-exclamation-triangle"></i>
+                El teléfono es requerido
+              </small>
+            </div>
+
+            <!-- Email Field -->
+            <div class="space-y-2">
+              <p-floatlabel>
+                <input
+                  type="email"
+                  class="w-full !rounded-xl !border-2 !border-gray-200 hover:!border-green-300 focus:!border-green-400 transition-colors"
+                  pInputText
+                  id="email"
+                  autocomplete="off"
+                  formControlName="email" />
+                <label class="!text-gray-600 !font-medium" for="email">Correo Electrónico *</label>
+              </p-floatlabel>
+              <small
+                class="text-red-500 text-sm flex items-center gap-1"
+                *ngIf="clientForm.get('email')?.invalid && (clientForm.get('email')?.dirty || clientForm.get('email')?.touched)">
+                <i class="pi pi-exclamation-triangle"></i>
+                El correo es requerido
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vehicle Information Section -->
+        <div formArrayName="vehicle">
+          <div [formGroupName]="0" class="space-y-6">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                <i class="pi pi-car text-purple-600"></i>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-800">Información del Vehículo</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Makes Selection -->
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Marca del Vehículo</label>
+                <p-select
+                  class="w-full custom-select"
+                  [options]="searchService.makes()"
+                  optionLabel="name"
+                  optionValue="make_id"
+                  [filter]="true"
+                  filterBy="name"
+                  [showClear]="true"
+                  placeholder="Seleccionar Marca"
+                  formControlName="make_id"
+                  (onFilter)="getMakesByName($event.filter)">
+
+                  <ng-template #selectedItem let-selectedOption>
+                    <div class="flex items-center gap-2">
+                      <i class="pi pi-car text-green-600"></i>
+                      <div>{{ selectedOption.name }}</div>
+                    </div>
+                  </ng-template>
+
+                  <ng-template let-make #item>
+                    <div class="flex items-center gap-2 p-2">
+                      <i class="pi pi-car text-green-600"></i>
+                      <div>{{ make.name }}</div>
+                    </div>
+                  </ng-template>
+                </p-select>
+              </div>
+
+              <!-- Models Selection -->
+              <div class="space-y-2">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Modelo del Vehículo</label>
+                <p-select
+                  class="w-full custom-select"
+                  [options]="models()"
+                  optionLabel="name"
+                  optionValue="model_id"
+                  [filter]="true"
+                  filterBy="name"
+                  [showClear]="true"
+                  placeholder="Seleccionar Modelo"
+                  formControlName="model_id"
+                  (onFilter)="getModelsByName($event.filter)">
+
+                  <ng-template #selectedItem let-selectedOption>
+                    <div class="flex items-center gap-2">
+                      <i class="pi pi-cog text-green-600"></i>
+                      <div>{{ selectedOption.name }}</div>
+                    </div>
+                  </ng-template>
+
+                  <ng-template let-model #item>
+                    <div class="flex items-center gap-2 p-2">
+                      <i class="pi pi-cog text-green-600"></i>
+                      <div>{{ model.name }}</div>
+                    </div>
+                  </ng-template>
+                </p-select>
+              </div>
+            </div>
+
+            <!-- Plates Field -->
+            <div class="max-w-md space-y-2">
+              <p-floatlabel>
+                <input
+                  type="text"
+                  class="w-full !rounded-xl !border-2 !border-gray-200 hover:!border-green-300 focus:!border-green-400 transition-colors !uppercase"
+                  pInputText
+                  id="plates"
+                  autocomplete="off"
+                  formControlName="plates"
+                  style="text-transform: uppercase;"/>
+                <label class="!text-gray-600 !font-medium" for="plates">Placas del Vehículo</label>
+              </p-floatlabel>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col sm:flex-row justify-end gap-4 pt-6 border-t border-gray-200">
+          <p-button
+            type="button"
+            pRipple
+            [routerLink]="['/panel/clientes']"
+            label="Volver al Listado"
+            severity="secondary"
+            icon="pi pi-arrow-left"
+            class="order-2 sm:order-1 shadow-lg hover:shadow-xl transition-all duration-300" />
+
+          <p-button
+            type="submit"
+            pRipple
+            label="Actualizar Cliente"
+            severity="success"
+            icon="pi pi-check"
+            [disabled]="clientForm.invalid"
+            class="order-1 sm:order-2 shadow-lg hover:shadow-xl transition-all duration-300" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Messages -->
+  <p-toast position="top-right" />
+</div>

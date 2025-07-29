@@ -1,0 +1,123 @@
+/* =================================
+   EDITAR CLIENTE COMPONENT STYLES
+   ================================= */
+
+/* Custom select styling */
+::ng-deep .custom-select .p-select {
+  border: 2px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  background: white !important;
+  min-height: 3.5rem !important;
+}
+
+::ng-deep .custom-select .p-select:hover {
+  border-color: #86efac !important;
+}
+
+::ng-deep .custom-select .p-select.p-focus {
+  border-color: #22c55e !important;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1) !important;
+}
+
+::ng-deep .custom-select .p-select .p-select-label {
+  padding: 1rem !important;
+  color: #374151 !important;
+  font-weight: 500 !important;
+}
+
+::ng-deep .custom-select .p-select .p-select-trigger {
+  padding: 1rem !important;
+  color: #6b7280 !important;
+}
+
+/* Dropdown panel styling */
+::ng-deep .custom-select .p-select-overlay {
+  border-radius: 12px !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  margin-top: 0.5rem !important;
+}
+
+::ng-deep .custom-select .p-select-list {
+  padding: 0.5rem !important;
+}
+
+::ng-deep .custom-select .p-select-option {
+  border-radius: 8px !important;
+  margin: 0.125rem 0 !important;
+  padding: 0.75rem !important;
+  transition: all 0.2s ease !important;
+}
+
+::ng-deep .custom-select .p-select-option:hover {
+  background: #f0fdf4 !important;
+  color: #15803d !important;
+}
+
+::ng-deep .custom-select .p-select-option.p-selected {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%) !important;
+  color: #15803d !important;
+  font-weight: 600 !important;
+}
+
+/* Blue theme overrides for edit mode */
+::ng-deep .p-button-secondary {
+  background: white !important;
+  border: 2px solid #bfdbfe !important;
+  color: #1e40af !important;
+}
+
+::ng-deep .p-button-secondary:hover {
+  background: #dbeafe !important;
+  border-color: #93c5fd !important;
+  color: #1d4ed8 !important;
+}
+
+/* Input focus effects */
+::ng-deep .p-inputtext:focus,
+::ng-deep .p-inputmask input:focus {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px -2px rgba(34, 197, 94, 0.15) !important;
+}
+
+/* Button enhancements */
+::ng-deep .p-button {
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  padding: 0.875rem 2rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+::ng-deep .p-button:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* Error message styling */
+small.text-red-500 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+/* Animation for form sections */
+.space-y-6 > * {
+  animation: slideInFromRight 0.6s ease-out forwards;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
