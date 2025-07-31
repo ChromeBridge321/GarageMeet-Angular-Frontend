@@ -5,12 +5,19 @@
       ">Cargos</h3>
   </div>
   <p-button (click)="showDialog(false)" type="button" pRipple label="Crear Cargo" class="mb-5" />
-  <p-table showGridlines [value]="positions" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading">
+  <p-table currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" stripedRows showGridlines [value]="positions" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading"
+    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]">
     <ng-template #header>
       <tr>
-        <th>N.</th>
-        <th>Nombre</th>
-        <th>Acciones</th>
+        <th>
+          N.
+        </th>
+        <th pSortableColumn="name">
+          Nombre <p-sortIcon field="name" />
+        </th>
+        <th>
+          Acciones
+        </th>
       </tr>
     </ng-template>
     <ng-template #body let-position let-index="rowIndex">
@@ -18,7 +25,7 @@
         <td>{{ index + 1 }}</td>
         <td>{{ position.name }}</td>
         <td>
-          <p-button  (click)="showDialog(true, position.positions_id)" type="button" pRipple icon="pi pi-pencil"
+          <p-button (click)="showDialog(true, position.positions_id)" type="button" pRipple icon="pi pi-pencil"
             class="mr-2" severity="secondary" tooltip="Editar Cargo" />
           <p-button (click)="delete(position.positions_id)" type="button" pRipple icon="pi pi-trash" severity="danger"
             tooltip="Eliminar Cargo" />

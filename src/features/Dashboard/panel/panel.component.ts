@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { MenuModule } from 'primeng/menu';
 @Component({
   selector: 'app-panel',
   imports: [DrawerModule,
@@ -16,7 +17,8 @@ import { AuthService } from '../../../core/services/auth.service';
     PanelMenu,
     CommonModule,
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    MenuModule
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css',
@@ -45,18 +47,13 @@ export class PanelComponent implements OnInit {
         label: 'Cargos',
         icon: 'pi pi-briefcase',
         routerLink: './cargos',
-        // items: [
-        //   {
-        //     label: 'Listado',
-        //     icon: 'pi pi-align-justify',
-        //     routerLink: './cargos',
-        //   },
-        //   {
-        //     label: 'Registrar',
-        //     icon: 'pi pi-pen-to-square',
-        //     routerLink: './cargos/crear',
-        //   }
-        // ]
+        items: [
+          {
+            label: 'Listado',
+            icon: 'pi pi-align-justify',
+            routerLink: './cargos',
+          }
+        ]
       },
       {
         label: 'Empleados',
@@ -99,8 +96,15 @@ export class PanelComponent implements OnInit {
         label: 'Cerrar Sesión',
         icon: 'pi pi-sign-out',
         styleClass: 'text-red-500',
-        command: () => this.authService.logout(),
+        items: [
+          {
+            label: 'Cerrar Sesión',
+            icon: 'pi pi-sign-out',
+            command: () => this.authService.logout()
+          }
+        ]
       }
+
     ]
   }
 }

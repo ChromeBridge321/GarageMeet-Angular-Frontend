@@ -8,7 +8,11 @@ export interface AuthResponse {
 interface user {
     id: number;
     email: string;
+    type_user: string | null;
+    name: string;
+    last_name: string;
     mechanical_workshop: mechanical_workshop | null;
+
 
 }
 

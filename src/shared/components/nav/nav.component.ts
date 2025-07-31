@@ -41,13 +41,20 @@ export class NavComponent implements OnInit {
       {
         label: 'Panel',
         routerLink: '/panel',
-        visible: this.authService.isLoggedIn()
+        visible: this.authService.isLoggedIn() && this.authService.getUserType() === 'Admin'
       },
       {
         label: 'Iniciar Sesión',
         routerLink: '/login',
         icon: 'pi pi-sign-in',
         visible: !this.authService.isLoggedIn()
+      },
+      {
+        label: 'Cerrar Sesión',
+        icon: 'pi pi-sign-out',
+        visible: this.authService.isLoggedIn() && this.authService.getUserType() !== 'Admin',
+        command: () => this.authService.logout()
+
       }
     ];
   }

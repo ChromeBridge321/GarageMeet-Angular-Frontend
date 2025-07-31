@@ -1,4 +1,4 @@
-<app-nav/>
+<app-nav />
 <main class="min-h-screen w-full bg-zinc-950">
   <!-- Hero Section -->
   <section id="Inicio" class="relative w-full h-screen overflow-hidden">
@@ -10,14 +10,32 @@
           <span class="block bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">Gestión de</span>
           <span class="block">Talleres Mecánicos</span>
         </span>
-        <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl max-w-4xl mx-auto text-gray-200 mb-10 font-light leading-relaxed">
+        <p
+          class="text-lg sm:text-xl md:text-2xl lg:text-3xl max-w-4xl mx-auto text-gray-200 mb-10 font-light leading-relaxed">
           Soluciones eficientes para transformar la administración de tu taller con tecnología de vanguardia
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25">
-            Comenzar ahora
-          </button>
-            <!-- <button class="w-full sm:w-auto px-8 py-4 border-2 border-white/30 text-white font-medium rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white/50">
+          <a href="https://www.mercadopago.com.mx/subscriptions/checkout?preapproval_plan_id=9c63974ff7704567ab329885a9298b02"
+            name="MP-payButton" class='blue-button'>Suscribirme</a>
+          <style>
+            .blue-button {
+              background-color: #3483FA;
+              color: white;
+              padding: 10px 24px;
+              text-decoration: none;
+              border-radius: 5px;
+              display: inline-block;
+              font-size: 16px;
+              transition: background-color 0.3s;
+              font-family: Arial, sans-serif;
+            }
+
+            .blue-button:hover {
+              background-color: #2a68c8;
+            }
+          </style>
+
+          <!-- <button class="w-full sm:w-auto px-8 py-4 border-2 border-white/30 text-white font-medium rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white/50">
               Ver demo
             </button> -->
         </div>
@@ -31,37 +49,46 @@
   </section>
 
   <!-- Nosotros Section -->
-  <section id="Nosotros" class="relative bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950 py-16 sm:py-20 lg:py-32">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-zinc-900/40 to-zinc-950"></div>
+  <section id="Nosotros"
+    class="relative bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950 py-16 sm:py-20 lg:py-32">
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-800/20 via-zinc-900/40 to-zinc-950">
+    </div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 lg:mb-20">
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-          Conoce a <span class="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">GarageMeet</span>
+          Conoce a <span
+            class="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">GarageMeet</span>
         </h2>
         <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-blue-600 mx-auto rounded-full"></div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
         <div class="group">
-          <div class="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-blue-500/30 transition-all duration-500 hover:transform hover:-translate-y-2 h-full">
+          <div
+            class="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-blue-500/30 transition-all duration-500 hover:transform hover:-translate-y-2 h-full">
             <div class="flex items-center mb-6">
-              <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-4">
+              <div
+                class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-4">
                 <i class="pi pi-users text-white text-xl"></i>
               </div>
               <h3 class="text-2xl sm:text-3xl font-bold text-white">Nosotros</h3>
             </div>
             <p class="text-base sm:text-lg text-gray-300 leading-relaxed">
               En GarageMeet, estamos dedicados a simplificar la gestión de talleres
-              mecánicos mediante soluciones tecnológicas innovadoras. Nuestro equipo combina experiencia en desarrollo web y conocimientos en el sector automotriz para
+              mecánicos mediante soluciones tecnológicas innovadoras. Nuestro equipo combina experiencia en desarrollo
+              web y conocimientos en el sector automotriz para
               ofrecer una plataforma integral y confiable.
             </p>
           </div>
         </div>
 
         <div class="group">
-          <div class="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-blue-500/30 transition-all duration-500 hover:transform hover:-translate-y-2 h-full">
+          <div
+            class="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-blue-500/30 transition-all duration-500 hover:transform hover:-translate-y-2 h-full">
             <div class="flex items-center mb-6">
-              <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-4">
+              <div
+                class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-4">
                 <i class="pi pi-eye text-white text-xl"></i>
               </div>
               <h3 class="text-2xl sm:text-3xl font-bold text-white">Visión</h3>
@@ -75,16 +102,19 @@
         </div>
 
         <div class="group">
-          <div class="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-blue-500/30 transition-all duration-500 hover:transform hover:-translate-y-2 h-full">
+          <div
+            class="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-blue-500/30 transition-all duration-500 hover:transform hover:-translate-y-2 h-full">
             <div class="flex items-center mb-6">
-              <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-4">
+              <div
+                class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-4">
                 <i class="pi pi-compass text-white text-xl"></i>
               </div>
               <h3 class="text-2xl sm:text-3xl font-bold text-white">Misión</h3>
             </div>
             <p class="text-base sm:text-lg text-gray-300 leading-relaxed">
               Proporcionar una plataforma digital
-              innovadora y confiable que transforme la gestión de talleres mecánicos. Nos comprometemos a ofrecer herramientas intuitivas y
+              innovadora y confiable que transforme la gestión de talleres mecánicos. Nos comprometemos a ofrecer
+              herramientas intuitivas y
               eficientes que simplifiquen las operaciones diarias.
             </p>
           </div>
@@ -100,12 +130,14 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         <div class="order-2 lg:order-1 space-y-6 lg:space-y-8">
           <div class="space-y-4">
-            <span class="inline-block px-4 py-2 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium border border-blue-500/20">
+            <span
+              class="inline-block px-4 py-2 bg-blue-500/10 text-blue-400 rounded-full text-sm font-medium border border-blue-500/20">
               Software en la nube
             </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
               Software de Gestión de
-              <span class="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">talleres mecánicos</span>
+              <span class="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">talleres
+                mecánicos</span>
             </h2>
             <h3 class="text-xl sm:text-2xl lg:text-3xl text-gray-300 font-light">
               Que tu taller hable por ti
@@ -117,10 +149,12 @@
             Es fácil de usar e intuitivo, diseñado pensando en ti.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
-            <button class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105">
+            <button
+              class="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105">
               Probar gratis
             </button>
-            <button class="px-6 py-3 border border-zinc-600 text-gray-300 hover:border-blue-500/50 hover:text-white rounded-xl transition-all duration-300">
+            <button
+              class="px-6 py-3 border border-zinc-600 text-gray-300 hover:border-blue-500/50 hover:text-white rounded-xl transition-all duration-300">
               Ver características
             </button>
           </div>
@@ -128,10 +162,14 @@
 
         <div class="order-1 lg:order-2 flex justify-center items-center">
           <div class="relative group">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-            <div class="relative bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-4 border border-zinc-700/50">
-              <img class="w-full h-auto rounded-xl shadow-2xl transform group-hover:scale-105 transition-all duration-500"
-                   src="images/section1.avif" alt="Software de gestión">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-blue-400/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500">
+            </div>
+            <div
+              class="relative bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-4 border border-zinc-700/50">
+              <img
+                class="w-full h-auto rounded-xl shadow-2xl transform group-hover:scale-105 transition-all duration-500"
+                src="images/section1.avif" alt="Software de gestión">
             </div>
           </div>
         </div>
@@ -140,28 +178,37 @@
   </section>
 
   <!-- Aumenta tu productividad Section -->
-  <section class="relative bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-900 py-16 sm:py-20 lg:py-32 overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-900/10 via-zinc-950/50 to-zinc-900"></div>
+  <section
+    class="relative bg-gradient-to-b from-zinc-900 via-zinc-950 to-zinc-900 py-16 sm:py-20 lg:py-32 overflow-hidden">
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-900/10 via-zinc-950/50 to-zinc-900">
+    </div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         <div class="flex justify-center items-center">
           <div class="relative group">
-            <div class="absolute inset-0 bg-gradient-to-r from-green-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-            <div class="relative bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-4 border border-zinc-700/50">
-              <img class="w-full h-auto rounded-xl shadow-2xl transform group-hover:scale-105 transition-all duration-500"
-                   src="images/section2.avif" alt="Productividad">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-green-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500">
+            </div>
+            <div
+              class="relative bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-4 border border-zinc-700/50">
+              <img
+                class="w-full h-auto rounded-xl shadow-2xl transform group-hover:scale-105 transition-all duration-500"
+                src="images/section2.avif" alt="Productividad">
             </div>
           </div>
         </div>
 
         <div class="space-y-6 lg:space-y-8">
           <div class="space-y-4">
-            <span class="inline-block px-4 py-2 bg-green-500/10 text-green-400 rounded-full text-sm font-medium border border-green-500/20">
+            <span
+              class="inline-block px-4 py-2 bg-green-500/10 text-green-400 rounded-full text-sm font-medium border border-green-500/20">
               Eficiencia mejorada
             </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
               Aumenta tu
-              <span class="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">productividad</span>
+              <span
+                class="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">productividad</span>
               y la de tu equipo
             </h2>
           </div>
@@ -174,7 +221,8 @@
 
           <div class="space-y-4">
             <div class="flex items-start space-x-4 group">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div
+                class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i class="pi pi-check text-white text-lg"></i>
               </div>
               <div>
@@ -184,7 +232,8 @@
             </div>
 
             <div class="flex items-start space-x-4 group">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div
+                class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i class="pi pi-check text-white text-lg"></i>
               </div>
               <div>
@@ -194,7 +243,8 @@
             </div>
 
             <div class="flex items-start space-x-4 group">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div
+                class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i class="pi pi-check text-white text-lg"></i>
               </div>
               <div>
@@ -215,7 +265,8 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         <div class="order-2 lg:order-1 space-y-6 lg:space-y-8">
           <div class="space-y-4">
-            <span class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium border border-purple-500/20">
+            <span
+              class="inline-block px-4 py-2 bg-purple-500/10 text-purple-400 rounded-full text-sm font-medium border border-purple-500/20">
               Análisis de datos
             </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
@@ -232,7 +283,8 @@
 
           <div class="space-y-4">
             <div class="flex items-start space-x-4 group">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div
+                class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i class="pi pi-chart-bar text-white text-lg"></i>
               </div>
               <div>
@@ -242,7 +294,8 @@
             </div>
 
             <div class="flex items-start space-x-4 group">
-              <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div
+                class="flex-shrink-0 w-10 h-10 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <i class="pi pi-chart-line text-white text-lg"></i>
               </div>
               <div>
@@ -255,10 +308,14 @@
 
         <div class="order-1 lg:order-2 flex justify-center items-center">
           <div class="relative group">
-            <div class="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-            <div class="relative bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-4 border border-zinc-700/50">
-              <img class="w-full h-auto rounded-xl shadow-2xl transform group-hover:scale-105 transition-all duration-500"
-                   src="images/section3.avif" alt="Reportes y análisis">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500">
+            </div>
+            <div
+              class="relative bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-4 border border-zinc-700/50">
+              <img
+                class="w-full h-auto rounded-xl shadow-2xl transform group-hover:scale-105 transition-all duration-500"
+                src="images/section3.avif" alt="Reportes y análisis">
             </div>
           </div>
         </div>
@@ -267,28 +324,37 @@
   </section>
 
   <!-- Que nada se te escape Section -->
-  <section class="relative bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950 py-16 sm:py-20 lg:py-32 overflow-hidden">
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-900/10 via-zinc-950/50 to-zinc-900"></div>
+  <section
+    class="relative bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950 py-16 sm:py-20 lg:py-32 overflow-hidden">
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-900/10 via-zinc-950/50 to-zinc-900">
+    </div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
         <div class="flex justify-center items-center">
           <div class="relative group">
-            <div class="absolute inset-0 bg-gradient-to-r from-orange-600/20 to-red-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-            <div class="relative bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-4 border border-zinc-700/50">
-              <img class="w-full h-auto rounded-xl shadow-2xl transform group-hover:scale-105 transition-all duration-500"
-                   src="images/section4.avif" alt="Control total">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-orange-600/20 to-red-600/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500">
+            </div>
+            <div
+              class="relative bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-4 border border-zinc-700/50">
+              <img
+                class="w-full h-auto rounded-xl shadow-2xl transform group-hover:scale-105 transition-all duration-500"
+                src="images/section4.avif" alt="Control total">
             </div>
           </div>
         </div>
 
         <div class="space-y-6 lg:space-y-8">
           <div class="space-y-4">
-            <span class="inline-block px-4 py-2 bg-orange-500/10 text-orange-400 rounded-full text-sm font-medium border border-orange-500/20">
+            <span
+              class="inline-block px-4 py-2 bg-orange-500/10 text-orange-400 rounded-full text-sm font-medium border border-orange-500/20">
               Control total
             </span>
             <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
               QUE NADA
-              <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">SE TE ESCAPE</span>
+              <span class="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">SE TE
+                ESCAPE</span>
             </h2>
           </div>
 
@@ -330,7 +396,8 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
         <!-- Plan Base -->
-        <div class="bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-blue-500/30 transition-all duration-500 hover:transform hover:-translate-y-2 shadow-xl">
+        <div
+          class="bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-blue-500/30 transition-all duration-500 hover:transform hover:-translate-y-2 shadow-xl">
           <div class="space-y-6">
             <div>
               <h3 class="text-2xl sm:text-3xl font-bold text-blue-400 mb-2">Plan Base</h3>
@@ -345,7 +412,8 @@
               <p class="text-sm text-gray-400">$5,400 MXN anualmente</p>
             </div>
 
-            <button class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105">
+            <button
+              class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105">
               Probar gratis
             </button>
 
@@ -391,9 +459,11 @@
         </div>
 
         <!-- Plan Plus + (Popular) -->
-        <div class="relative bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-blue-500/40 hover:border-blue-400/60 transition-all duration-500 hover:transform hover:-translate-y-2 shadow-2xl shadow-blue-900/20 lg:scale-105">
+        <div
+          class="relative bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-blue-500/40 hover:border-blue-400/60 transition-all duration-500 hover:transform hover:-translate-y-2 shadow-2xl shadow-blue-900/20 lg:scale-105">
           <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-            <span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-bold px-6 py-2 rounded-full">
+            <span
+              class="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-bold px-6 py-2 rounded-full">
               MÁS POPULAR
             </span>
           </div>
@@ -412,7 +482,8 @@
               <p class="text-sm text-gray-400">$8,880 MXN anualmente</p>
             </div>
 
-            <button class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105">
+            <button
+              class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105">
               Probar gratis
             </button>
 
@@ -470,12 +541,14 @@
         </div>
 
         <!-- ¿Por qué elegirnos? -->
-        <div class="bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50">
+        <div
+          class="bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50">
           <h3 class="text-xl sm:text-2xl font-bold text-blue-400 mb-8">¿Por qué elegirnos?</h3>
 
           <div class="space-y-6 mb-8">
             <div class="flex items-start space-x-4">
-              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
                 <i class="pi pi-shield text-white text-lg"></i>
               </div>
               <div>
@@ -485,7 +558,8 @@
             </div>
 
             <div class="flex items-start space-x-4">
-              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
                 <i class="pi pi-clock text-white text-lg"></i>
               </div>
               <div>
@@ -495,7 +569,8 @@
             </div>
 
             <div class="flex items-start space-x-4">
-              <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
                 <i class="pi pi-chart-line text-white text-lg"></i>
               </div>
               <div>
@@ -506,12 +581,14 @@
           </div>
 
           <div class="relative group">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl blur-md group-hover:blur-lg transition-all duration-300"></div>
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl blur-md group-hover:blur-lg transition-all duration-300">
+            </div>
             <img class="relative w-full h-auto rounded-xl shadow-lg" src="images/plans.avif" alt="Imagen de planes">
           </div>
         </div>
       </div>
     </div>
   </section>
-<app-footer/>
+  <app-footer />
 </main>

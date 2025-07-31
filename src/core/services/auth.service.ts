@@ -60,6 +60,12 @@ export class AuthService {
     return this.getSecureStorage('userData');
   }
 
+  // Método para obtener el tipo de usuario
+  public getUserType(): string | null {
+    const authStateUser = this.authState()?.user;
+    return authStateUser?.type_user || null;
+  }
+
   // Método para obtener datos del taller mecánico
   public getMechanicalWorkshopData() {
     // Preferir datos del estado en memoria, fallback a almacenamiento
