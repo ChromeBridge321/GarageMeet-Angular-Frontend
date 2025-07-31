@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-presentation',
-  imports: [NavComponent, FooterComponent, RouterLink],
+  imports: [NavComponent, FooterComponent],
   templateUrl: './presentation.component.html',
 })
 export class PresentationComponent { }
