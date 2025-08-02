@@ -41,6 +41,6 @@ export class ClientesService {
 
 
   update(cliente: RESTClient) {
-    return this.http.put(`${this.baseUrl}/clients/update`, cliente, { headers: this.getHeaders() });
+    return this.http.put(`${this.baseUrl}/update`, cliente, { headers: this.getHeaders() });
   }
 }

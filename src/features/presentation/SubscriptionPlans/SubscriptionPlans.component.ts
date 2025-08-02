@@ -1,6 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { BadgeModule } from 'primeng/badge';
@@ -13,7 +12,7 @@ import { PaymentMethodsService } from '../../Dashboard/AddPaymentMethod/services
 
 @Component({
   selector: 'app-subscription-plans',
-  imports: [CommonModule, RouterLink, ButtonModule, CardModule, BadgeModule, DialogModule, Toast],
+  imports: [CommonModule, ButtonModule, CardModule, BadgeModule, DialogModule, Toast],
   templateUrl: './SubscriptionPlans.component.html',
   styleUrl: './SubscriptionPlans.component.css',
   providers: [MessageService, SubscriptionService, PaymentMethodsService]

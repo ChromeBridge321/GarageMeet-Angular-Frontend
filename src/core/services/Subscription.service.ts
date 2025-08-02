@@ -112,4 +112,14 @@ export class SubscriptionService {
     const status = this.subscriptionStatusSubject.value;
     return status?.can_access_dashboard || false;
   }
+
+      // Agregar este método para obtener el estado actual de suscripción
+  getCurrentSubscriptionStatus(): SubscriptionStatus | null {
+    return this.subscriptionStatusSubject.value;
+  }
+
+        isSubscriptionCancelled(): boolean {
+    const status = this.subscriptionStatusSubject.value;
+    return status?.subscription?.cancel_at_period_end || false;
+  }
 }

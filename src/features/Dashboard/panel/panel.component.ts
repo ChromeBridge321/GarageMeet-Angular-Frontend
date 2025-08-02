@@ -117,6 +117,17 @@ export class PanelComponent implements OnInit {
             routerLink: '/panel/listar-metodos-pago',
           }
         ]
+      },
+      {
+        label: 'Suscripción',
+        icon: 'pi pi-bell',
+        items: [
+          {
+            label: 'Administrar Suscripción',
+            icon: 'pi pi-cog',
+            routerLink: '/panel/suscripcion',
+          }
+        ]
       }
 
     ]

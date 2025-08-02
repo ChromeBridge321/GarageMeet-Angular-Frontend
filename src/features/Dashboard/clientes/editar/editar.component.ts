@@ -135,6 +135,7 @@ export class EditarComponent implements OnInit {
         }, 1000);
       },
       error: (error) => {
+        console.error('Error al actualizar el cliente:', error);
         error = error.error.error;
 
         if (error == 'Necesitas una suscripción activa para acceder a esta funcionalidad') {

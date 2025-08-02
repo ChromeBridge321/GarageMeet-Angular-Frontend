@@ -3,7 +3,6 @@ import { NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 // Forms
 import { ReactiveFormsModule, FormGroup, FormBuilder, FormsModule, Validators } from '@angular/forms';
-
 // PrimeNG Components
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabel } from 'primeng/floatlabel';
@@ -41,7 +40,8 @@ export class CrearComponent implements OnInit {
     private readonly messageService: MessageService,
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly cargosService: CargosService
+    private readonly cargosService: CargosService,
+
   ) {
     this.employeeForm = this.initializeForm();
     this.mechanicalWorkshopId = this.authService.mechanicalWorkshop()?.id;
@@ -70,19 +70,21 @@ export class CrearComponent implements OnInit {
       return;
     }
     const employeeData = this.employeeForm.value;
-    this.employeeService.create(employeeData).subscribe(() => {
-      this.showSuccessMessage('Empleado creado exitosamente.');
-      this.router.navigate(['/panel/empleados']);
-    }, (error) => {
-      console.log(error);
-      error = error.error.error;
+    this.employeeService.create(employeeData).subscribe({
+      next: () => {
+        this.showSuccessMessage('Empleado creado exitosamente.');
+         this.resetForm();
+      },
+      error: (error) => {
+        console.log(error);
+        error = error.error.error;
 
       if (error == 'Necesitas una suscripción activa para acceder a esta funcionalidad') {
         this.showErrorMessage(error);
       } else {
         this.showErrorMessage('Error al crear el empleado');
       }
-    });
+    }});
   }
 
   // Load positions from service
@@ -99,7 +101,9 @@ export class CrearComponent implements OnInit {
     });
   }
 
-
+  private resetForm(): void {
+    this.employeeForm.reset();
+  }
   // Message helpers
   private showErrorMessage(detail: string): void {
     this.messageService.add({
