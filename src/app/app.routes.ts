@@ -8,6 +8,7 @@ import { PanelComponent } from '../features/Dashboard/panel/panel.component';
 import { authGuard } from '../core/guards/authGuard.guard';
 import { roleGuard } from '../core/guards/Role.guard';
 import { guestGuard } from '../core/guards/guest.guard';
+import { SubscriptionPlansComponent } from '../features/presentation/SubscriptionPlans/SubscriptionPlans.component';
 export const routes: Routes = [
   {
     path: '',
@@ -41,6 +42,10 @@ export const routes: Routes = [
     canActivate: [roleGuard],
     data: { roles: ['Admin'] },
     loadChildren: () => import('../features/Dashboard/dashboard.routes'),
+  },
+  {
+    path: 'pricing',
+    component: SubscriptionPlansComponent
   },
 
   {

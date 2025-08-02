@@ -135,7 +135,13 @@ export class EditarComponent implements OnInit {
         }, 1000);
       },
       error: (error) => {
-        this.showErrorMessage('Verifique los datos del vehículo seleccionado');
+        error = error.error.error;
+
+        if (error == 'Necesitas una suscripción activa para acceder a esta funcionalidad') {
+          this.showErrorMessage(error);
+        } else {
+          this.showErrorMessage('Error al actualizar el cliente');
+        }
       }
     });
   }

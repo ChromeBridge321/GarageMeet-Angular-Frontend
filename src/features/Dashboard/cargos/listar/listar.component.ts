@@ -57,7 +57,7 @@ export class ListarComponent implements OnInit {
     }
   }
 
-  resetForm(){
+  resetForm() {
     this.positionForm.reset();
     this.visible = false;
   }
@@ -104,8 +104,13 @@ export class ListarComponent implements OnInit {
           this.positionForm.reset();
         },
         error: (error) => {
-          this.showErrorMessage('Error al crear el cargo');
-          console.error('Error creating position:', error);
+          error = error.error.error;
+
+          if (error == 'Necesitas una suscripción activa para acceder a esta funcionalidad') {
+            this.showErrorMessage(error);
+          } else {
+            this.showErrorMessage('Error al crear el cargo');
+          }
         }
       }
     );
@@ -156,7 +161,13 @@ export class ListarComponent implements OnInit {
         }, 1000);
       },
       error: (error) => {
-        this.showErrorMessage('Error al actualizar el cargo.');
+        error = error.error.error;
+
+        if (error == 'Necesitas una suscripción activa para acceder a esta funcionalidad') {
+          this.showErrorMessage(error);
+        } else {
+          this.showErrorMessage('Error al actualizar el cargo');
+        }
       }
     });
   }

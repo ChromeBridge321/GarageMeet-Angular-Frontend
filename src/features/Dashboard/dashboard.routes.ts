@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { PanelComponent } from './panel/panel.component';
+import { AddPaymentMethodComponent } from './AddPaymentMethod/AddPaymentMethod.component';
+import { ListPaymentMethodsComponent } from './ListPaymentMethods/ListPaymentMethods.component';
 export const dashboardRoutes: Routes = [
   {
     path: '',
@@ -20,6 +22,14 @@ export const dashboardRoutes: Routes = [
       {
         path: 'taller',
         loadChildren: () => import('./taller/taller.routes'),
+      },
+      {
+        path: 'agregar-metodos-pago',
+        component: AddPaymentMethodComponent
+      },
+      {
+        path: 'listar-metodos-pago',
+        component: ListPaymentMethodsComponent
       },
       {
         path: '**',

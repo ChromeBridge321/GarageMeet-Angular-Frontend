@@ -82,7 +82,13 @@ export class CrearComponent implements OnInit, OnDestroy {
         this.resetForm();
       },
       error: (error) => {
-        this.showErrorMessage('Verifique los datos del vehículo seleccionado');
+        error = error.error.error;
+
+        if (error == 'Necesitas una suscripción activa para acceder a esta funcionalidad') {
+          this.showErrorMessage(error);
+        } else {
+          this.showErrorMessage('Error al crear el cliente');
+        }
       }
     });
   }
@@ -111,7 +117,7 @@ export class CrearComponent implements OnInit, OnDestroy {
   }
 
 
-    loadModels(): void {
+  loadModels(): void {
     this.vehiculosService.getModels().subscribe((data) => {
       this.models.set(data);
     });

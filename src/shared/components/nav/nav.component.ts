@@ -28,7 +28,7 @@ export class NavComponent implements OnInit {
       },
       {
         label: 'Planes',
-        command: () => this.scrollToSection('Planes')
+        routerLink: '/pricing',
       },
       {
         label: 'Talleres',

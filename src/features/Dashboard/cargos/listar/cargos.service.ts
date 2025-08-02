@@ -8,7 +8,7 @@ import { Position } from '../../empleados/models/empleados.model';
   providedIn: 'root'
 })
 export class CargosService {
-  private baseUrl = `${environment.apiUrl}/positions/all`;
+  private baseUrl = `${environment.apiUrl}/dashboard/positions`;
   constructor(
     private http: HttpClient,
     private authService: AuthService
@@ -22,15 +22,15 @@ export class CargosService {
   }
 
   load(mechanical_workshops_id: number) {
-    return this.http.get<RESTPositions[]>(this.baseUrl, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
+    return this.http.get<RESTPositions[]>(`${environment.apiUrl}/positions/all`, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
   }
 
   create(Position: Position) {
-    return this.http.post<RESTPositions>(`${environment.apiUrl}/positions/create`, Position, { headers: this.getHeaders() });
+    return this.http.post<RESTPositions>(`${this.baseUrl}/create`, Position, { headers: this.getHeaders() });
   }
 
   delete(positions_id: number) {
-    return this.http.delete(`${environment.apiUrl}/positions/delete`, { headers: this.getHeaders(), params: { positions_id } });
+    return this.http.delete(`${this.baseUrl}/delete`, { headers: this.getHeaders(), params: { positions_id } });
   }
 
   getById(positions_id: number, mechanical_workshops_id: number) {
@@ -38,6 +38,6 @@ export class CargosService {
   }
 
   update(position: RESTPositions) {
-    return this.http.put<RESTPositions>(`${environment.apiUrl}/positions/update`, position, { headers: this.getHeaders() });
+    return this.http.put<RESTPositions>(`${this.baseUrl}/update`, position, { headers: this.getHeaders() });
   }
 }

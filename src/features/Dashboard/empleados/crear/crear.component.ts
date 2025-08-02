@@ -70,10 +70,18 @@ export class CrearComponent implements OnInit {
       return;
     }
     const employeeData = this.employeeForm.value;
-    console.log('Employee data to send:', employeeData);
     this.employeeService.create(employeeData).subscribe(() => {
       this.showSuccessMessage('Empleado creado exitosamente.');
       this.router.navigate(['/panel/empleados']);
+    }, (error) => {
+      console.log(error);
+      error = error.error.error;
+
+      if (error == 'Necesitas una suscripción activa para acceder a esta funcionalidad') {
+        this.showErrorMessage(error);
+      } else {
+        this.showErrorMessage('Error al crear el empleado');
+      }
     });
   }
 

@@ -7,6 +7,7 @@ import { RESTEmployee } from '../models/empleados.model';
   providedIn: 'root'
 })
 export class EmployeeService {
+  private baseUrl = `${environment.apiUrl}/dashboard/employees`;
   constructor(private http: HttpClient,
     private authService: AuthService) { }
 
@@ -21,20 +22,21 @@ export class EmployeeService {
   load(mechanical_workshops_id: number) {
     return this.http.get<RESTEmployee[]>(`${environment.apiUrl}/employees/all`, { headers: this.getHeaders(), params: { mechanical_workshops_id } });
   }
-
-  create(employee: RESTEmployee) {
-    return this.http.post<RESTEmployee>(`${environment.apiUrl}/employees/create`, employee, { headers: this.getHeaders() });
-  }
-
-  delete(peoples_id: number) {
-    return this.http.delete(`${environment.apiUrl}/employees/delete`, { headers: this.getHeaders(), params: { peoples_id } });
-  }
-
   getEmployeeById(employee_id: number, mechanical_workshops_id: number) {
     return this.http.get<RESTEmployee>(`${environment.apiUrl}/employees/getById`, { headers: this.getHeaders(), params: { employee_id, mechanical_workshops_id } });
   }
 
+  create(employee: RESTEmployee) {
+    return this.http.post<RESTEmployee>(`${this.baseUrl}/create`, employee, { headers: this.getHeaders() });
+  }
+
+  delete(peoples_id: number) {
+    return this.http.delete(`${this.baseUrl}/delete`, { headers: this.getHeaders(), params: { peoples_id } });
+  }
+
+
+
   update(employee: RESTEmployee) {
-    return this.http.put<RESTEmployee>(`${environment.apiUrl}/employees/update`, employee, { headers: this.getHeaders() });
+    return this.http.put<RESTEmployee>(`${this.baseUrl}/update`, employee, { headers: this.getHeaders() });
   }
 }

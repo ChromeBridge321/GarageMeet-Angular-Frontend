@@ -3,7 +3,6 @@ import { MenuItem } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
-import { PanelMenu } from 'primeng/panelmenu';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
@@ -14,7 +13,6 @@ import { MenuModule } from 'primeng/menu';
   imports: [DrawerModule,
     ButtonModule,
     Menubar,
-    PanelMenu,
     CommonModule,
     RouterOutlet,
     RouterLink,
@@ -101,6 +99,22 @@ export class PanelComponent implements OnInit {
             label: 'Cerrar Sesión',
             icon: 'pi pi-sign-out',
             command: () => this.authService.logout()
+          }
+        ]
+      },
+      {
+        label: 'Metodos de Pago',
+        icon: 'pi pi-credit-card',
+        items: [
+          {
+            label: 'Agregar Metodo de Pago',
+            icon: 'pi pi-plus',
+            routerLink: '/panel/agregar-metodos-pago',
+          },
+          {
+            label: 'Listado de Metodos de Pago',
+            icon: 'pi pi-list',
+            routerLink: '/panel/listar-metodos-pago',
           }
         ]
       }
