@@ -15,7 +15,7 @@
           Soluciones eficientes para transformar la administración de tu taller con tecnología de vanguardia
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="https://www.mercadopago.com.mx/subscriptions/checkout?preapproval_plan_id=9c63974ff7704567ab329885a9298b02"
+          <!-- <a href="https://www.mercadopago.com.mx/subscriptions/checkout?preapproval_plan_id=9c63974ff7704567ab329885a9298b02"
             name="MP-payButton" class='blue-button'>Suscribirme</a>
           <style>
             .blue-button {
@@ -35,9 +35,13 @@
             }
           </style>
 
-          <!-- <button class="w-full sm:w-auto px-8 py-4 border-2 border-white/30 text-white font-medium rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white/50">
+          <button class="w-full sm:w-auto px-8 py-4 border-2 border-white/30 text-white font-medium rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white/50">
               Ver demo
             </button> -->
+          <button [routerLink]="['/register']" routerLinkActive="router-link-active"
+            class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25">
+            Comenzar ahora
+          </button>
         </div>
       </div>
     </div>
@@ -381,214 +385,6 @@
     </div>
   </section>
 
-  <!-- Planes Section -->
-  <section id="Planes" class="relative bg-zinc-900 py-16 sm:py-20 lg:py-32">
-    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/50 to-zinc-900"></div>
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16 lg:mb-20">
-        <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
-          NUESTROS <span class="bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">PLANES</span>
-        </h2>
-        <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mx-auto">
-          Elige el plan que mejor se adapte a las necesidades de tu taller
-        </p>
-      </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-        <!-- Plan Base -->
-        <div
-          class="bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50 hover:border-blue-500/30 transition-all duration-500 hover:transform hover:-translate-y-2 shadow-xl">
-          <div class="space-y-6">
-            <div>
-              <h3 class="text-2xl sm:text-3xl font-bold text-blue-400 mb-2">Plan Base</h3>
-              <p class="text-gray-400 text-sm">Incluye algunos de los beneficios ya mencionados</p>
-            </div>
-
-            <div class="space-y-2">
-              <div class="flex items-baseline">
-                <span class="text-3xl sm:text-4xl font-bold text-white">$540</span>
-                <span class="text-gray-400 ml-2">MXN/mes</span>
-              </div>
-              <p class="text-sm text-gray-400">$5,400 MXN anualmente</p>
-            </div>
-
-            <button
-              class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105">
-              Probar gratis
-            </button>
-
-            <div class="space-y-3">
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Seguimientos de cita</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Pagos con tarjeta desde la web</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Reportes de ventas del día</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Reportes de utilidad</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Reparaciones más solicitadas</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Rendimientos de negocio</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Plan Plus + (Popular) -->
-        <div
-          class="relative bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-blue-500/40 hover:border-blue-400/60 transition-all duration-500 hover:transform hover:-translate-y-2 shadow-2xl shadow-blue-900/20 lg:scale-105">
-          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-            <span
-              class="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-sm font-bold px-6 py-2 rounded-full">
-              MÁS POPULAR
-            </span>
-          </div>
-
-          <div class="space-y-6">
-            <div>
-              <h3 class="text-2xl sm:text-3xl font-bold text-blue-400 mb-2">Plan Plus +</h3>
-              <p class="text-gray-400 text-sm">Incluye todos los beneficios y un sitio web propio</p>
-            </div>
-
-            <div class="space-y-2">
-              <div class="flex items-baseline">
-                <span class="text-3xl sm:text-4xl font-bold text-white">$740</span>
-                <span class="text-gray-400 ml-2">MXN/mes</span>
-              </div>
-              <p class="text-sm text-gray-400">$8,880 MXN anualmente</p>
-            </div>
-
-            <button
-              class="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all duration-300 transform hover:scale-105">
-              Probar gratis
-            </button>
-
-            <div class="space-y-3">
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Citas en línea</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Página web propia</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Seguimientos de cita</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Pagos con tarjeta desde la web</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Reportes de ventas del día</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Reportes de utilidad</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Reparaciones más solicitadas</span>
-              </div>
-              <div class="flex items-start space-x-3">
-                <div class="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center mt-0.5">
-                  <i class="pi pi-check text-white text-xs"></i>
-                </div>
-                <span class="text-gray-300">Rendimientos de negocio</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ¿Por qué elegirnos? -->
-        <div
-          class="bg-gradient-to-br from-zinc-800/80 to-zinc-900/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-zinc-700/50">
-          <h3 class="text-xl sm:text-2xl font-bold text-blue-400 mb-8">¿Por qué elegirnos?</h3>
-
-          <div class="space-y-6 mb-8">
-            <div class="flex items-start space-x-4">
-              <div
-                class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
-                <i class="pi pi-shield text-white text-lg"></i>
-              </div>
-              <div>
-                <h4 class="font-semibold text-white mb-1">Seguridad garantizada</h4>
-                <p class="text-sm text-gray-400">Tus datos siempre protegidos con encriptación de nivel bancario</p>
-              </div>
-            </div>
-
-            <div class="flex items-start space-x-4">
-              <div
-                class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
-                <i class="pi pi-clock text-white text-lg"></i>
-              </div>
-              <div>
-                <h4 class="font-semibold text-white mb-1">Soporte 24/7</h4>
-                <p class="text-sm text-gray-400">Estamos aquí para ayudarte cuando lo necesites</p>
-              </div>
-            </div>
-
-            <div class="flex items-start space-x-4">
-              <div
-                class="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center">
-                <i class="pi pi-chart-line text-white text-lg"></i>
-              </div>
-              <div>
-                <h4 class="font-semibold text-white mb-1">Actualización continua</h4>
-                <p class="text-sm text-gray-400">Mejoras constantes sin costo adicional</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="relative group">
-            <div
-              class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl blur-md group-hover:blur-lg transition-all duration-300">
-            </div>
-            <img class="relative w-full h-auto rounded-xl shadow-lg" src="images/plans.avif" alt="Imagen de planes">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <app-footer />
 </main>

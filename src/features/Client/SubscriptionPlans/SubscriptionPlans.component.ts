@@ -11,12 +11,13 @@ import { environment } from '../../../eviroments/enviroments';
 import { PaymentMethodsService } from '../../Dashboard/PaymentMethods/services/PaymentMethod.service';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
+import { NavComponent } from "../../../shared/components/nav/nav.component";
 
 declare var Stripe: any;
 
 @Component({
   selector: 'app-subscription-plans',
-  imports: [CommonModule, ButtonModule, CardModule, BadgeModule, DialogModule, Toast, RadioButtonModule, FormsModule],
+  imports: [CommonModule, ButtonModule, CardModule, BadgeModule, DialogModule, Toast, RadioButtonModule, FormsModule, NavComponent],
   templateUrl: './SubscriptionPlans.component.html',
   styleUrl: './SubscriptionPlans.component.css',
   providers: [MessageService, SubscriptionService, PaymentMethodsService]
