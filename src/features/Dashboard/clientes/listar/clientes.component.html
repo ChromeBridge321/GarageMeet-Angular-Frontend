@@ -4,7 +4,17 @@
 
       ">Clientes</h3>
   </div>
-  <p-button type="button" pRipple [routerLink]="['/panel/clientes/crear']" label="Crear Cliente" class="mb-5" />
+  <p-button
+    type="button"
+    pRipple
+    [routerLink]="canModifyData ? ['/panel/clientes/crear'] : null"
+    (click)="!canModifyData && showSubscriptionError()"
+    label="Crear Cliente"
+    class="mb-5"
+    [disabled]="!canModifyData"
+    pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear clientes' : 'Crear un nuevo cliente'}}"
+    tooltipPosition="top"
+  />
   <p-table showGridlines [value]="clients" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading">
     <ng-template #header>
       <tr>
@@ -24,8 +34,27 @@
         <td>{{ client.person.email }}</td>
         <td>{{ client.vehicles[0]?.make + ' ' + client.vehicles[0]?.model }}</td>
         <td>
-          <p-button type="button" pRipple [routerLink]="['/panel/clientes/editar/', client.clients_id]" icon="pi pi-pencil" severity="secondary" tooltip="Editar Cliente" />
-          <p-button type="button" pRipple icon="pi pi-trash" severity="danger" tooltip="Eliminar Cliente"  (click)="delete(client.person.peoples_id)"/>
+          <p-button
+            type="button"
+            pRipple
+            [routerLink]="canModifyData ? ['/panel/clientes/editar/', client.clients_id] : null"
+            (click)="!canModifyData && showSubscriptionError()"
+            icon="pi pi-pencil"
+            severity="secondary"
+            [disabled]="!canModifyData"
+            pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para editar' : 'Editar Cliente'}}"
+            tooltipPosition="top"
+          />
+          <p-button
+            type="button"
+            pRipple
+            icon="pi pi-trash"
+            severity="danger"
+            [disabled]="!canModifyData"
+            pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para eliminar' : 'Eliminar Cliente'}}"
+            tooltipPosition="top"
+            (click)="delete(client.person.peoples_id)"
+          />
         </td>
       </tr>
     </ng-template>

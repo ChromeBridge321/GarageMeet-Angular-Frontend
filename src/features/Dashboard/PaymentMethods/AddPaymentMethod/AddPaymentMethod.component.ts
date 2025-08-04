@@ -5,8 +5,8 @@ import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { PaymentMethodsService } from './services/PaymentMethod.service';
-import { environment } from '../../../eviroments/enviroments';
+import { PaymentMethodsService } from '../services/PaymentMethod.service';
+import { environment } from '../../../../eviroments/enviroments';
 declare const Stripe: any;
 @Component({
   selector: 'app-add-payment-method',
@@ -21,6 +21,7 @@ export class AddPaymentMethodComponent implements OnInit, OnDestroy {
   cardElement: any;
   isLoading = signal(false);
   clientSecret = signal<string>('');
+  existingPaymentMethods = signal<any[]>([]);
 
   constructor(
     private paymentMethodsService: PaymentMethodsService,
@@ -30,6 +31,7 @@ export class AddPaymentMethodComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     await this.initializeStripe();
     this.createSetupIntent();
+    this.loadExistingPaymentMethods();
   }
 
   ngOnDestroy() {
@@ -60,6 +62,17 @@ export class AddPaymentMethodComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.cardElement.mount('#card-element');
     }, 100);
+  }
+
+  private loadExistingPaymentMethods() {
+    this.paymentMethodsService.getPaymentMethods().subscribe({
+      next: (response) => {
+        this.existingPaymentMethods.set(response.payment_methods || []);
+      },
+      error: (error) => {
+        console.error('Error loading payment methods:', error);
+      }
+    });
   }
 
   private createSetupIntent() {
@@ -98,14 +111,33 @@ export class AddPaymentMethodComponent implements OnInit, OnDestroy {
         return;
       }
 
+      // Verificar que tenemos los datos necesarios
+      const newCard = setupIntent.payment_method?.card;
+      const paymentMethodId = setupIntent.payment_method?.id;
+
+      if (!paymentMethodId) {
+        this.showErrorMessage('Error: No se pudo obtener el ID del método de pago');
+        this.isLoading.set(false);
+        return;
+      }
+
+      // Usar el método de validación del servicio
+      if (!this.paymentMethodsService.validateCardData(newCard)) {
+        this.showErrorMessage('Error: Los datos de la tarjeta son inválidos o incompletos');
+        this.isLoading.set(false);
+        console.error('Invalid card data, cannot proceed:', newCard);
+        return;
+      }
+
       // Agregar el método de pago al cliente
-      this.paymentMethodsService.attachPaymentMethod(setupIntent.payment_method).subscribe({
+      this.paymentMethodsService.attachPaymentMethod(paymentMethodId).subscribe({
         next: () => {
           this.showSuccessMessage('Método de pago agregado exitosamente');
           this.isLoading.set(false);
           // Resetear el formulario
           this.cardElement.clear();
           this.createSetupIntent(); // Crear nuevo setup intent
+          this.loadExistingPaymentMethods(); // Recargar métodos de pago
         },
         error: (error) => {
           this.showErrorMessage('Error al guardar el método de pago');

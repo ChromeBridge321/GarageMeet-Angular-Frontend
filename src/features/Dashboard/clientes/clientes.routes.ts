@@ -3,6 +3,7 @@ import { ClientesComponent } from "./listar/clientes.component";
 import { CrearComponent } from "./crear/crear.component";
 import { VehiculosComponent } from "./vehiculos/listar/vehiculos.component";
 import { EditarComponent } from "./editar/editar.component";
+import { subscriptionGuard } from "../../../core/guards/Subscription.guard";
 export const clientesRoutes: Route[] = [
   {
     path: '',
@@ -10,7 +11,8 @@ export const clientesRoutes: Route[] = [
   },
   {
     path: 'crear',
-    component: CrearComponent
+    component: CrearComponent,
+    canActivate: [subscriptionGuard]
   },
   {
     path: 'vehiculos',
@@ -19,7 +21,8 @@ export const clientesRoutes: Route[] = [
   ,
   {
     path: 'editar/:id',
-    component: EditarComponent
+    component: EditarComponent,
+    canActivate: [subscriptionGuard]
   }
 ];
 

@@ -1,14 +1,12 @@
 import { Routes } from '@angular/router';
-import { PresentationComponent } from '../features/presentation/presentation.component';
+import { PresentationComponent } from '../features/Client/Template/presentation.component';
 import { PruebasComponent } from '../features/pruebas/pruebas.component';
 import { SearchComponent } from '../features/search/search.component';
 import { LoginComponent } from '../features/auth/login/login.component';
 import { RegisterComponent } from '../features/auth/register/register.component';
-import { PanelComponent } from '../features/Dashboard/panel/panel.component';
-import { authGuard } from '../core/guards/authGuard.guard';
 import { roleGuard } from '../core/guards/Role.guard';
 import { guestGuard } from '../core/guards/guest.guard';
-import { SubscriptionPlansComponent } from '../features/presentation/SubscriptionPlans/SubscriptionPlans.component';
+import { SubscriptionPlansComponent } from '../features/Client/SubscriptionPlans/SubscriptionPlans.component';
 export const routes: Routes = [
   {
     path: '',

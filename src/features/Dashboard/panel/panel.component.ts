@@ -1,13 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { Menubar } from 'primeng/menubar';
 import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, ActivatedRoute } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { MenuModule } from 'primeng/menu';
+import { Toast } from 'primeng/toast';
 @Component({
   selector: 'app-panel',
   imports: [DrawerModule,
@@ -16,17 +17,34 @@ import { MenuModule } from 'primeng/menu';
     CommonModule,
     RouterOutlet,
     RouterLink,
-    MenuModule
+    MenuModule,
+    Toast
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css',
+  providers: [MessageService]
 })
 export class PanelComponent implements OnInit {
   items: MenuItem[] | undefined;
   visible1: boolean = false;
   itemsMenu: MenuItem[] | undefined;
   authService = inject(AuthService);
+  private route = inject(ActivatedRoute);
+  private messageService = inject(MessageService);
+
   ngOnInit() {
+    // Verificar si hay mensajes en los query parameters
+    this.route.queryParams.subscribe(params => {
+      if (params['message'] === 'subscription_required') {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Suscripción requerida',
+          detail: 'Necesitas una suscripción activa para acceder a esta función. Consulta nuestros planes de suscripción.',
+          life: 5000
+        });
+      }
+    });
+
     this.items = [
     ];
     this.itemsMenu = [
@@ -109,12 +127,12 @@ export class PanelComponent implements OnInit {
           {
             label: 'Agregar Metodo de Pago',
             icon: 'pi pi-plus',
-            routerLink: '/panel/agregar-metodos-pago',
+            routerLink: '/panel/metodos-pago/agregar',
           },
           {
             label: 'Listado de Metodos de Pago',
             icon: 'pi pi-list',
-            routerLink: '/panel/listar-metodos-pago',
+            routerLink: '/panel/metodos-pago/listar',
           }
         ]
       },

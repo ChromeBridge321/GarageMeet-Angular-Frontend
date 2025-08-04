@@ -6,9 +6,9 @@ import { ButtonModule } from 'primeng/button';
 import { Toast } from 'primeng/toast';
 import { ConfirmDialog } from 'primeng/confirmdialog';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import { PaymentMethodsService } from '../AddPaymentMethod/services/PaymentMethod.service';
+import { PaymentMethodsService } from '../services/PaymentMethod.service';
 import { TooltipModule } from 'primeng/tooltip';
-import { PaymentMethod } from '../AddPaymentMethod/services/PaymentMethod.service';
+import { PaymentMethod } from '../models/PaymentMethods.interface';
 @Component({
   selector: 'app-list-payment-methods',
   standalone: true,

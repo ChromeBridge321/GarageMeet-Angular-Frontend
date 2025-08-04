@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { PanelComponent } from './panel/panel.component';
-import { AddPaymentMethodComponent } from './AddPaymentMethod/AddPaymentMethod.component';
-import { ListPaymentMethodsComponent } from './ListPaymentMethods/ListPaymentMethods.component';
 import { SubscriptionManagementComponent } from './SubscriptionManagement/SubscriptionManagement.component';
 export const dashboardRoutes: Routes = [
   {
@@ -25,12 +23,8 @@ export const dashboardRoutes: Routes = [
         loadChildren: () => import('./taller/taller.routes'),
       },
       {
-        path: 'agregar-metodos-pago',
-        component: AddPaymentMethodComponent
-      },
-      {
-        path: 'listar-metodos-pago',
-        component: ListPaymentMethodsComponent
+        path: 'metodos-pago',
+        loadChildren: () => import('./PaymentMethods/paymentMethods.routes'),
       },
       {
         path: 'suscripcion',

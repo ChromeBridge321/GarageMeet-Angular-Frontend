@@ -3,21 +3,7 @@ import { environment } from '../../../../eviroments/enviroments';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../../../core/services/auth.service';
 import { Observable } from 'rxjs';
-export interface PaymentMethod {
-  id: string;
-  type: string;
-  card?: {
-    brand: string;
-    last4: string;
-    exp_month: number;
-    exp_year: number;
-  };
-}
-
-export interface SetupIntent {
-  client_secret: string;
-  setup_intent_id: string;
-}
+import { SetupIntent, PaymentMethod} from '../models/PaymentMethods.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -44,10 +30,21 @@ export class PaymentMethodsService {
   }
 
   attachPaymentMethod(paymentMethodId: string): Observable<any> {
+    console.log('Sending payment method ID to backend:', paymentMethodId);
+
     return this.http.post(`${this.baseUrl}/attach`,
       { payment_method_id: paymentMethodId },
       { headers: this.getHeaders() }
     );
+  }
+
+  // Nuevo método para validar datos de tarjeta antes de procesar
+  validateCardData(cardData: any): boolean {
+    return cardData &&
+           cardData.last4 &&
+           cardData.brand &&
+           cardData.exp_month &&
+           cardData.exp_year;
   }
 
   getPaymentMethods(): Observable<{ payment_methods: PaymentMethod[] }> {

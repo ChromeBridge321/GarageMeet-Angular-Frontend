@@ -2,6 +2,7 @@ import { Route } from "@angular/router";
 import { ListarComponent } from "./listar/listar.component";
 import { CrearComponent } from "./crear/crear.component";
 import { EditarComponent } from "./editar/editar.component";
+import { subscriptionGuard } from "../../../core/guards/Subscription.guard";
 
 export const empleadosRoutes: Route[] = [
   {
@@ -10,11 +11,13 @@ export const empleadosRoutes: Route[] = [
   },
   {
     path: 'crear',
-    component: CrearComponent
+    component: CrearComponent,
+    canActivate: [subscriptionGuard]
   },
   {
     path: 'editar/:id',
-    component: EditarComponent
+    component: EditarComponent,
+    canActivate: [subscriptionGuard]
   }
 ];
 

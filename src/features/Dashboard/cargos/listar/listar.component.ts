@@ -1,13 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { CargosService } from './cargos.service';
+import { CargosService } from '../services/cargos.service';
 import { RESTPositions } from '../models/cargos.model';
 import { AuthService } from '../../../../core/services/auth.service';
+import { SubscriptionService } from '../../../../core/services/Subscription.service';
 import { Button } from "primeng/button"; '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Dialog } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { Toast } from 'primeng/toast';
+import { TooltipModule } from 'primeng/tooltip';
 // Forms
 import { ReactiveFormsModule, FormGroup, FormBuilder, FormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -15,7 +17,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialog } from "primeng/confirmdialog";
 @Component({
   selector: 'app-listar',
-  imports: [TableModule, Button, Dialog, InputTextModule, ReactiveFormsModule, FormsModule, Toast, ConfirmDialog],
+  imports: [TableModule, Button, Dialog, InputTextModule, ReactiveFormsModule, FormsModule, Toast, ConfirmDialog, TooltipModule],
   templateUrl: './listar.component.html',
   providers: [MessageService, ConfirmationService],
 })
@@ -33,6 +35,7 @@ export class ListarComponent implements OnInit {
   constructor(
     private readonly cargosService: CargosService,
     private readonly authService: AuthService,
+    private readonly subscriptionService: SubscriptionService,
     private readonly fb: FormBuilder,
     private readonly messageService: MessageService,
     private readonly confirmationService: ConfirmationService
@@ -50,6 +53,11 @@ export class ListarComponent implements OnInit {
     this.listar();
   }
 
+  // Getter para verificar suscripción desde el template
+  get canModifyData(): boolean {
+    return this.subscriptionService.canAccessDashboard();
+  }
+
   isEditFunction() {
     return this.title = {
       title: 'Editar Cargo',
@@ -62,6 +70,12 @@ export class ListarComponent implements OnInit {
     this.visible = false;
   }
   showDialog(action: boolean, positions_id: number = 0) {
+    // Verificar suscripción solo para crear/editar (no para listar)
+    if (!this.subscriptionService.canAccessDashboard()) {
+      this.showErrorMessage('Necesitas una suscripción activa para crear o editar cargos');
+      return;
+    }
+
     this.visible = true;
     this.isEdit = action;
     if (this.isEdit) {
@@ -117,6 +131,12 @@ export class ListarComponent implements OnInit {
   }
 
   delete(positions_id: number) {
+    // Verificar suscripción antes de eliminar
+    if (!this.subscriptionService.canAccessDashboard()) {
+      this.showErrorMessage('Necesitas una suscripción activa para eliminar cargos');
+      return;
+    }
+
     this.confirmationService.confirm({
       message: '¿Está seguro de que desea eliminar este cargo?',
       header: 'Confirmar eliminación',

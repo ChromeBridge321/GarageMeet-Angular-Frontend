@@ -16,7 +16,7 @@ import { Position } from '../models/empleados.model';
 import { RESTPositions } from '../../cargos/models/cargos.model';
 import { EmployeeService } from '../services/employee.service';
 import { ActivatedRoute } from '@angular/router';
-import { CargosService } from '../../cargos/listar/cargos.service';
+import { CargosService } from '../../cargos/services/cargos.service';
 import { timeout } from 'rxjs';
 @Component({
   selector: 'app-editar',

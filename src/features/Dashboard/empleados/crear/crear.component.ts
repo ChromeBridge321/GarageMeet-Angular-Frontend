@@ -19,7 +19,7 @@ import { RESTPositions } from '../../cargos/models/cargos.model';
 //services
 import { EmployeeService } from '../services/employee.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { CargosService } from '../../cargos/listar/cargos.service';
+import { CargosService } from '../../cargos/services/cargos.service';
 @Component({
   selector: 'app-crear',
   imports: [ReactiveFormsModule, InputTextModule, FloatLabel, SelectModule, InputMask, Toast, Ripple, ButtonModule, NgIf, RouterLink, FormsModule],

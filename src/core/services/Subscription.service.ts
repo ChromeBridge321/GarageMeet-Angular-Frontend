@@ -18,6 +18,7 @@ export interface SubscriptionPlan {
   features: string[];
   is_active: boolean;
   is_popular: boolean;
+  //recommended: boolean;
 }
 
 export interface SubscriptionStatus {
