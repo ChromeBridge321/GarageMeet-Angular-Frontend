@@ -109,18 +109,6 @@ export class PanelComponent implements OnInit {
         ]
       },
       {
-        label: 'Cerrar Sesión',
-        icon: 'pi pi-sign-out',
-        styleClass: 'text-red-500',
-        items: [
-          {
-            label: 'Cerrar Sesión',
-            icon: 'pi pi-sign-out',
-            command: () => this.authService.logout()
-          }
-        ]
-      },
-      {
         label: 'Metodos de Pago',
         icon: 'pi pi-credit-card',
         items: [
@@ -146,7 +134,19 @@ export class PanelComponent implements OnInit {
             routerLink: '/panel/suscripcion',
           }
         ]
-      }
+      },
+      {
+        label: 'Cerrar Sesión',
+        icon: 'pi pi-sign-out',
+        styleClass: 'text-red-500',
+        items: [
+          {
+            label: 'Cerrar Sesión',
+            icon: 'pi pi-sign-out',
+            command: () => this.authService.logout()
+          }
+        ]
+      },
 
     ]
   }

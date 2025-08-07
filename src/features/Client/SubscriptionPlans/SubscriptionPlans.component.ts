@@ -12,7 +12,8 @@ import { PaymentMethodsService } from '../../Dashboard/PaymentMethods/services/P
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule } from '@angular/forms';
 import { NavComponent } from "../../../shared/components/nav/nav.component";
-
+import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 declare var Stripe: any;
 
 @Component({
@@ -33,6 +34,7 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
   existingPaymentMethods = signal<any[]>([]);
   selectedPaymentMethod = signal<string | null>(null);
   loadingPaymentMethods = signal(false);
+  showPaymentMethodsDialog = false;
 
   // New card dialog properties
   showNewCardDialog = signal(false);
@@ -46,7 +48,9 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
   constructor(
     private subscriptionService: SubscriptionService,
     private paymentMethodsService: PaymentMethodsService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   async ngOnInit() {
@@ -64,12 +68,12 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
       try {
         this.cardElement.unmount();
       } catch (e) {
-        console.log('Card element already unmounted');
+        // Card element already unmounted
       }
       try {
         this.cardElement.destroy();
       } catch (e) {
-        console.log('Card element already destroyed');
+        // Card element already destroyed
       }
       this.cardElement = null;
     }
@@ -91,26 +95,32 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
   }
 
   private loadExistingPaymentMethods() {
-    this.loadingPaymentMethods.set(true);
-    this.paymentMethodsService.getPaymentMethods().subscribe({
-      next: (response) => {
-        this.existingPaymentMethods.set(response.payment_methods || []);
+    if (this.authService.isLoggedIn()) {
+      this.loadingPaymentMethods.set(true);
+      this.showPaymentMethodsDialog = true;
+      this.paymentMethodsService.getPaymentMethods().subscribe({
+        next: (response) => {
+          this.existingPaymentMethods.set(response.payment_methods || []);
 
-        // Set default payment method if exists
-        const defaultMethod = response.payment_methods?.find((pm: any) => pm.is_default);
-        if (defaultMethod) {
-          this.selectedPaymentMethod.set(defaultMethod.id);
-        } else if (response.payment_methods?.length > 0) {
-          this.selectedPaymentMethod.set(response.payment_methods[0].id);
+          // Set default payment method if exists
+          const defaultMethod = response.payment_methods?.find((pm: any) => pm.is_default);
+          if (defaultMethod) {
+            this.selectedPaymentMethod.set(defaultMethod.id);
+          } else if (response.payment_methods?.length > 0) {
+            this.selectedPaymentMethod.set(response.payment_methods[0].id);
+          }
+
+          this.loadingPaymentMethods.set(false);
+        },
+        error: (error) => {
+          console.error('Error loading payment methods:', error);
+          this.loadingPaymentMethods.set(false);
         }
+      });
+    }
+    this.showPaymentMethodsDialog = false;
+    return;
 
-        this.loadingPaymentMethods.set(false);
-      },
-      error: (error) => {
-        console.error('Error loading payment methods:', error);
-        this.loadingPaymentMethods.set(false);
-      }
-    });
   }
 
   private async initializeStripe() {
@@ -121,7 +131,6 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
             this.stripe = Stripe(environment.stripePublishableKey);
             this.elements = this.stripe.elements();
             this.stripeLoaded.set(true);
-            console.log('Stripe initialized successfully');
             resolve();
           } catch (error) {
             console.error('Error initializing Stripe:', error);
@@ -129,7 +138,6 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
             resolve();
           }
         } else {
-          console.log('Waiting for Stripe to load...');
           setTimeout(checkStripe, 100);
         }
       };
@@ -140,6 +148,11 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
   selectPlan(plan: SubscriptionPlan) {
     if (!this.stripeLoaded()) {
       this.showErrorMessage('El sistema de pagos aún se está cargando. Inténtalo de nuevo.');
+      return;
+    }
+
+    if (!this.authService.isLoggedIn()) {
+      this.showWarningMessage('Por favor, inicia sesión o regístrate para continuar.');
       return;
     }
 
@@ -200,11 +213,10 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
 
       // Montar el elemento
       this.cardElement.mount('#card-element-new');
-      console.log('Card element mounted successfully');
 
       // Event listeners
       this.cardElement.on('ready', () => {
-        console.log('Card element is ready for input');
+        // Card element is ready for input
       });
 
       this.cardElement.on('change', (event: any) => {
@@ -260,7 +272,6 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
         return;
       }
 
-      console.log('Using payment method ID:', paymentMethodId);
 
       // Agregar método de pago a la cuenta
       this.paymentMethodsService.attachPaymentMethod(paymentMethodId).subscribe({
@@ -280,8 +291,8 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
           // Manejar diferentes tipos de errores
           if (error.error?.message) {
             if (error.error.message.includes('already attached') ||
-                error.error.message.includes('ya está') ||
-                error.error.message.includes('payment_method_id')) {
+              error.error.message.includes('ya está') ||
+              error.error.message.includes('payment_method_id')) {
               this.showErrorMessage('Esta tarjeta ya está agregada a tu cuenta');
               // Recargar métodos de pago para mostrar la tarjeta existente
               this.loadExistingPaymentMethods();
@@ -330,7 +341,6 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
     this.subscribing.set(true);
 
     try {
-      console.log('Using payment method:', paymentMethodId);
 
       // Crear suscripción
       this.subscriptionService.createSubscription(plan.stripe_price_id, paymentMethodId).subscribe({
@@ -388,6 +398,14 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
     this.messageService.add({
       severity: 'error',
       summary: 'Error',
+      detail
+    });
+  }
+
+  private showWarningMessage(detail: string): void {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Advertencia',
       detail
     });
   }

@@ -7,6 +7,7 @@ import { RegisterComponent } from '../features/auth/register/register.component'
 import { roleGuard } from '../core/guards/Role.guard';
 import { guestGuard } from '../core/guards/guest.guard';
 import { SubscriptionPlansComponent } from '../features/Client/SubscriptionPlans/SubscriptionPlans.component';
+
 export const routes: Routes = [
   {
     path: '',

@@ -1,20 +1,69 @@
-<app-nav />
-<section class="flex w-full h-[50dvh] bg-zinc-700">
-  <div class="h-full w-1/2 text-8xl font-bold italic text-center flex justify-center items-center">
-    <span>LOCALIZA TU TALLER MECANICO</span>
+<app-nav class="sticky top-0 z-50 " />
+<div class=" bg-zinc-700 md:flex md:py-10">
+  <div class="flex justify-center md:w-1/2 ">
+    <span class="text-white flex justify-center items-center text-5xl font-bold text-center pt-5 md:p-0 md:text-6xl
+    lg:text-7xl
+    xl:text-8xl
+      ">
+      <h4 class="px-4 md:px-2 xl:px-8" style="font-style: italic;">LOCALIZA TU TALLER MECANICO</h4>
+    </span>
   </div>
-  <div class="h-full w-1/2 flex justify-center items-center">
-    <div class="w-1/6">
-      <a class="rounded-2xl bg-red-500 p-3 flex justify-center items-center size-15" href=""><i class=" pi pi-bullseye"></i></a>
-    </div>
-    <div class="ps-7">
-      <div class=" w-full">
-        <label class="w-full" for="taller">Busca por ciudad o estado</label>
-      </div>
-      <div class=" w-full">
-        <input class="w-full  bg-white" type="text" id="taller">
-      </div>
-    </div>
 
-  </div>
+  <section class="flex justify-center flex-col-reverse pt-5 sm:flex-row-reverse sm:pb-6 md:w-1/2">
+    <div
+      class="w-full px-6 py-5 sm:w-2/10 sm:py-0 sm:flex sm:items-end sm:ps-0 md:justify-center md:items-center md:flex-col">
+      <div class="hidden w-full text-2xl text-center font-normal pb-2 sm:text-start md:text-xl md:block">
+        <label class="text-zinc-700 font-semibold  w-full" for="taller">A</label>
+      </div>
+      <button (click)="OnSearch(autocomplete.value)"
+        class="rounded-xl bg-red-500 p-6 flex justify-center items-center size-10 w-full sm:rounded-xl cursor-pointer hover:bg-red-600 transition-colors duration-300">
+        <i class="pi pi-bullseye text-white" style="font-size: 1.5rem;"></i>
+      </button>
+    </div>
+    <div class="w-full px-6 sm:w-8/10 md:flex md:items-center md:justify-center md:flex-col">
+      <div class=" w-full text-2xl text-center font-normal pb-2 sm:text-start md:text-xl xl:text-2xl">
+        <label class="text-white  w-full" for="taller">Busca por ciudad o estado</label>
+      </div>
+      <div class="w-full">
+        <p-autocomplete class="xl:hidden" size="large" #autocomplete fluid [delay]="200" [forceSelection]="true"
+          [(ngModel)]="value" [suggestions]="items" (completeMethod)="search($event)" [optionLabel]="'name'">
+          <ng-template let-city pTemplate="item">
+            {{ city.name}}
+          </ng-template>
+        </p-autocomplete>
+
+        <p-autocomplete class="hidden xl:block" size="large" #autocomplete fluid [delay]="200" [forceSelection]="true"
+          [(ngModel)]="value" [suggestions]="items" (completeMethod)="search($event)" [optionLabel]="'name'">
+          <ng-template let-city pTemplate="item">
+            {{ city.name}}
+          </ng-template>
+        </p-autocomplete>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class=" bg-zinc-200 p-5 size-full h-full sm:flex-wrap sm:flex sm:justify-center xl:gap-5 xl:overflow-x-auto">
+  <section class=" sm:w-1/2 xl:w-1/4 sm:px-1" *ngFor="let mechanic of mechanicals">
+    <div class="w-full bg-zinc-500 h-12 rounded-t-lg"></div>
+    <div class="w-full bg-white shadow rounded-b-lg p-5 mb-5">
+      <div class="text-xl font-semibold text-start mb-2 lg:mb-4 lg:text-3xl">
+        <h3>{{ mechanic.name }}</h3>
+      </div>
+      <div class="mb-2 lg:text-xl lg:mb-4">
+        <span class="bg-zinc-200 rounded-xl py-1 px-2 text-zinc-500 me-2">{{ mechanic.city.name }}</span>
+        <span class="bg-zinc-200 rounded-xl py-1 px-2 text-zinc-500">{{ mechanic.state.name }}</span>
+      </div>
+      <div class="lg:text-xl">
+        <p><i class="pi pi-phone me-1" style="color: green"></i> {{ mechanic.cellphone_number }}</p>
+        <p><i class="pi pi-envelope me-1" style="color: green"></i> {{ mechanic.email }}</p>
+        <p><i class="pi pi-map me-1" style="color: green"></i> {{ mechanic.address }}</p>
+      </div>
+      <div class="w-full flex justify-between pt-4">
+        <p-button class="w-1/2 mx-2" [fluid]="true" variant="text" [raised]="true" severity="secondary"><a
+            href="{{ mechanic.google_maps_link }}">Mapa</a></p-button>
+        <p-button class="w-1/2 mx-2" [fluid]="true" label="Servicios" severity="contrast"></p-button>
+      </div>
+    </div>
+  </section>
 </section>
