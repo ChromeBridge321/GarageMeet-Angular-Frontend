@@ -57,6 +57,18 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
     this.loadPlans();
     await this.initializeStripe();
     this.loadExistingPaymentMethods();
+    
+    // Cargar el estado de suscripción si el usuario está autenticado
+    if (this.authService.isLoggedIn()) {
+      this.subscriptionService.getSubscriptionStatus().subscribe({
+        next: (status) => {
+          // El estado se actualiza automáticamente en el servicio
+        },
+        error: (error) => {
+          console.error('Error loading subscription status:', error);
+        }
+      });
+    }
   }
 
   ngOnDestroy() {
@@ -153,6 +165,12 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
 
     if (!this.authService.isLoggedIn()) {
       this.showWarningMessage('Por favor, inicia sesión o regístrate para continuar.');
+      return;
+    }
+
+    // Verificar si el usuario ya tiene una suscripción activa
+    if (this.subscriptionService.hasActiveSubscription()) {
+      this.showWarningMessage('Ya cuentas con una suscripción activa. No puedes suscribirte a otro plan mientras tengas una suscripción vigente.');
       return;
     }
 
@@ -350,9 +368,16 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
           } else {
             this.showSuccessMessage('¡Suscripción creada exitosamente!');
             this.closePaymentDialog();
-            setTimeout(() => {
-              window.location.href = '/panel';
-            }, 2000);
+
+            if (this.authService.getUserType() === 'User') {
+              setTimeout(() => {
+                window.location.href = '/register-workshop';
+              }, 2000);
+            } else if (this.authService.getUserType() === 'Admin') {
+              setTimeout(() => {
+                window.location.href = '/panel';
+              }, 2000);
+            }
           }
           this.subscribing.set(false);
         },
@@ -392,6 +417,11 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
     this.showPaymentDialog.set(false);
     this.selectedPlan.set(null);
     this.cleanupCardElement();
+  }
+
+  // Método para verificar si el usuario tiene una suscripción activa
+  hasActiveSubscription(): boolean {
+    return this.subscriptionService.hasActiveSubscription();
   }
 
   private showErrorMessage(detail: string): void {

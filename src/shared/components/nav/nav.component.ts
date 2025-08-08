@@ -52,7 +52,7 @@ export class NavComponent implements OnInit {
       {
         label: 'Cerrar Sesión',
         icon: 'pi pi-sign-out',
-        visible: this.authService.isLoggedIn() && this.authService.getUserType() !== 'Admin',
+        visible: this.authService.isLoggedIn() && this.authService.getUserType() == 'User',
         command: () => this.authService.logout()
 
       }

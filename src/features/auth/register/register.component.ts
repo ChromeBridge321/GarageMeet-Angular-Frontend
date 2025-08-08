@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterDTO } from '../models/auth.dto';
-import { RegisterService } from './register.service';
+import { RegisterService } from '../services/register.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -28,7 +28,7 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
-      type_user: [1] // Default value of 1 as shown in the API example
+      type_user: [2] // Default value of 2 as shown in the API example
     }, { validators: this.passwordMatchValidator });
   }
 
@@ -59,7 +59,7 @@ export class RegisterComponent {
       this.registerService.register(registerData).subscribe({
         next: () => {
           this.isLoading.set(false);
-          this.router.navigateByUrl('/panel');
+          this.router.navigateByUrl('/pricing');
         },
         error: (error) => {
           this.isLoading.set(false);

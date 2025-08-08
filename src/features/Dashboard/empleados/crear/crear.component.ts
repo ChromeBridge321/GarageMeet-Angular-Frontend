@@ -52,7 +52,7 @@ export class CrearComponent implements OnInit {
     return this.fb.group({
       name: ['', Validators.required],
       last_name: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(60)]],
-      cellphone_number: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(20)]],
+      cellphone_number: ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
       email: ['', [Validators.required, Validators.email]],
       mechanicals_id: [this.authService.mechanicalWorkshop()?.id, [Validators.required]],
       positions_id: ['', [Validators.required]]

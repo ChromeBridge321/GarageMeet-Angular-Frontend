@@ -144,7 +144,7 @@ export class AuthService {
     this.clearSecureStorage('authResponse');
     this.clearSecureStorage('userData');
     this.clearSecureStorage('mechanicalWorkshopData');
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   // Almacenamiento seguro (abstracción)
