@@ -1,22 +1,23 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterDTO } from '../models/auth.dto';
 import { RegisterService } from '../services/register.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { MessageService } from 'primeng/api';
+import { Toast } from 'primeng/toast';
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, Toast],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [MessageService]
 })
 export class RegisterComponent {
   registerForm: FormGroup;
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
-
+ messageService = inject(MessageService);
   constructor(
     private fb: FormBuilder,
     private registerService: RegisterService,
@@ -64,7 +65,7 @@ export class RegisterComponent {
         error: (error) => {
           this.isLoading.set(false);
           console.error('Error:', error);
-          this.errorMessage.set('Error al registrar la cuenta. Intenta nuevamente.');
+          this.showErrorMessage('Error al registrar la cuenta. Intenta nuevamente.');
         }
       });
     } else {
@@ -107,5 +108,13 @@ export class RegisterComponent {
       }
     }
     return null;
+  }
+
+  private showErrorMessage(detail: string): void {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail
+    });
   }
 }

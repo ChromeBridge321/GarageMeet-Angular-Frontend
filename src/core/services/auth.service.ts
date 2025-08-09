@@ -113,7 +113,6 @@ export class AuthService {
   }  // Métodos públicos
   setAuthState(response: AuthResponse): void {
     // Store full response in memory
-    console.log('Setting auth state:', response);
     this.authState.set(response);
 
     // Store the complete AuthResponse in sessionStorage

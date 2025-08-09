@@ -1,22 +1,23 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginDTO } from '../models/auth.dto';
 import { LoginService } from '../services/login.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { MessageService } from 'primeng/api';
+import { Toast } from 'primeng/toast';
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule, Toast],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [MessageService]
 })
 export class LoginComponent {
   loginForm: FormGroup;
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
-
+  messageService = inject(MessageService);
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
@@ -42,8 +43,7 @@ export class LoginComponent {
         },
         error: (error) => {
           this.isLoading.set(false);
-          console.error('Error:', error);
-          this.errorMessage.set('Error al iniciar sesión. Verifica tus credenciales.');
+          this.showErrorMessage('Error al iniciar sesión. Verifica tus credenciales.');
         }
       });
     } else {
@@ -69,5 +69,13 @@ export class LoginComponent {
       }
     }
     return null;
+  }
+
+  private showErrorMessage(detail: string): void {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail
+    });
   }
 }

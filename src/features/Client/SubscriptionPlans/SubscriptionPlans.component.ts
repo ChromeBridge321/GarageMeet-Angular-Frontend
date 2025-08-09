@@ -57,7 +57,7 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
     this.loadPlans();
     await this.initializeStripe();
     this.loadExistingPaymentMethods();
-    
+
     // Cargar el estado de suscripción si el usuario está autenticado
     if (this.authService.isLoggedIn()) {
       this.subscriptionService.getSubscriptionStatus().subscribe({
