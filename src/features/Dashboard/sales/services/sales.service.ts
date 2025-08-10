@@ -56,4 +56,15 @@ export class SalesService {
     });
   }
 
+  create(sale: CreateSale) {
+    return this.http.post<CreateSale>(`${this.baseUrl}/create`, sale, { headers: this.getHeaders() });
+  }
+
+  getSaleById(services_sales_id: number, mechanical_workshops_id: number) {
+    return this.http.get<Sale>(`${this.baseUrl}/getById`, { headers: this.getHeaders(), params: { services_sales_id, mechanical_workshops_id } });
+  }
+
+  update(sale: UpdateSale) {
+    return this.http.put<UpdateSale>(`${this.baseUrl}/update`, sale, { headers: this.getHeaders() });
+  }
 }

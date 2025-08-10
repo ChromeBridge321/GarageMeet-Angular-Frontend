@@ -2,7 +2,7 @@ export interface Sale {
   services_sales_id: number;
   payment_types_id: number;
   employee: EmployeeOption;
-  vehicles: VehicleOption;
+  vehicle: VehicleOption;
   mechanical_workshops_id: number;
   date: string;
   price: number;
@@ -49,14 +49,14 @@ export interface CreateSale {
 
 export interface UpdateSale {
   services_sales_id: number;
-  payment_types_id?: number;
-  employees_id?: number;
-  vehicles_id?: number;
-  mechanical_workshops_id?: number;
-  date?: string;
-  price?: number;
-  services?: number[];
-  pieces?: number[];
+  payment_types_id: number;
+  employees_id: number;
+  vehicles_id: number;
+  mechanical_workshops_id: number;
+  date: string;
+  price: number;
+  services: number[];
+  pieces: number[];
 }
 
 // Interfaces para dropdowns/selects

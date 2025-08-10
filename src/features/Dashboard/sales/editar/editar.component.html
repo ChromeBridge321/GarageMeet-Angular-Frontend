@@ -1,9 +1,9 @@
 <!-- Crear Cliente Form -->
-<form class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50" [formGroup]="saleeForm" (ngSubmit)="createEmployee(autocompleteServices.value, autocompletePieces.value)">
+<form class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50" [formGroup]="saleeForm" (ngSubmit)="updateSale(autocompleteServices.value, autocompletePieces.value)">
 
   <!-- Page Title -->
   <div class="font-bold flex text-4xl justify-center items-center mt-5">
-    <h1>Registrar Venta</h1>
+    <h1>Actualizar Venta</h1>
   </div>
   <div class="w-full flex flex-row mt-2">
     <!-- Personal Information Row -->
@@ -11,8 +11,9 @@
     <!-- paymentType Selection -->
     <div class=" w-1/2">
       <label for="paymentTypes_id">Tipo de pago</label>
-      <p-select fluid="true" [options]="paymentTypes" optionLabel="name" [filter]="true"
-        filterBy="name" [showClear]="true" placeholder="Seleccionar tipo de pago" formControlName="payment_types_id" optionValue="payment_types_id">
+      <p-select fluid="true" [options]="paymentTypes" optionLabel="name" [filter]="true" filterBy="name"
+        [showClear]="true" placeholder="Seleccionar tipo de pago" formControlName="payment_types_id"
+        optionValue="payment_types_id">
         <ng-template let-paymentType #item>
           <div class="flex items-center gap-2">
             <div>{{ paymentType.name }}</div>
@@ -55,18 +56,36 @@
     <!-- date Field -->
     <div class="w-1/2">
       <label for="date">Fecha</label>
-      <p-datepicker [showButtonBar]="true" placeholder="Año-Mes-Día" dateFormat="yy-mm-dd" #datepicker fluid="true" formControlName="date" />
+      <p-datepicker [showButtonBar]="true" placeholder="Año-Mes-Día" dateFormat="yy-mm-dd" #datepicker fluid="true"
+        formControlName="date" />
     </div>
   </div>
 
-
+  <div class="w-full flex flex-row mt-5">
+    <div class="w-1/2 bg-zinc-100 rounded-xl p-4 mx-2">
+      <h1 class="font-bold text-xl">Piezas Actuales</h1>
+      <ul>
+        <li *ngFor="let piece of sale?.pieces">
+          - {{ piece.name }}
+        </li>
+      </ul>
+    </div>
+    <div class="w-1/2 bg-zinc-100 rounded-xl p-4 mx-2">
+      <h1 class="font-bold text-xl">Servicios Actuales</h1>
+      <ul>
+        <li *ngFor="let service of sale?.services">
+          - {{ service.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
   <div class="w-full flex flex-col mt-2">
     <!-- pieces Information Row -->
     <!-- pieces Selection -->
     <div class="w-full">
       <label for="multiple-ac-1" class="font-bold mb-2 block">Piezas</label>
-      <p-autocomplete placeholder="Buscar piezas" #autocompletePieces multiple fluid="true" [delay]="200" [forceSelection]="true"
-        [suggestions]="pieces" (completeMethod)="searchPieces($event)" [optionLabel]="'name'">
+      <p-autocomplete placeholder="Buscar piezas" #autocompletePieces multiple fluid="true" [delay]="200"
+        [forceSelection]="true" [suggestions]="pieces" (completeMethod)="searchPieces($event)" [optionLabel]="'name'">
         <ng-template let-piece pTemplate="item">
           {{ piece.name}}
         </ng-template>
@@ -77,8 +96,9 @@
     <!-- services Selection -->
     <div class="w-full">
       <label for="multiple-ac-1" class="font-bold mb-2 block">Servicios</label>
-      <p-autocomplete placeholder="Buscar servicios" #autocompleteServices multiple fluid="true" [delay]="200" [forceSelection]="true"
-        [suggestions]="services" (completeMethod)="searchServices($event)" [optionLabel]="'name'">
+      <p-autocomplete placeholder="Buscar servicios" #autocompleteServices multiple fluid="true" [delay]="200"
+        [forceSelection]="true" [suggestions]="services" (completeMethod)="searchServices($event)"
+        [optionLabel]="'name'">
         <ng-template let-service pTemplate="item">
           {{ service.name}}
         </ng-template>

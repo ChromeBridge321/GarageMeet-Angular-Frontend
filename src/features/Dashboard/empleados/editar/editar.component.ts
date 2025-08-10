@@ -98,14 +98,14 @@ export class EditarComponent implements OnInit {
 
         },
         error: (error) => {
-        error = error.error.error;
+          error = error.error.error;
 
-        if (error == 'Necesitas una suscripción activa para acceder a esta funcionalidad') {
-          this.showErrorMessage(error);
-        } else {
-          this.showErrorMessage('Error al actualizar el empleado');
+          if (error == 'Necesitas una suscripción activa para acceder a esta funcionalidad') {
+            this.showErrorMessage(error);
+          } else {
+            this.showErrorMessage('Error al actualizar el empleado');
+          }
         }
-      }
       }
     );
   }

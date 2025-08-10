@@ -19,11 +19,10 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { RouterLink } from '@angular/router';
 import { Button } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
+import { Dialog } from 'primeng/dialog';
 // Models y Services
 import {
   Sale,
-  CreateSale,
-  UpdateSale,
   PaymentType,
   Employee,
   Vehicle,
@@ -51,7 +50,8 @@ import { AuthService } from '../../../../core/services/auth.service';
     CalendarModule,
     RouterLink,
     Button,
-    TooltipModule
+    TooltipModule,
+    Dialog
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './listar.component.html',
@@ -68,6 +68,10 @@ export class ListarComponent implements OnInit {
   displayViewDialog = false;
   isEditing = false;
   selectedSale: Sale | null = null;
+
+  // Dialog para mostrar detalles de la venta
+  showDetailsDialog = false;
+  saleDetails: Sale | null = null;
 
   // Form
   saleForm!: FormGroup;
@@ -88,6 +92,18 @@ export class ListarComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.mechanicalWorkshopId = this.authService.getMechanicalWorkshopData()?.id;
+  }
+
+  visible: boolean = false;
+
+  showDialog() {
+    this.visible = true;
+  }
+
+  // Método para mostrar los detalles de la venta
+  showSaleDetails(sale: Sale) {
+    this.saleDetails = sale;
+    this.showDetailsDialog = true;
   }
 
   // Getter para verificar suscripción desde el template
