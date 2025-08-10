@@ -1,0 +1,45 @@
+/* Estilos para el componente de listado de tipos de pago */
+.payment-types-container {
+  padding: 1rem;
+}
+
+.payment-types-header {
+  margin-bottom: 1.5rem;
+}
+
+.payment-types-table {
+  margin-top: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .payment-types-container {
+    padding: 0.5rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+}

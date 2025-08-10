@@ -125,6 +125,50 @@ export class PanelComponent implements OnInit {
         ]
       },
       {
+        label: 'Tipos de Pago',
+        icon: 'pi pi-money-bill',
+        items: [
+          {
+            label: 'Listado',
+            icon: 'pi pi-align-justify',
+            routerLink: './tipos-pago',
+          }
+        ]
+      },
+      {
+        label: 'Piezas',
+        icon: 'pi pi-cog',
+        items: [
+          {
+            label: 'Gestión de Piezas',
+            icon: 'pi pi-list',
+            routerLink: './piezas',
+          }
+        ]
+      },
+      {
+        label: 'Servicios',
+        icon: 'pi pi-wrench',
+        items: [
+          {
+            label: 'Gestión de Servicios',
+            icon: 'pi pi-list',
+            routerLink: './servicios',
+          }
+        ]
+      },
+      {
+        label: 'Ventas',
+        icon: 'pi pi-shopping-cart',
+        items: [
+          {
+            label: 'Gestión de Ventas',
+            icon: 'pi pi-list',
+            routerLink: './ventas',
+          }
+        ]
+      },
+      {
         label: 'Suscripción',
         icon: 'pi pi-bell',
         items: [

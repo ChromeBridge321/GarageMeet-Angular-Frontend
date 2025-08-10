@@ -27,6 +27,22 @@ export const dashboardRoutes: Routes = [
         loadChildren: () => import('./PaymentMethods/paymentMethods.routes'),
       },
       {
+        path: 'tipos-pago',
+        loadChildren: () => import('./payment-types/payment-types.routes'),
+      },
+      {
+        path: 'piezas',
+        loadChildren: () => import('./pieces/pieces.routes'),
+      },
+      {
+        path: 'servicios',
+        loadChildren: () => import('./services/services.routes'),
+      },
+      {
+        path: 'ventas',
+        loadChildren: () => import('./sales/sales.routes'),
+      },
+      {
         path: 'suscripcion',
         component: SubscriptionManagementComponent
       },

@@ -1,0 +1,130 @@
+.pieces-container {
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+}
+
+.card-header h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.table-header .p-input-icon-left {
+  width: 300px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: #6c757d;
+}
+
+.empty-state h3 {
+  margin: 1rem 0 0.5rem 0;
+  color: #495057;
+}
+
+.empty-state p {
+  margin: 0.5rem 0 1.5rem 0;
+}
+
+/* Modal Styles */
+.piece-dialog {
+  min-width: 500px;
+}
+
+.form-container {
+  padding: 1rem 0;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.form-group input,
+.form-group p-inputNumber {
+  width: 100%;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pieces-container {
+    padding: 10px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .table-header .p-input-icon-left {
+    width: 100%;
+  }
+
+  .piece-dialog {
+    min-width: auto;
+    width: 95vw;
+    max-width: 500px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Utilidades */
+.w-full {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
