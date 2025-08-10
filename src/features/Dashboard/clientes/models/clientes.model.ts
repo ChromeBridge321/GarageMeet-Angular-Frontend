@@ -1,7 +1,9 @@
 export interface RESTClient {
+  clientInfo:              string;
   clients_id:              number;
-  mechanical_workshops_id: number;
   peoples_id:              number;
+  vehicles_id:             number;
+  mechanical_workshops_id: number;
   person:                  Person;
   vehicles:                Vehicle[];
 }

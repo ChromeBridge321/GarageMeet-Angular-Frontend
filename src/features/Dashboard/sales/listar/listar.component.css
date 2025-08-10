@@ -1,0 +1,156 @@
+/* Estilos personalizados para el componente de ventas */
+
+.p-datatable {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  border: none;
+  padding: 1rem;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background: #f8f9fa;
+}
+
+.p-dialog {
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.p-dialog .p-dialog-header {
+  background: #fff;
+  border-bottom: 1px solid #e9ecef;
+  border-radius: 12px 12px 0 0;
+  padding: 1.5rem;
+}
+
+.p-dialog .p-dialog-content {
+  padding: 1.5rem;
+  background: #fff;
+}
+
+.p-dialog .p-dialog-footer {
+  background: #fff;
+  border-top: 1px solid #e9ecef;
+  border-radius: 0 0 12px 12px;
+  padding: 1rem 1.5rem;
+}
+
+.p-button {
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.p-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.p-dropdown, .p-calendar, .p-inputnumber, .p-multiselect {
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.p-dropdown:hover, .p-calendar:hover, .p-inputnumber:hover, .p-multiselect:hover {
+  border-color: #007bff;
+}
+
+.p-dropdown:focus, .p-calendar:focus, .p-inputnumber:focus, .p-multiselect:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.p-inputtext:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Personalización de la tabla */
+.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+  background: #fafafa;
+}
+
+.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+  background: #fff;
+}
+
+/* Botones de acción */
+.p-button.p-button-text {
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.p-button.p-button-text:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .p-dialog {
+    width: 95vw !important;
+    margin: 1rem;
+  }
+
+  .grid.grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Loading overlay */
+.p-datatable-loading-overlay {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Toast styling */
+.p-toast {
+  z-index: 9999;
+}
+
+/* Form validation styling */
+.ng-invalid.ng-touched {
+  border-color: #dc3545 !important;
+}
+
+.text-red-600 {
+  color: #dc2626;
+  font-size: 0.875rem;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* MultiSelect styling */
+.p-multiselect-panel {
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.p-multiselect-item {
+  padding: 0.75rem 1rem;
+  transition: background-color 0.2s;
+}
+
+.p-multiselect-item:hover {
+  background: #f8f9fa;
+}
+
+.p-multiselect-item.p-highlight {
+  background: #007bff;
+  color: white;
+}

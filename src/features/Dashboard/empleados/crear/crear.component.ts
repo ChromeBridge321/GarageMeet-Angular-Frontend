@@ -14,7 +14,6 @@ import { Ripple } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 
 //models
-import { RESTEmployee } from '../models/empleados.model';
 import { RESTPositions } from '../../cargos/models/cargos.model';
 //services
 import { EmployeeService } from '../services/employee.service';

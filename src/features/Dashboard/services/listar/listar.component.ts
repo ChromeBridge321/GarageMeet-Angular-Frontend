@@ -11,7 +11,6 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputNumberModule } from 'primeng/inputnumber';
-import { InputTextarea } from 'primeng/inputtextarea';
 
 import { MessageService, ConfirmationService } from 'primeng/api';
 
@@ -33,7 +32,6 @@ import { AuthService } from '../../../../core/services/auth.service';
     ToastModule,
     ConfirmDialogModule,
     InputNumberModule,
-    InputTextarea
   ],
   providers: [MessageService, ConfirmationService],
   templateUrl: './listar.component.html',

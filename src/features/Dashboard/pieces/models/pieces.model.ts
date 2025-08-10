@@ -3,8 +3,6 @@ export interface Piece {
   name: string;
   price: number;
   mechanical_workshops_id: number;
-  created_at?: string;
-  updated_at?: string;
 }
 
 export interface CreatePiece {

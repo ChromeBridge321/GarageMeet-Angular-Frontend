@@ -3,6 +3,7 @@ export interface RESTEmployee {
   mechanical_workshops_id: number;
   peoples_id:              number;
   person:                  Person;
+  fullName:                string;
   positions:               Position[] | [];
 }
 

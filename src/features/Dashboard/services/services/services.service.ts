@@ -27,7 +27,7 @@ export class ServicesService {
 
   // Obtener todos los servicios del taller
   load(mechanical_workshops_id: number): Observable<Service[]> {
-    return this.http.get<Service[]>(`${this.baseUrl}/list`, {
+    return this.http.get<Service[]>(`${environment.apiUrl}/services/all`, {
       headers: this.getHeaders(),
       params: { mechanical_workshops_id: mechanical_workshops_id.toString() }
     });
@@ -97,6 +97,16 @@ export class ServicesService {
       params: {
         services_id: id.toString(),
         mechanical_workshops_id: mechanical_workshops_id.toString()
+      }
+    });
+  }
+
+  getByName(name: string, mechanical_workshops_id: number): Observable<Service[]> {
+    return this.http.get<Service[]>(`${this.baseUrl}/getByName`, {
+      headers: this.getHeaders(),
+      params: {
+        name: name,
+        mechanical_workshops_id: mechanical_workshops_id
       }
     });
   }

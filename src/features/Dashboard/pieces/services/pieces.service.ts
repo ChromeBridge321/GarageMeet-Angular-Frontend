@@ -93,4 +93,11 @@ export class PiecesService {
       params: { pieces_id: id}
     });
   }
+
+  getByName(name: string, mechanical_workshops_id: number): Observable<Piece[]> {
+    return this.http.get<Piece[]>(`${this.baseUrl}/getByName`, {
+      headers: this.getHeaders(),
+      params: { name: name, mechanical_workshops_id: mechanical_workshops_id }
+    });
+  }
 }
