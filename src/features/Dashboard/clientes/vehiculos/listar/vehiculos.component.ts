@@ -6,10 +6,12 @@ import { AuthService } from '../../../../../core/services/auth.service';
 import { TableModule } from 'primeng/table';
 import { Button } from "primeng/button";
 import { RouterLink } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-vehiculos',
-  imports: [TableModule, Button, RouterLink ],
+  imports: [TableModule, Button, RouterLink, InputTextModule, CommonModule ],
   templateUrl: './vehiculos.component.html',
 })
 export class VehiculosComponent implements OnInit {
@@ -28,6 +30,15 @@ export class VehiculosComponent implements OnInit {
     this.clientesService.load(this.mechanicarWorshopId).subscribe((data) => {
       this.clients = data;
       this.loading = false;
+    });
+  }
+
+  limpiarFiltros(table: any) {
+    table.clear();
+    // Limpiar también los inputs de filtro por columna
+    const filterInputs = document.querySelectorAll('input[pInputText]');
+    filterInputs.forEach((input: any) => {
+      input.value = '';
     });
   }
 }

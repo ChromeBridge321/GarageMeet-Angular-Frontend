@@ -4,15 +4,66 @@
 
       ">Vehiculos</h3>
   </div>
-  <p-table showGridlines [value]="clients" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading">
+  <!-- Barra de control -->
+  <div class="flex justify-content-between align-items-center mb-4">
+    <div class="flex align-items-center gap-3">
+      <p-button
+        icon="pi pi-filter-slash"
+        label="Limpiar Filtros"
+        severity="secondary"
+        size="small"
+        (onClick)="limpiarFiltros(dt1)"
+        pTooltip="Limpiar todos los filtros aplicados">
+      </p-button>
+    </div>
+    <div class="flex align-items-center gap-2">
+      <span class="text-sm text-gray-600">{{ clients.length }} vehículo(s) total(es)</span>
+    </div>
+  </div>
+
+  <p-table showGridlines [value]="clients" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading"
+    [globalFilterFields]="['person.name', 'person.last_name', 'vehicles.0.make', 'vehicles.0.model', 'vehicles.0.plates']"
+    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" #dt1>
     <ng-template #header>
       <tr>
         <th>Id</th>
-        <th>Cliente</th>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Placas</th>
+        <th pSortableColumn="person.name">
+          Cliente
+          <p-sortIcon field="person.name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="vehicles.0.make">
+          Marca
+          <p-sortIcon field="vehicles.0.make"></p-sortIcon>
+        </th>
+        <th pSortableColumn="vehicles.0.model">
+          Modelo
+          <p-sortIcon field="vehicles.0.model"></p-sortIcon>
+        </th>
+        <th pSortableColumn="vehicles.0.plates">
+          Placas
+          <p-sortIcon field="vehicles.0.plates"></p-sortIcon>
+        </th>
         <th>Acciones</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'person.name', 'contains')"
+                 placeholder="Filtrar por cliente" class="w-full" />
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'vehicles.0.make', 'contains')"
+                 placeholder="Filtrar por marca" class="w-full" />
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'vehicles.0.model', 'contains')"
+                 placeholder="Filtrar por modelo" class="w-full" />
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'vehicles.0.plates', 'contains')"
+                 placeholder="Filtrar por placas" class="w-full" />
+        </th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template #body let-clients let-index="rowIndex">

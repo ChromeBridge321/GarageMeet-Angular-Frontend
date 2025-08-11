@@ -24,22 +24,35 @@
 
         <ng-template pTemplate="caption">
           <div class="table-header">
-            <span class="p-input-icon-left">
-              <i class="pi pi-search"></i>
-              <input
-                pInputText
-                type="text"
-                placeholder="Buscar piezas..."
-                (input)="piecesTable.filterGlobal($any($event.target).value, 'contains')" />
-            </span>
+            <div class="flex justify-content-end align-items-center">
+              <p-button
+                icon="pi pi-filter-slash"
+                label="Limpiar Filtros"
+                severity="secondary"
+                size="small"
+                (onClick)="limpiarFiltros(piecesTable)"
+                pTooltip="Limpiar todos los filtros aplicados">
+              </p-button>
+            </div>
           </div>
         </ng-template>
 
         <ng-template pTemplate="header">
           <tr>
             <th>N.</th>
-            <th>Nombre</th>
+            <th pSortableColumn="name">
+              Nombre
+              <p-sortIcon field="name"></p-sortIcon>
+            </th>
             <th>Acciones</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>
+              <input pInputText type="text" (input)="piecesTable.filter($any($event.target).value, 'name', 'contains')"
+                     placeholder="Filtrar por nombre" class="w-full" />
+            </th>
+            <th></th>
           </tr>
         </ng-template>
 

@@ -43,6 +43,10 @@ export const dashboardRoutes: Routes = [
         loadChildren: () => import('./sales/sales.routes'),
       },
       {
+        path: 'citas',
+        loadChildren: () => import('./appointments/appointments.routes'),
+      },
+      {
         path: 'suscripcion',
         component: SubscriptionManagementComponent
       },

@@ -25,7 +25,7 @@
         <label class="text-white  w-full" for="taller">Busca por ciudad o estado</label>
       </div>
       <div class="w-full">
-        <p-autocomplete  class="xl:hidden" size="large" #autocomplete fluid [delay]="200" [forceSelection]="true"
+        <p-autocomplete class="xl:hidden" size="large" #autocomplete fluid [delay]="200" [forceSelection]="true"
           [(ngModel)]="value" [suggestions]="items" (completeMethod)="search($event)" [optionLabel]="'name'">
           <ng-template let-city pTemplate="item">
             {{ city.name}}
@@ -62,8 +62,80 @@
       <div class="w-full flex justify-between items-end pt-4 h-1/5">
         <p-button class="w-1/2 mx-2" [fluid]="true" variant="text" [raised]="true" severity="secondary"><a
             href="{{ mechanic.google_maps_link }}">Mapa</a></p-button>
-        <p-button class="w-1/2 mx-2" [fluid]="true" label="Servicios" severity="contrast"></p-button>
+        <p-button (onClick)="agendarCita(mechanic.id)" class="w-1/2 mx-2" [fluid]="true" label="Agendar Cita"
+          severity="contrast"></p-button>
       </div>
     </div>
   </section>
+  <p-toast></p-toast>
 </section>
+
+<!-- Diálogo para agendar cita -->
+<p-dialog header="Agendar Cita" [(visible)]="displayDialog" [modal]="true" [style]="{width: '450px'}"
+  [draggable]="false" [resizable]="false">
+
+  <form [formGroup]="appointmentForm" (ngSubmit)="submitAppointment()">
+    <!-- Indicador de carga -->
+    <div *ngIf="isSubmitting" class="text-center mb-4">
+      <p-progressSpinner strokeWidth="4" [style]="{ width: '30px', height: '30px' }"></p-progressSpinner>
+      <p class="text-sm text-gray-600 mt-2">Procesando tu solicitud...</p>
+    </div>
+
+    <div class="flex flex-col gap-4" [class.opacity-50]="isSubmitting">
+      <!-- Nombre completo -->
+      <div class="flex flex-col gap-2">
+        <label for="client_name" class="font-semibold">Nombre Completo *</label>
+        <input pInputText id="client_name" formControlName="client_name" placeholder="Ingresa tu nombre completo"
+          class="w-full" [disabled]="isSubmitting" />
+        <small class="text-red-500"
+          *ngIf="appointmentForm.get('client_name')?.invalid && appointmentForm.get('client_name')?.touched">
+          El nombre es requerido (mínimo 2 caracteres)
+        </small>
+      </div>
+
+      <!-- Telefono -->
+      <div class="flex flex-col gap-2">
+        <label for="client_phone" class="font-semibold">Teléfono *</label>
+        <input pInputText id="client_phone" formControlName="client_phone" placeholder="Ingresa tu teléfono"
+          class="w-full" [disabled]="isSubmitting" />
+        <small class="text-red-500"
+          *ngIf="appointmentForm.get('client_phone')?.invalid && appointmentForm.get('client_phone')?.touched">
+          Ingresa un teléfono válido
+        </small>
+      </div>
+
+      <!-- Correo electrónico -->
+      <div class="flex flex-col gap-2">
+        <label for="client_email" class="font-semibold">Correo Electrónico *</label>
+        <input pInputText id="client_email" formControlName="client_email" placeholder="Ingresa tu correo electrónico"
+          class="w-full" [disabled]="isSubmitting" />
+        <small class="text-red-500"
+          *ngIf="appointmentForm.get('client_email')?.invalid && appointmentForm.get('client_email')?.touched">
+          Ingresa un correo electrónico válido
+        </small>
+      </div>
+
+      <!-- Descripción -->
+      <div class="flex flex-col gap-2">
+        <label for="description" class="font-semibold">Descripción *</label>
+        <textarea pInputTextarea id="description" formControlName="description"
+          placeholder="Describe el servicio que necesitas" rows="4" class="w-full resize-none" [disabled]="isSubmitting"></textarea>
+        <small class="text-red-500"
+          *ngIf="appointmentForm.get('description')?.invalid && appointmentForm.get('description')?.touched">
+          La descripción es requerida (mínimo 10 caracteres)
+        </small>
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-2 mt-6">
+      <p-button label="Cancelar" type="button" severity="secondary" (onClick)="closeDialog()" [disabled]="isSubmitting">
+      </p-button>
+      <p-button
+        [label]="isSubmitting ? 'Agendando...' : 'Agendar Cita'"
+        type="submit"
+        [disabled]="appointmentForm.invalid || isSubmitting"
+        [loading]="isSubmitting">
+      </p-button>
+    </div>
+  </form>
+</p-dialog>

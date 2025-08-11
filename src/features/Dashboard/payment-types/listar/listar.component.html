@@ -12,6 +12,24 @@
     pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear tipos de pago' : 'Crear un nuevo tipo de pago'}}"
     tooltipPosition="top"
   />
+
+  <!-- Barra de control -->
+  <div class="flex justify-content-between align-items-center mb-4">
+    <div class="flex align-items-center gap-3">
+      <p-button
+        icon="pi pi-filter-slash"
+        label="Limpiar Filtros"
+        severity="secondary"
+        size="small"
+        (onClick)="limpiarFiltros(dt1)"
+        pTooltip="Limpiar todos los filtros aplicados">
+      </p-button>
+    </div>
+    <div class="flex align-items-center gap-2">
+      <span class="text-sm text-gray-600">{{ paymentTypes.length }} tipo(s) de pago total(es)</span>
+    </div>
+  </div>
+
   <p-table
     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     stripedRows
@@ -20,17 +38,26 @@
     [tableStyle]="{ 'min-width': 'auto' }"
     [loading]="loading"
     [paginator]="true"
-    [rows]="5"
-    [rowsPerPageOptions]="[5, 10, 20]">
+    [rows]="10"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [globalFilterFields]="['name']" #dt1>
     <ng-template pTemplate="header">
       <tr>
         <th>N.</th>
         <th pSortableColumn="name">
           Nombre <p-sortIcon field="name" />
         </th>
-        <th pSortableColumn="description">
-          Descripción <p-sortIcon field="description" />
+        <th>
+          Acciones
         </th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'name', 'contains')"
+                 placeholder="Filtrar por nombre" class="w-full" />
+        </th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-paymentType let-index="rowIndex">

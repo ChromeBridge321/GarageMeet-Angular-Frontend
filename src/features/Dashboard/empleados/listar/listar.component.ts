@@ -12,9 +12,12 @@ import { Toast } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ConfirmDialog } from 'primeng/confirmdialog';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 @Component({
   selector: 'app-listar',
-  imports: [TableModule, Button, RouterLink, Toast, ConfirmDialog, TooltipModule],
+  imports: [TableModule, Button, RouterLink, Toast, ConfirmDialog, TooltipModule, CommonModule, FormsModule, InputTextModule],
   templateUrl: './listar.component.html',
   providers: [MessageService, ConfirmationService],
 })
@@ -85,6 +88,15 @@ export class ListarComponent implements OnInit {
       severity: 'success',
       summary: 'Éxito',
       detail
+    });
+  }
+
+  limpiarFiltros(table: any) {
+    table.clear();
+    // Limpiar también los inputs de filtro por columna
+    const filterInputs = document.querySelectorAll('input[pInputText]');
+    filterInputs.forEach((input: any) => {
+      input.value = '';
     });
   }
 }

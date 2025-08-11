@@ -7,15 +7,66 @@
     (click)="!canModifyData && showSubscriptionError()" label="Crear Venta" class="mb-5" [disabled]="!canModifyData"
     pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear empleados' : 'Crear un nuevo empleado'}}"
     tooltipPosition="top" />
-  <p-table showGridlines [value]="sales" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading">
+  <!-- Barra de control -->
+  <div class="flex justify-content-between align-items-center mb-4">
+    <div class="flex align-items-center gap-3">
+      <p-button
+        icon="pi pi-filter-slash"
+        label="Limpiar Filtros"
+        severity="secondary"
+        size="small"
+        (onClick)="limpiarFiltros(dt1)"
+        pTooltip="Limpiar todos los filtros aplicados">
+      </p-button>
+    </div>
+    <div class="flex align-items-center gap-2">
+      <span class="text-sm text-gray-600">{{ sales.length }} venta(s) total(es)</span>
+    </div>
+  </div>
+
+  <p-table showGridlines [value]="sales" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading"
+    [globalFilterFields]="['date', 'price', 'employee.name', 'employee.last_name', 'vehicle.make', 'vehicle.model']"
+    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" #dt1>
     <ng-template #header>
       <tr>
         <th>N.</th>
-        <th>Fecha</th>
-        <th>Total</th>
-        <th>Empleado</th>
-        <th>Vehiculo</th>
+        <th pSortableColumn="date">
+          Fecha
+          <p-sortIcon field="date"></p-sortIcon>
+        </th>
+        <th pSortableColumn="price">
+          Total
+          <p-sortIcon field="price"></p-sortIcon>
+        </th>
+        <th pSortableColumn="employee.name">
+          Empleado
+          <p-sortIcon field="employee.name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="vehicle.make">
+          Vehiculo
+          <p-sortIcon field="vehicle.make"></p-sortIcon>
+        </th>
         <th>Acciones</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'date', 'contains')"
+                 placeholder="Filtrar por fecha" class="w-full" />
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'price', 'contains')"
+                 placeholder="Filtrar por total" class="w-full" />
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'employee.name', 'contains')"
+                 placeholder="Filtrar por empleado" class="w-full" />
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'vehicle.make', 'contains')"
+                 placeholder="Filtrar por vehículo" class="w-full" />
+        </th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template #body let-sale let-index="rowIndex">

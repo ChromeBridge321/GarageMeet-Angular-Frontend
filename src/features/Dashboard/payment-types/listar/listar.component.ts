@@ -269,4 +269,13 @@ export class ListarPaymentTypesComponent implements OnInit {
       detail
     });
   }
+
+  limpiarFiltros(table: any) {
+    table.clear();
+    // Limpiar también los inputs de filtro por columna
+    const filterInputs = document.querySelectorAll('input[pInputText]');
+    filterInputs.forEach((input: any) => {
+      input.value = '';
+    });
+  }
 }

@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { MenuModule } from 'primeng/menu';
 import { Toast } from 'primeng/toast';
+import { PanelMenu } from 'primeng/panelmenu';
 @Component({
   selector: 'app-panel',
   imports: [DrawerModule,
@@ -18,7 +19,8 @@ import { Toast } from 'primeng/toast';
     RouterOutlet,
     RouterLink,
     MenuModule,
-    Toast
+    Toast,
+    PanelMenu
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css',
@@ -176,6 +178,17 @@ export class PanelComponent implements OnInit {
             label: 'Administrar Suscripción',
             icon: 'pi pi-cog',
             routerLink: '/panel/suscripcion',
+          }
+        ]
+      },
+      {
+        label: 'Citas',
+        icon: 'pi pi-calendar',
+        items: [
+          {
+            label: 'Administrar Citas',
+            icon: 'pi pi-calendar',
+            routerLink: '/panel/citas',
           }
         ]
       },

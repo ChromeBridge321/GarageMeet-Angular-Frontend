@@ -14,15 +14,66 @@
     pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear empleados' : 'Crear un nuevo empleado'}}"
     tooltipPosition="top"
   />
-  <p-table showGridlines [value]="employees" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading">
+  <!-- Barra de control -->
+  <div class="flex justify-content-between align-items-center mb-4">
+    <div class="flex align-items-center gap-3">
+      <p-button
+        icon="pi pi-filter-slash"
+        label="Limpiar Filtros"
+        severity="secondary"
+        size="small"
+        (onClick)="limpiarFiltros(dt1)"
+        pTooltip="Limpiar todos los filtros aplicados">
+      </p-button>
+    </div>
+    <div class="flex align-items-center gap-2">
+      <span class="text-sm text-gray-600">{{ employees.length }} empleado(s) total(es)</span>
+    </div>
+  </div>
+
+  <p-table showGridlines [value]="employees" [tableStyle]="{ 'min-width': 'auto' }" [loading]="loading"
+    [globalFilterFields]="['person.name', 'person.last_name', 'person.cellphone_number', 'person.email', 'positions.0.name']"
+    [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]" #dt1>
     <ng-template #header>
       <tr>
         <th>N.</th>
-        <th>Nombre</th>
-        <th>Teléfono</th>
-        <th>Correo</th>
-        <th>Cargo</th>
+        <th pSortableColumn="person.name">
+          Nombre
+          <p-sortIcon field="person.name"></p-sortIcon>
+        </th>
+        <th pSortableColumn="person.cellphone_number">
+          Teléfono
+          <p-sortIcon field="person.cellphone_number"></p-sortIcon>
+        </th>
+        <th pSortableColumn="person.email">
+          Correo
+          <p-sortIcon field="person.email"></p-sortIcon>
+        </th>
+        <th pSortableColumn="positions.0.name">
+          Cargo
+          <p-sortIcon field="positions.0.name"></p-sortIcon>
+        </th>
         <th>Acciones</th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'person.name', 'contains')"
+                 placeholder="Filtrar por nombre" class="w-full" />
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'person.cellphone_number', 'contains')"
+                 placeholder="Filtrar por teléfono" class="w-full" />
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'person.email', 'contains')"
+                 placeholder="Filtrar por correo" class="w-full" />
+        </th>
+        <th>
+          <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'positions.0.name', 'contains')"
+                 placeholder="Filtrar por cargo" class="w-full" />
+        </th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template #body let-employee let-index="rowIndex">
