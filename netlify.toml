@@ -1,0 +1,11 @@
+[build]
+  publish = "dist/garage-meet/browser"
+  command = "npm run build:prod"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
