@@ -139,31 +139,168 @@
 <p-confirmDialog />
 
 <!-- Diálogo para mostrar detalles de la venta -->
-<p-dialog header="Detalles de la Venta" [modal]="true" [(visible)]="showDetailsDialog" [style]="{ width: '50rem' }"
-  [breakpoints]="{ '960px': '75vw', '640px': '90vw' }">
+<p-dialog
+  [modal]="true"
+  [(visible)]="showDetailsDialog"
+  [style]="{ width: '700px', maxWidth: '90vw' }"
+  [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="sale-details-dialog">
 
-  <div *ngIf="saleDetails" class="w-full">
-    <h1>Fecha: {{ saleDetails.date }}</h1>
-    <h1>Total: {{ saleDetails.price | currency:'MXN':'symbol':'1.2-2' }}</h1>
-    <h1>Empleado: {{ saleDetails.employee.name }} {{ saleDetails.employee.last_name }}</h1>
-    <h1>Vehículo: {{ saleDetails.vehicle.make }} {{ saleDetails.vehicle.model }}</h1>
-    <h1>Placas: {{ saleDetails.vehicle.plates }}</h1>
-    <h1>Piezas:</h1>
-    <ul>
-      <li *ngFor="let piece of saleDetails.pieces">
-        {{ piece.name }}
-      </li>
-    </ul>
+  <ng-template pTemplate="header">
+    <div class="flex align-items-center gap-3">
+      <div class="bg-green-100 text-green-600 w-10 h-10 flex align-items-center justify-content-center border-round">
+        <i class="pi pi-shopping-cart text-xl"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold text-gray-800 m-0">Detalles de la Venta</h3>
+        <p class="text-sm text-gray-600 m-0 mt-1" *ngIf="saleDetails">Venta #{{ saleDetails.services_sales_id }}</p>
+      </div>
+    </div>
+  </ng-template>
 
-    <h1>Servicios:</h1>
-    <ul>
-      <li *ngFor="let service of saleDetails.services">
-        {{ service.name }}
-      </li>
-    </ul>
+  <div *ngIf="saleDetails" class="sale-details-content">
+    <!-- Información General de la Venta -->
+    <div class="info-section mb-5">
+      <div class="section-header mb-3">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-info-circle text-blue-600"></i>
+          <h4 class="text-lg font-semibold text-gray-800 m-0">Información General</h4>
+        </div>
+      </div>
+      <div class="bg-gray-50 border-round p-4">
+        <div class="grid">
+          <div class="col-12 md:col-6">
+            <div class="info-item mb-3">
+              <span class="info-label">Fecha de la venta</span>
+              <span class="info-value font-medium">
+                <i class="pi pi-calendar mr-2 text-blue-600"></i>
+                {{ saleDetails.date | date:'dd/MM/yyyy' }}
+              </span>
+            </div>
+          </div>
+          <div class="col-12 md:col-6">
+            <div class="info-item mb-3">
+              <span class="info-label">Total de la venta</span>
+              <span class="info-value font-bold text-green-600 text-xl">
+                <i class="pi pi-dollar mr-2"></i>
+                {{ saleDetails.price | currency:'MXN':'symbol':'1.2-2' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información del Empleado -->
+    <div class="info-section mb-5">
+      <div class="section-header mb-3">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-user text-purple-600"></i>
+          <h4 class="text-lg font-semibold text-gray-800 m-0">Empleado Responsable</h4>
+        </div>
+      </div>
+      <div class="bg-purple-50 border border-purple-200 border-round p-4">
+        <div class="flex align-items-center gap-3">
+          <div class="bg-purple-100 text-purple-600 w-12 h-12 flex align-items-center justify-content-center border-round">
+            <i class="pi pi-user text-xl"></i>
+          </div>
+          <div>
+            <h5 class="text-lg font-semibold text-purple-800 m-0">
+              {{ saleDetails.employee.name }} {{ saleDetails.employee.last_name }}
+            </h5>
+            <p class="text-sm text-purple-600 m-0">Empleado del taller</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información del Vehículo -->
+    <div class="info-section mb-5">
+      <div class="section-header mb-3">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-car text-orange-600"></i>
+          <h4 class="text-lg font-semibold text-gray-800 m-0">Vehículo Atendido</h4>
+        </div>
+      </div>
+      <div class="bg-orange-50 border border-orange-200 border-round p-4">
+        <div class="grid">
+          <div class="col-12 md:col-8">
+            <div class="flex align-items-center gap-3">
+              <div class="bg-orange-100 text-orange-600 w-12 h-12 flex align-items-center justify-content-center border-round">
+                <i class="pi pi-car text-xl"></i>
+              </div>
+              <div>
+                <h5 class="text-lg font-semibold text-orange-800 m-0">
+                  {{ saleDetails.vehicle.make }} {{ saleDetails.vehicle.model }}
+                </h5>
+                <p class="text-sm text-orange-600 m-0">Vehículo del cliente</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 md:col-4">
+            <div class="info-item">
+              <span class="info-label">Placas</span>
+              <span class="info-value font-medium text-orange-800">
+                <i class="pi pi-id-card mr-2"></i>
+                {{ saleDetails.vehicle.plates }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Piezas Utilizadas -->
+    <div class="info-section mb-5" *ngIf="saleDetails.pieces && saleDetails.pieces.length > 0">
+      <div class="section-header mb-3">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-cog text-red-600"></i>
+          <h4 class="text-lg font-semibold text-gray-800 m-0">Piezas Utilizadas</h4>
+        </div>
+      </div>
+      <div class="pieces-container">
+        <div class="piece-item" *ngFor="let piece of saleDetails.pieces">
+          <div class="flex align-items-center gap-3 p-3 bg-red-50 border border-red-200 border-round">
+            <div class="bg-red-100 text-red-600 w-8 h-8 flex align-items-center justify-content-center border-round">
+              <i class="pi pi-cog"></i>
+            </div>
+            <span class="font-medium text-red-800">{{ piece.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Servicios Realizados -->
+    <div class="info-section" *ngIf="saleDetails.services && saleDetails.services.length > 0">
+      <div class="section-header mb-3">
+        <div class="flex align-items-center gap-2">
+          <i class="pi pi-wrench text-blue-600"></i>
+          <h4 class="text-lg font-semibold text-gray-800 m-0">Servicios Realizados</h4>
+        </div>
+      </div>
+      <div class="services-container">
+        <div class="service-item" *ngFor="let service of saleDetails.services">
+          <div class="flex align-items-center gap-3 p-3 bg-blue-50 border border-blue-200 border-round">
+            <div class="bg-blue-100 text-blue-600 w-8 h-8 flex align-items-center justify-content-center border-round">
+              <i class="pi pi-wrench"></i>
+            </div>
+            <span class="font-medium text-blue-800">{{ service.name }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <ng-template pTemplate="footer">
-    <p-button label="Cerrar" icon="pi pi-times" (click)="showDetailsDialog = false" severity="secondary" />
+    <div class="flex justify-content-end gap-2 pt-3 border-top-1 border-gray-200">
+      <p-button
+        label="Cerrar"
+        icon="pi pi-times"
+        (click)="showDetailsDialog = false"
+        severity="secondary">
+      </p-button>
+    </div>
   </ng-template>
 </p-dialog>
