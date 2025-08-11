@@ -1,8 +1,120 @@
-<section class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50">
-<h1 class=" text-2xl pb-2">{{ MW.name }}</h1>
-<h1 class=" text-2xl pb-2">{{ MW.address }}</h1>
-<h1 class=" text-2xl pb-2">{{ MW.cellphone_number }}</h1>
-<h1 class=" text-2xl pb-2">{{ MW.email }}</h1>
-<h1 class=" text-2xl pb-2 text-blue-500"><a href="{{ MW.google_maps_link }}">Google Maps</a></h1>
+<div class="dashboard-card">
+  <div class="dashboard-card-header">
+    <div class="flex align-items-center gap-3">
+      <div class="bg-blue-100 text-blue-600 w-12 h-12 flex align-items-center items-center justify-content-center border-round">
+        <i class="pi pi-building text-xl" style="font-size: 2rem;"></i>
+      </div>
+      <div>
+        <h3 class="dashboard-title">Información del Taller</h3>
+        <p class="text-gray-600 mt-1">Detalles y configuración de tu taller mecánico</p>
+      </div>
+    </div>
+  </div>
 
-</section>
+  <div class="dashboard-card-content">
+    <div class="workshop-info-container">
+      <!-- Información Principal -->
+      <div class="info-section mb-5">
+        <div class="section-header mb-4">
+          <h4 class="text-lg font-semibold text-gray-800 m-0 flex align-items-center gap-2">
+            <i class="pi pi-info-circle text-blue-600"></i>
+            Información General
+          </h4>
+        </div>
+
+        <div class="grid">
+          <div class="col-12 lg:col-6">
+            <div class="info-card">
+              <div class="info-item">
+                <div class="info-label">
+                  <i class="pi pi-building mr-2"></i>
+                  Nombre del Taller
+                </div>
+                <div class="info-value">{{ MW.name }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 lg:col-6">
+            <div class="info-card">
+              <div class="info-item">
+                <div class="info-label">
+                  <i class="pi pi-phone mr-2"></i>
+                  Teléfono de Contacto
+                </div>
+                <div class="info-value">
+                  <a [href]="'tel:' + MW.cellphone_number" class="contact-link">
+                    {{ MW.cellphone_number }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 lg:col-6">
+            <div class="info-card">
+              <div class="info-item">
+                <div class="info-label">
+                  <i class="pi pi-envelope mr-2"></i>
+                  Correo Electrónico
+                </div>
+                <div class="info-value">
+                  <a [href]="'mailto:' + MW.email" class="contact-link">
+                    {{ MW.email }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 lg:col-6">
+            <div class="info-card">
+              <div class="info-item">
+                <div class="info-label">
+                  <i class="pi pi-map-marker mr-2"></i>
+                  Dirección
+                </div>
+                <div class="info-value">{{ MW.address }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Ubicación -->
+      <div class="info-section">
+        <div class="section-header mb-4">
+          <h4 class="text-lg font-semibold text-gray-800 m-0 flex align-items-center gap-2">
+            <i class="pi pi-map text-green-600"></i>
+            Ubicación
+          </h4>
+        </div>
+
+        <div class="location-card">
+          <div class="flex align-items-center justify-content-between flex-wrap gap-3">
+            <div class="location-info">
+              <div class="text-lg font-medium text-gray-800 mb-1">
+                <i class="pi pi-map-marker text-red-500 mr-2"></i>
+                {{ MW.address }}
+              </div>
+              <p class="text-sm text-gray-600 m-0">
+                Haz clic en el botón para ver la ubicación en Google Maps
+              </p>
+            </div>
+            <div class="location-actions">
+              <a
+                [href]="MW.google_maps_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="maps-button">
+                <i class="pi pi-external-link mr-2"></i>
+                Ver en Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

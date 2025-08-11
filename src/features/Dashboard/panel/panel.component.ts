@@ -9,7 +9,6 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { MenuModule } from 'primeng/menu';
 import { Toast } from 'primeng/toast';
-import { PanelMenu } from 'primeng/panelmenu';
 @Component({
   selector: 'app-panel',
   imports: [DrawerModule,
@@ -20,7 +19,6 @@ import { PanelMenu } from 'primeng/panelmenu';
     RouterLink,
     MenuModule,
     Toast,
-    PanelMenu
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css',
@@ -59,6 +57,17 @@ export class PanelComponent implements OnInit {
             icon: 'pi pi-file-edit',
             routerLink: './taller',
           },
+        ]
+      },
+      {
+        label: 'Citas',
+        icon: 'pi pi-calendar',
+        items: [
+          {
+            label: 'Administrar Citas',
+            icon: 'pi pi-calendar',
+            routerLink: '/panel/citas',
+          }
         ]
       },
       {
@@ -110,22 +119,7 @@ export class PanelComponent implements OnInit {
           },
         ]
       },
-      {
-        label: 'Metodos de Pago',
-        icon: 'pi pi-credit-card',
-        items: [
-          {
-            label: 'Agregar Metodo de Pago',
-            icon: 'pi pi-plus',
-            routerLink: '/panel/metodos-pago/agregar',
-          },
-          {
-            label: 'Listado de Metodos de Pago',
-            icon: 'pi pi-list',
-            routerLink: '/panel/metodos-pago/listar',
-          }
-        ]
-      },
+
       {
         label: 'Tipos de Pago',
         icon: 'pi pi-money-bill',
@@ -182,13 +176,18 @@ export class PanelComponent implements OnInit {
         ]
       },
       {
-        label: 'Citas',
-        icon: 'pi pi-calendar',
+        label: 'Metodos de Pago',
+        icon: 'pi pi-credit-card',
         items: [
           {
-            label: 'Administrar Citas',
-            icon: 'pi pi-calendar',
-            routerLink: '/panel/citas',
+            label: 'Agregar Metodo de Pago',
+            icon: 'pi pi-plus',
+            routerLink: '/panel/metodos-pago/agregar',
+          },
+          {
+            label: 'Listado de Metodos de Pago',
+            icon: 'pi pi-list',
+            routerLink: '/panel/metodos-pago/listar',
           }
         ]
       },

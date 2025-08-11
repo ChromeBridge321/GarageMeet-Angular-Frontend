@@ -1,186 +1,187 @@
-<div class="services-container">
-  <div class="card">
-    <div class="card-header">
-      <h2>Gestión de Servicios</h2>
-      <p-button
-        label="Nuevo Servicio"
-        icon="pi pi-plus"
-        severity="success"
-        (onClick)="openCreateModal()">
-      </p-button>
-    </div>
 
-    <div class="card-content">
-      <p-table
-        #servicesTable
-        [value]="services"
-        [loading]="loading"
-        [paginator]="true"
-        [rows]="10"
-        [showCurrentPageReport]="true"
-        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} servicios"
-        [globalFilterFields]="['name', 'description', 'price']"
-        responsiveLayout="scroll">
-
-        <ng-template pTemplate="caption">
-          <div class="table-header">
-            <div class="flex justify-content-end align-items-center">
-              <p-button
-                icon="pi pi-filter-slash"
-                label="Limpiar Filtros"
-                severity="secondary"
-                size="small"
-                (onClick)="limpiarFiltros(servicesTable)"
-                pTooltip="Limpiar todos los filtros aplicados">
-              </p-button>
-            </div>
-          </div>
-        </ng-template>
-
-        <ng-template pTemplate="header">
-          <tr>
-            <th>N.</th>
-            <th pSortableColumn="name">
-              Nombre
-              <p-sortIcon field="name"></p-sortIcon>
-            </th>
-            <th>Acciones</th>
-          </tr>
-          <tr>
-            <th></th>
-            <th>
-              <input pInputText type="text" (input)="servicesTable.filter($any($event.target).value, 'name', 'contains')"
-                     placeholder="Filtrar por nombre" class="w-full" />
-            </th>
-            <th></th>
-          </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-service let-index="rowIndex">
-          <tr>
-            <td>{{ index + 1 }}</td>
-            <td>{{ service.name }}</td>
-            <td>
-              <div class="action-buttons">
-                <p-button
-                  icon="pi pi-pencil"
-                  severity="info"
-                  size="small"
-                  [text]="true"
-                  (onClick)="openEditModal(service)"
-                  pTooltip="Editar servicio">
-                </p-button>
-                <p-button
-                  icon="pi pi-trash"
-                  severity="danger"
-                  size="small"
-                  [text]="true"
-                  (onClick)="deleteService(service)"
-                  pTooltip="Eliminar servicio">
-                </p-button>
-              </div>
-            </td>
-          </tr>
-        </ng-template>
-
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="6" class="text-center">
-              <div class="empty-state">
-                <i class="pi pi-wrench" style="font-size: 3rem; color: #6c757d;"></i>
-                <h3>No hay servicios registrados</h3>
-                <p>Comienza agregando tu primer servicio al sistema</p>
-                <p-button
-                  label="Agregar Servicio"
-                  icon="pi pi-plus"
-                  (onClick)="openCreateModal()">
-                </p-button>
-              </div>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
+<div class="dashboard-card">
+  <div class="dashboard-card-header">
+    <h3 class="dashboard-title">Servicios</h3>
+    <p-button
+      type="button"
+      pRipple
+      label="Nuevo Servicio"
+      icon="pi pi-plus"
+      (onClick)="openCreateModal()"
+    />
   </div>
 
-  <!-- Modal para crear/editar servicio -->
-  <p-dialog
-    [header]="modalTitle"
-    [(visible)]="showModal"
-    [modal]="true"
-    [closable]="true"
-    [draggable]="false"
-    [resizable]="false"
-    styleClass="service-dialog"
-    [style]="{ width: '600px' }">
-
-    <div class="form-container">
-      <form>
-        <div class="form-group">
-          <label for="name">Nombre del Servicio *</label>
-          <input
-            id="name"
-            type="text"
-            pInputText
-            [(ngModel)]="serviceForm.name"
-            name="name"
-            placeholder="Ej: Cambio de aceite, Balanceo de llantas..."
-            class="w-full" />
-        </div>
-
-        <div class="form-group">
-          <label for="description">Descripción</label>
-          <textarea
-            id="description"
-            pInputTextarea
-            [(ngModel)]="serviceForm.description"
-            name="description"
-            rows="3"
-            placeholder="Describe el servicio que ofreces..."
-            class="w-full">
-          </textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="price">Precio (opcional)</label>
-          <p-inputNumber
-            id="price"
-            [(ngModel)]="serviceForm.price"
-            name="price"
-            mode="currency"
-            currency="USD"
-            locale="en-US"
-            [min]="0"
-            [maxFractionDigits]="2"
-            placeholder="0.00"
-            class="w-full">
-          </p-inputNumber>
-        </div>
-      </form>
-    </div>
-
-    <ng-template pTemplate="footer">
-      <div class="dialog-footer">
+  <div class="dashboard-card-content">
+    <!-- Barra de control -->
+    <div class="flex justify-content-between align-items-center mb-4">
+      <div class="flex align-items-center gap-3">
         <p-button
-          label="Cancelar"
-          icon="pi pi-times"
+          icon="pi pi-filter-slash"
+          label="Limpiar Filtros"
           severity="secondary"
-          [text]="true"
-          (onClick)="closeModal()">
-        </p-button>
-        <p-button
-          [label]="isEditing ? 'Actualizar' : 'Crear'"
-          [icon]="isEditing ? 'pi pi-check' : 'pi pi-plus'"
-          severity="success"
-          (onClick)="saveService()">
+          size="small"
+          (onClick)="limpiarFiltros(servicesTable)"
+          pTooltip="Limpiar todos los filtros aplicados">
         </p-button>
       </div>
-    </ng-template>
-  </p-dialog>
+      <div class="flex align-items-center gap-2">
+        <span class="text-sm text-gray-600">{{ services.length }} servicio(s) total(es)</span>
+      </div>
+    </div>
 
-  <!-- Toast para notificaciones -->
-  <p-toast></p-toast>
+    <p-table
+      showGridlines
+      #servicesTable
+      [value]="services"
+      [tableStyle]="{ 'min-width': 'auto' }"
+      [loading]="loading"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 20, 50]"
+      [globalFilterFields]="['name', 'description', 'price']">
 
-  <!-- Confirmación de eliminación -->
-  <p-confirmDialog></p-confirmDialog>
+      <ng-template #header>
+        <tr>
+          <th>N.</th>
+          <th pSortableColumn="name">
+            Nombre
+            <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th>Acciones</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>
+            <input pInputText type="text" (input)="servicesTable.filter($any($event.target).value, 'name', 'contains')"
+                   placeholder="Filtrar por nombre" class="w-full" />
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+
+      <ng-template #body let-service let-index="rowIndex">
+        <tr>
+          <td>{{ index + 1 }}</td>
+          <td>{{ service.name }}</td>
+          <td>
+            <div class="flex gap-2">
+              <p-button
+                icon="pi pi-pencil"
+                severity="secondary"
+                size="small"
+                [text]="true"
+                (onClick)="openEditModal(service)"
+                pTooltip="Editar servicio"
+                tooltipPosition="top"
+              />
+              <p-button
+                icon="pi pi-trash"
+                severity="danger"
+                size="small"
+                [text]="true"
+                (onClick)="deleteService(service)"
+                pTooltip="Eliminar servicio"
+                tooltipPosition="top"
+              />
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template #emptymessage>
+        <tr>
+          <td colspan="3" class="text-center">
+            <div class="empty-state py-6">
+              <i class="pi pi-wrench" style="font-size: 3rem; color: #6c757d;"></i>
+              <h3>No hay servicios registrados</h3>
+              <p>Comienza agregando tu primer servicio al sistema</p>
+              <p-button
+                label="Agregar Servicio"
+                icon="pi pi-plus"
+                (onClick)="openCreateModal()">
+              </p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </div>
+
+<p-toast />
+<p-confirmDialog />
+
+<!-- Modal para crear/editar servicio -->
+<p-dialog
+  [header]="modalTitle"
+  [(visible)]="showModal"
+  [modal]="true"
+  [closable]="true"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="service-dialog"
+  [style]="{ width: '600px' }">
+
+  <div class="form-container">
+    <form>
+      <div class="form-group">
+        <label for="name">Nombre del Servicio *</label>
+        <input
+          id="name"
+          type="text"
+          pInputText
+          [(ngModel)]="serviceForm.name"
+          name="name"
+          placeholder="Ej: Cambio de aceite, Balanceo de llantas..."
+          class="w-full" />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          pInputTextarea
+          [(ngModel)]="serviceForm.description"
+          name="description"
+          rows="3"
+          placeholder="Describe el servicio que ofreces..."
+          class="w-full">
+        </textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Precio (opcional)</label>
+        <p-inputNumber
+          id="price"
+          [(ngModel)]="serviceForm.price"
+          name="price"
+          mode="currency"
+          currency="USD"
+          locale="en-US"
+          [min]="0"
+          [maxFractionDigits]="2"
+          placeholder="0.00"
+          class="w-full">
+        </p-inputNumber>
+      </div>
+    </form>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="dialog-footer">
+      <p-button
+        label="Cancelar"
+        icon="pi pi-times"
+        severity="secondary"
+        [text]="true"
+        (onClick)="closeModal()">
+      </p-button>
+      <p-button
+        [label]="isEditing ? 'Actualizar' : 'Crear'"
+        [icon]="isEditing ? 'pi pi-check' : 'pi pi-plus'"
+        severity="success"
+        (onClick)="saveService()">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>

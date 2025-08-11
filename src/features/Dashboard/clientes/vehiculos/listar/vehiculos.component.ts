@@ -4,6 +4,8 @@ import { RESTClient } from '../../models/clientes.model';
 import { ClientesService } from '../../services/clientes.service';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { TableModule } from 'primeng/table';
+import { PaginatorModule } from 'primeng/paginator';
+import { DropdownModule } from 'primeng/dropdown';
 import { Button } from "primeng/button";
 import { RouterLink } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
@@ -11,7 +13,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-vehiculos',
-  imports: [TableModule, Button, RouterLink, InputTextModule, CommonModule ],
+  imports: [TableModule, PaginatorModule, DropdownModule, Button, RouterLink, InputTextModule, CommonModule ],
   templateUrl: './vehiculos.component.html',
 })
 export class VehiculosComponent implements OnInit {

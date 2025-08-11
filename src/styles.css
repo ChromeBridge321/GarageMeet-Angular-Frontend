@@ -136,3 +136,288 @@ body {
   font-weight: 900;
   font-style: normal;
 }
+
+/* ===============================
+   TEMA MINIMALISTA AZUL CLARO
+   =============================== */
+
+:root {
+  --primary-blue: #3b82f6;
+  --primary-blue-light: #60a5fa;
+  --primary-blue-lighter: #93c5fd;
+  --primary-blue-lightest: #dbeafe;
+  --primary-blue-ultra-light: #eff6ff;
+  --secondary-blue: #1e40af;
+  --accent-blue: #2563eb;
+
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1e293b;
+  --gray-900: #0f172a;
+
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: var(--primary-blue);
+
+  --border-radius: 8px;
+  --border-radius-sm: 6px;
+  --border-radius-lg: 12px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+/* ===============================
+   ESTILOS GLOBALES DASHBOARD
+   =============================== */
+
+.dashboard-container {
+  background: var(--gray-50);
+  min-height: 100vh;
+}
+
+.dashboard-card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+}
+
+.dashboard-card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.dashboard-card-content {
+  padding: 1.5rem;
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gray-800);
+  margin: 0;
+}
+
+.dashboard-subtitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--gray-700);
+  margin: 0;
+}
+
+/* ===============================
+   ESTILOS PRIMENG PERSONALIZADOS
+   =============================== */
+
+/* Botones */
+.p-button {
+  border-radius: var(--border-radius) !important;
+  font-weight: 500 !important;
+  transition: all 0.2s ease !important;
+  border: none !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.p-button.p-button-primary {
+  background: var(--primary-blue) !important;
+  color: white !important;
+}
+
+.p-button.p-button-primary:hover {
+  background: var(--secondary-blue) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.p-button.p-button-secondary {
+  background: var(--gray-100) !important;
+  color: var(--gray-700) !important;
+}
+
+.p-button.p-button-secondary:hover {
+  background: var(--gray-200) !important;
+}
+
+.p-button.p-button-success {
+  background: var(--success) !important;
+  color: white !important;
+}
+
+.p-button.p-button-success:hover {
+  background: #059669 !important;
+}
+
+.p-button.p-button-danger {
+  background: var(--danger) !important;
+  color: white !important;
+}
+
+.p-button.p-button-danger:hover {
+  background: #dc2626 !important;
+}
+
+/* Tablas */
+.p-datatable {
+  border-radius: var(--border-radius) !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-sm) !important;
+  border: 1px solid var(--gray-200) !important;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background: var(--primary-blue-ultra-light) !important;
+  color: var(--gray-800) !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid var(--primary-blue-lightest) !important;
+  padding: 1rem !important;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.875rem 1rem !important;
+  border-bottom: 1px solid var(--gray-200) !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background: var(--primary-blue-ultra-light) !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background: var(--gray-50) !important;
+}
+
+.p-datatable .p-datatable-tbody > tr:nth-child(even):hover {
+  background: var(--primary-blue-ultra-light) !important;
+}
+
+/* Inputs */
+.p-inputtext {
+  border: 1px solid var(--gray-300) !important;
+  border-radius: var(--border-radius-sm) !important;
+  padding: 0.75rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.p-inputtext:focus {
+  border-color: var(--primary-blue) !important;
+  box-shadow: 0 0 0 3px var(--primary-blue-lightest) !important;
+}
+
+/* Paginador */
+.p-paginator {
+  background: white !important;
+  border: none !important;
+  border-top: 1px solid var(--gray-200) !important;
+  padding: 1rem !important;
+}
+
+.p-paginator .p-paginator-page {
+  border-radius: var(--border-radius-sm) !important;
+  color: var(--gray-600) !important;
+}
+
+.p-paginator .p-paginator-page.p-highlight {
+  background: var(--primary-blue) !important;
+  color: white !important;
+}
+
+/* Menu */
+.p-menubar {
+  background: white !important;
+  border: none !important;
+  border-bottom: 1px solid var(--gray-200) !important;
+  border-radius: 0 !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.p-menu {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.p-menu .p-menu-item .p-menu-item-link {
+  padding: 0.875rem 1.25rem !important;
+  color: var(--gray-700) !important;
+  transition: all 0.2s ease !important;
+  border-radius: var(--border-radius-sm) !important;
+  margin: 0.125rem 0.5rem !important;
+}
+
+.p-menu .p-menu-item .p-menu-item-link:hover {
+  background: var(--primary-blue-ultra-light) !important;
+  color: var(--primary-blue) !important;
+}
+
+.p-menu .p-menu-item .p-menu-item-link.router-link-active {
+  background: var(--primary-blue) !important;
+  color: white !important;
+}
+
+/* Drawer */
+.p-drawer {
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.p-drawer .p-drawer-header {
+  background: white !important;
+  border-bottom: 1px solid var(--gray-200) !important;
+  padding: 1.5rem !important;
+}
+
+.p-drawer .p-drawer-content {
+  background: white !important;
+  padding: 1rem !important;
+}
+
+/* Toast */
+.p-toast .p-toast-message {
+  border-radius: var(--border-radius) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* Dialog */
+.p-dialog {
+  border-radius: var(--border-radius-lg) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.p-dialog .p-dialog-header {
+  background: white !important;
+  border-bottom: 1px solid var(--gray-200) !important;
+  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0 !important;
+}
+
+.p-dialog .p-dialog-content {
+  background: white !important;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .dashboard-card-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .dashboard-title {
+    font-size: 1.25rem;
+  }
+
+  .p-datatable .p-datatable-thead > tr > th,
+  .p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.75rem 0.5rem !important;
+  }
+}

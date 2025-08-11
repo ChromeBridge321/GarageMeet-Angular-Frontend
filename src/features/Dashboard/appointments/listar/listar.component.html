@@ -1,215 +1,328 @@
-<div class="appointments-container">
-  <div class="appointments-header">
-    <h2>Gestión de Citas</h2>
-    <p>Lista de todas las citas programadas en tu taller</p>
-  </div>
-
-  <!-- Barra de búsqueda global -->
-  <div class="flex justify-content-between align-items-center mb-4">
-    <div class="flex align-items-center gap-3">
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input
-          pInputText
-          type="text"
-          (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
-          placeholder="Buscar en todas las columnas..."
-          class="w-20rem"
-        />
-      </span>
-      <p-button
-        icon="pi pi-filter-slash"
-        label="Limpiar Filtros"
-        severity="secondary"
-        size="small"
-        (onClick)="limpiarFiltros(dt1)"
-        pTooltip="Limpiar todos los filtros aplicados">
-      </p-button>
-    </div>
-    <div class="flex align-items-center gap-2">
-      <span class="text-sm text-gray-600">{{ citas.length }} cita(s) total(es)</span>
+<div class="dashboard-card">
+  <div class="dashboard-card-header">
+    <div>
+      <h2 class="dashboard-title">Gestión de Citas</h2>
+      <p class="text-gray-600 mt-1">Lista de todas las citas programadas en tu taller</p>
     </div>
   </div>
 
-  <p-table [value]="citas" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
-    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} citas" [loading]="false"
-    class="appointments-table" [globalFilterFields]="['appointment_id', 'client_name', 'client_email', 'client_phone']"
-    #dt1>
+  <div class="dashboard-card-content">
+    <!-- Barra de búsqueda global -->
+    <div class="flex justify-content-between align-items-center mb-4">
+      <div class="flex align-items-center gap-3">
+        <span class="p-input-icon-left">
+          <input
+            pInputText
+            type="text"
+            (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Buscar en todas las columnas..."
+            class="w-20rem"
+          />
+        </span>
+        <p-button
+          icon="pi pi-filter-slash"
+          label="Limpiar Filtros"
+          severity="secondary"
+          size="small"
+          (onClick)="limpiarFiltros(dt1)"
+          pTooltip="Limpiar todos los filtros aplicados">
+        </p-button>
+      </div>
+      <div class="flex align-items-center gap-2">
+        <span class="text-sm text-gray-600">{{ citas.length }} cita(s) total(es)</span>
+      </div>
+    </div>
 
-    <ng-template pTemplate="header">
-      <tr>
-        <th>ID</th>
-        <th>Cliente</th>
-        <th>Email</th>
-        <th>Teléfono</th>
-        <th>
-          <div class="flex flex-column gap-2">
-            <span>Fecha</span>
-            <p-columnFilter type="date" field="appointment_date" display="menu" class="ml-auto"></p-columnFilter>
-          </div>
-        </th>
-        <th>
-          <div class="flex flex-column gap-2">
-            <span>Estado</span>
-            <p-columnFilter field="status" matchMode="equals" display="menu" class="ml-auto">
-              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                <p-dropdown [ngModel]="value" [options]="statusOptions" placeholder="Todos los estados"
-                  (onChange)="filter($event.value)" [showClear]="true">
-                  <ng-template pTemplate="option" let-option>
-                    <span [class]="'px-2 py-1 rounded text-xs font-medium ' + getStatusClasses(option.value)">
-                      {{ option.label }}
-                    </span>
-                  </ng-template>
-                </p-dropdown>
-              </ng-template>
-            </p-columnFilter>
-          </div>
-        </th>
-        <th>Acciones</th>
-      </tr>
-    </ng-template>
+    <p-table [value]="citas" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} citas" [loading]="false"
+      [rowsPerPageOptions]="[5, 10, 20, 50]"
+      [globalFilterFields]="['appointment_id', 'client_name', 'client_email', 'client_phone']"
+      #dt1>
 
-    <ng-template pTemplate="body" let-cita>
-      <tr>
-        <td>{{ cita.appointment_id }}</td>
-        <td>{{ cita.client_name }}</td>
-        <td>{{ cita.client_email }}</td>
-        <td>{{ cita.client_phone }}</td>
-        <td>{{ cita.appointment_date | date:'dd/MM/yyyy HH:mm' }}</td>
-        <td>
-          <span [class]="'px-3 py-1 rounded-full text-sm font-medium ' + getStatusClasses(cita.status)">
-            {{ getStatusLabel(cita.status) }}
-          </span>
-        </td>
-        <td class="text-center">
-          <p-button icon="pi pi-eye" severity="info" size="small" (onClick)="showCitaDetails(cita)"
-            pTooltip="Ver detalles y gestionar cita">
-          </p-button>
-        </td>
-      </tr>
-    </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>
+            <div class="flex flex-column gap-2">
+              <span>Fecha</span>
+              <p-columnFilter type="date" field="appointment_date" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
+          </th>
+          <th>
+            <div class="flex flex-column gap-2">
+              <span>Estado</span>
+              <p-columnFilter field="status" matchMode="equals" display="menu" class="ml-auto">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                  <p-dropdown [ngModel]="value" [options]="statusOptions" placeholder="Todos los estados"
+                    (onChange)="filter($event.value)" [showClear]="true">
+                    <ng-template pTemplate="option" let-option>
+                      <span [class]="'px-2 py-1 rounded text-xs font-medium ' + getStatusClasses(option.value)">
+                        {{ option.label }}
+                      </span>
+                    </ng-template>
+                  </p-dropdown>
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
 
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="7" class="text-center">No hay citas registradas</td>
-      </tr>
-    </ng-template>
-  </p-table>
+      <ng-template pTemplate="body" let-cita>
+        <tr>
+          <td>{{ cita.appointment_id }}</td>
+          <td>{{ cita.client_name }}</td>
+          <td>{{ cita.client_email }}</td>
+          <td>{{ cita.client_phone }}</td>
+          <td>{{ cita.appointment_date | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>
+            <span [class]="'px-3 py-1 rounded-full text-sm font-medium ' + getStatusClasses(cita.status)">
+              {{ getStatusLabel(cita.status) }}
+            </span>
+          </td>
+          <td class="text-center">
+            <p-button icon="pi pi-eye" severity="info" [text]="true" (onClick)="showCitaDetails(cita)"
+              pTooltip="Ver detalles y gestionar cita">
+            </p-button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7" class="text-center">
+            <div class="py-8">
+              <i class="pi pi-calendar text-6xl text-gray-400 mb-4"></i>
+              <h3 class="text-lg font-semibold text-gray-700 mb-2">No hay citas registradas</h3>
+              <p class="text-gray-500">Las citas aparecerán aquí cuando los clientes las programen</p>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
 
   <!-- Dialog de detalles -->
-  <p-dialog [(visible)]="showDetailsDialog" header="Detalles de la Cita" [modal]="true" [style]="{ width: '50vw' }"
-    [closable]="true" class="details-dialog">
+  <p-dialog
+    [(visible)]="showDetailsDialog"
+    [modal]="true"
+    [style]="{ width: '650px', maxWidth: '90vw' }"
+    [closable]="true"
+    [draggable]="false"
+    [resizable]="false"
+    styleClass="appointment-details-dialog">
 
-    <div *ngIf="citaDetails">
+    <ng-template pTemplate="header">
+      <div class="flex align-items-center gap-3">
+        <div class="bg-blue-100 text-blue-600 w-10 h-10 flex align-items-center justify-content-center border-round">
+          <i class="pi pi-calendar text-xl"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800 m-0">Detalles de la Cita</h3>
+          <p class="text-sm text-gray-600 m-0 mt-1" *ngIf="citaDetails">ID: #{{ citaDetails.appointment_id }}</p>
+        </div>
+      </div>
+    </ng-template>
+
+    <div *ngIf="citaDetails" class="appointment-details-content">
       <!-- Información del Cliente -->
-      <div class="section-title">Información del Cliente</div>
-      <div class="detail-row">
-        <span class="detail-label">Nombre:</span>
-        <span class="detail-value">{{ citaDetails.client_name }}</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Email:</span>
-        <span class="detail-value">{{ citaDetails.client_email }}</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Teléfono:</span>
-        <span class="detail-value">{{ citaDetails.client_phone }}</span>
+      <div class="info-section mb-5">
+        <div class="section-header mb-3">
+          <div class="flex align-items-center gap-2">
+            <i class="pi pi-user text-blue-600"></i>
+            <h4 class="text-lg font-semibold text-gray-800 m-0">Información del Cliente</h4>
+          </div>
+        </div>
+        <div class="bg-gray-50 border-round p-4">
+          <div class="grid">
+            <div class="col-12 md:col-6">
+              <div class="info-item mb-3">
+                <span class="info-label">Nombre completo</span>
+                <span class="info-value">{{ citaDetails.client_name }}</span>
+              </div>
+            </div>
+            <div class="col-12 md:col-6">
+              <div class="info-item mb-3">
+                <span class="info-label">Teléfono</span>
+                <span class="info-value">
+                  <a [href]="'tel:' + citaDetails.client_phone" class="text-blue-600 no-underline hover:underline">
+                    {{ citaDetails.client_phone }}
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="info-item">
+                <span class="info-label">Correo electrónico</span>
+                <span class="info-value">
+                  <a [href]="'mailto:' + citaDetails.client_email" class="text-blue-600 no-underline hover:underline">
+                    {{ citaDetails.client_email }}
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Información de la Cita -->
-      <div class="section-title" style="margin-top: 1.5rem;">Detalles de la Cita</div>
-      <div class="detail-row">
-        <span class="detail-label">Fecha:</span>
-        <span class="detail-value">{{ citaDetails.appointment_date | date:'dd/MM/yyyy HH:mm' }}</span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Estado:</span>
-        <span class="detail-value">
-          <span [class]="'px-3 py-1 rounded-full text-sm font-medium ' + getStatusClasses(citaDetails.status)">
-            {{ getStatusLabel(citaDetails.status) }}
-          </span>
-        </span>
-      </div>
-      <div class="detail-row">
-        <span class="detail-label">Descripción:</span>
-        <span class="detail-value">{{ citaDetails.description }}</span>
-      </div>
-      <div class="detail-row" *ngIf="citaDetails.notes">
-        <span class="detail-label">Notas:</span>
-        <span class="detail-value">{{ citaDetails.notes }}</span>
+      <div class="info-section mb-5">
+        <div class="section-header mb-3">
+          <div class="flex align-items-center gap-2">
+            <i class="pi pi-clock text-green-600"></i>
+            <h4 class="text-lg font-semibold text-gray-800 m-0">Detalles de la Cita</h4>
+          </div>
+        </div>
+        <div class="bg-gray-50 border-round p-4">
+          <div class="grid">
+            <div class="col-12 md:col-6">
+              <div class="info-item mb-3">
+                <span class="info-label">Fecha y hora</span>
+                <span class="info-value font-medium">
+                  <i class="pi pi-calendar-plus mr-2 text-blue-600"></i>
+                  {{ citaDetails.appointment_date | date:'dd/MM/yyyy HH:mm' }}
+                </span>
+              </div>
+            </div>
+            <div class="col-12 md:col-6">
+              <div class="info-item mb-3">
+                <span class="info-label">Estado actual</span>
+                <div class="info-value">
+                  <span [class]="'inline-flex align-items-center px-3 py-1 rounded-full text-sm font-medium ' + getStatusClasses(citaDetails.status)">
+                    {{ getStatusLabel(citaDetails.status) }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-12" *ngIf="citaDetails.description">
+              <div class="info-item mb-3">
+                <span class="info-label">Descripción del servicio</span>
+                <span class="info-value">{{ citaDetails.description }}</span>
+              </div>
+            </div>
+            <div class="col-12" *ngIf="citaDetails.notes">
+              <div class="info-item">
+                <span class="info-label">Notas adicionales</span>
+                <span class="info-value">{{ citaDetails.notes }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Sección de Acciones Disponibles -->
-      <div class="section-title" style="margin-top: 1.5rem;">Acciones Disponibles</div>
-      <div class="actions-section" style="margin-top: 1rem;">
+      <div class="info-section">
+        <div class="section-header mb-3">
+          <div class="flex align-items-center gap-2">
+            <i class="pi pi-cog text-orange-600"></i>
+            <h4 class="text-lg font-semibold text-gray-800 m-0">Acciones Disponibles</h4>
+          </div>
+        </div>
 
         <!-- Mensaje informativo según el estado -->
-        <div class="status-info mb-3">
-          <div *ngIf="citaDetails.status === 'pending'" class="p-3 bg-yellow-50 border border-yellow-200 rounded">
-            <i class="pi pi-info-circle text-yellow-600 mr-2"></i>
-            <span class="text-yellow-700">Esta cita está pendiente de confirmación. Puedes confirmarla o cancelarla.</span>
+        <div class="status-alert mb-4">
+          <div *ngIf="citaDetails.status === 'pending'" class="alert alert-warning">
+            <div class="flex align-items-start gap-3">
+              <i class="pi pi-info-circle text-lg text-yellow-600 mt-1"></i>
+              <div>
+                <h5 class="text-yellow-800 font-semibold m-0 mb-1">Cita Pendiente</h5>
+                <p class="text-yellow-700 m-0 text-sm">Esta cita está pendiente de confirmación. Puedes confirmarla con una fecha y hora específica o cancelarla si es necesario.</p>
+              </div>
+            </div>
           </div>
-          <div *ngIf="citaDetails.status === 'confirmed'" class="p-3 bg-green-50 border border-green-200 rounded">
-            <i class="pi pi-check-circle text-green-600 mr-2"></i>
-            <span class="text-green-700">Esta cita ya está confirmada. Puedes marcarla como completada o cancelarla si es necesario.</span>
+
+          <div *ngIf="citaDetails.status === 'confirmed'" class="alert alert-success">
+            <div class="flex align-items-start gap-3">
+              <i class="pi pi-check-circle text-lg text-green-600 mt-1"></i>
+              <div>
+                <h5 class="text-green-800 font-semibold m-0 mb-1">Cita Confirmada</h5>
+                <p class="text-green-700 m-0 text-sm">Esta cita ya está confirmada y programada. Puedes marcarla como completada una vez finalizado el servicio o cancelarla si es necesario.</p>
+              </div>
+            </div>
           </div>
-          <div *ngIf="citaDetails.status === 'cancelled'" class="p-3 bg-red-50 border border-red-200 rounded">
-            <i class="pi pi-times-circle text-red-600 mr-2"></i>
-            <span class="text-red-700">Esta cita fue cancelada. No hay acciones disponibles.</span>
+
+          <div *ngIf="citaDetails.status === 'cancelled'" class="alert alert-danger">
+            <div class="flex align-items-start gap-3">
+              <i class="pi pi-times-circle text-lg text-red-600 mt-1"></i>
+              <div>
+                <h5 class="text-red-800 font-semibold m-0 mb-1">Cita Cancelada</h5>
+                <p class="text-red-700 m-0 text-sm">Esta cita fue cancelada. No hay acciones adicionales disponibles.</p>
+              </div>
+            </div>
           </div>
-          <div *ngIf="citaDetails.status === 'completed'" class="p-3 bg-blue-50 border border-blue-200 rounded">
-            <i class="pi pi-flag text-blue-600 mr-2"></i>
-            <span class="text-blue-700">Esta cita fue completada exitosamente.</span>
+
+          <div *ngIf="citaDetails.status === 'completed'" class="alert alert-info">
+            <div class="flex align-items-start gap-3">
+              <i class="pi pi-flag text-lg text-blue-600 mt-1"></i>
+              <div>
+                <h5 class="text-blue-800 font-semibold m-0 mb-1">Cita Completada</h5>
+                <p class="text-blue-700 m-0 text-sm">Esta cita fue completada exitosamente. El servicio ha sido finalizado.</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Botones de acción -->
-        <div class="action-buttons-grid" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <!-- Botón Confirmar - Solo para citas pendientes -->
-          <p-button *ngIf="citaDetails.status === 'pending'"
-            label="Confirmar Cita"
-            severity="success"
-            icon="pi pi-check"
-            (onClick)="confirmarCitaFromDetails()"
-            class="flex-1"
-            pTooltip="Asignar fecha y hora específica">
-          </p-button>
+        <div class="action-buttons-container">
+          <div class="flex flex-wrap gap-3" *ngIf="citaDetails.status === 'pending' || citaDetails.status === 'confirmed'">
+            <!-- Botón Confirmar - Solo para citas pendientes -->
+            <p-button *ngIf="citaDetails.status === 'pending'"
+              label="Confirmar Cita"
+              severity="success"
+              icon="pi pi-check"
+              (onClick)="confirmarCitaFromDetails()"
+              class="flex-auto action-button"
+              pTooltip="Asignar fecha y hora específica">
+            </p-button>
 
-          <!-- Botón Marcar como Completada - Solo para citas confirmadas -->
-          <p-button *ngIf="citaDetails.status === 'confirmed'"
-            label="Marcar como Completada"
-            severity="info"
-            icon="pi pi-flag"
-            (onClick)="marcarComoCompletadaFromDetails()"
-            class="flex-1"
-            pTooltip="Marcar esta cita como completada">
-          </p-button>
+            <!-- Botón Marcar como Completada - Solo para citas confirmadas -->
+            <p-button *ngIf="citaDetails.status === 'confirmed'"
+              label="Marcar como Completada"
+              severity="info"
+              icon="pi pi-flag"
+              (onClick)="marcarComoCompletadaFromDetails()"
+              class="flex-auto action-button"
+              pTooltip="Marcar esta cita como completada">
+            </p-button>
 
-          <!-- Botón Cancelar - Solo para citas pendientes o confirmadas -->
-          <p-button *ngIf="citaDetails.status === 'pending' || citaDetails.status === 'confirmed'"
-            label="Cancelar Cita"
-            severity="danger"
-            icon="pi pi-times"
-            (onClick)="cancelarCitaFromDetails()"
-            class="flex-1"
-            pTooltip="Cancelar esta cita definitivamente">
-          </p-button>
+            <!-- Botón Cancelar - Solo para citas pendientes o confirmadas -->
+            <p-button *ngIf="citaDetails.status === 'pending' || citaDetails.status === 'confirmed'"
+              label="Cancelar Cita"
+              severity="danger"
+              icon="pi pi-times"
+              (onClick)="cancelarCitaFromDetails()"
+              class="flex-auto action-button"
+              pTooltip="Cancelar esta cita definitivamente">
+            </p-button>
+          </div>
 
           <!-- Mensaje cuando no hay acciones disponibles -->
           <div *ngIf="citaDetails.status === 'cancelled' || citaDetails.status === 'completed'"
-            class="w-full text-center p-3 bg-gray-50 border border-gray-200 rounded">
-            <span class="text-gray-600">No hay acciones disponibles para esta cita.</span>
+            class="no-actions-available">
+            <div class="text-center p-4 bg-gray-50 border border-gray-200 border-round">
+              <i class="pi pi-lock text-2xl text-gray-400 mb-2"></i>
+              <p class="text-gray-600 m-0">No hay acciones disponibles para esta cita.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="dialog-footer" style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e5e7eb;">
-      <div class="flex justify-content-end">
-        <p-button label="Cerrar" severity="secondary" (onClick)="showDetailsDialog = false">
+    <ng-template pTemplate="footer">
+      <div class="flex justify-content-end gap-2 pt-3 border-top-1 border-gray-200">
+        <p-button
+          label="Cerrar"
+          severity="secondary"
+          icon="pi pi-times"
+          (onClick)="showDetailsDialog = false">
         </p-button>
       </div>
-    </div>
+    </ng-template>
   </p-dialog>
 
   <!-- Toast para mensajes -->
@@ -254,4 +367,4 @@
       </p-button>
     </div>
   </p-dialog>
-</div>
+

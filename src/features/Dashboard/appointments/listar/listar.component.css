@@ -1,0 +1,173 @@
+/* Estilos para el modal de detalles de citas */
+::ng-deep .appointment-details-dialog .p-dialog-content {
+  padding: 1.5rem;
+}
+
+::ng-deep .appointment-details-dialog .p-dialog-header {
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Contenido del modal */
+.appointment-details-content {
+  color: #374151;
+}
+
+/* Secciones de información */
+.info-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-header {
+  border-bottom: 2px solid #f3f4f6;
+  padding-bottom: 0.5rem;
+}
+
+/* Elementos de información */
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: #111827;
+  word-break: break-word;
+}
+
+/* Alertas de estado */
+.status-alert {
+  margin-bottom: 1rem;
+}
+
+.alert {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border-width: 1px;
+}
+
+.alert-warning {
+  background-color: #fef3c7;
+  border-color: #fcd34d;
+}
+
+.alert-success {
+  background-color: #d1fae5;
+  border-color: #6ee7b7;
+}
+
+.alert-danger {
+  background-color: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.alert-info {
+  background-color: #dbeafe;
+  border-color: #93c5fd;
+}
+
+/* Contenedor de botones de acción */
+.action-buttons-container {
+  margin-top: 1rem;
+}
+
+.action-button {
+  min-width: 140px;
+}
+
+/* Mensaje cuando no hay acciones */
+.no-actions-available {
+  margin-top: 1rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  ::ng-deep .appointment-details-dialog .p-dialog {
+    width: 95vw !important;
+    margin: 0.5rem;
+  }
+
+  ::ng-deep .appointment-details-dialog .p-dialog-content {
+    padding: 1rem;
+  }
+
+  ::ng-deep .appointment-details-dialog .p-dialog-header {
+    padding: 1rem;
+  }
+
+  .action-button {
+    min-width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .info-item {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Animaciones suaves */
+.info-section {
+  transition: all 0.2s ease-in-out;
+}
+
+.alert {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mejoras en los enlaces */
+.info-value a {
+  transition: all 0.2s ease-in-out;
+}
+
+.info-value a:hover {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
+/* Estilos para el botón de cerrar en el footer */
+::ng-deep .appointment-details-dialog .p-dialog-footer {
+  padding: 1rem 1.5rem;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Espaciado mejorado para el grid */
+.grid {
+  margin: 0;
+}
+
+.grid > .col-12,
+.grid > .col-6 {
+  padding: 0.5rem;
+}
+
+/* Estilo para iconos en secciones */
+.section-header i {
+  font-size: 1.1rem;
+}
+
+/* Mejora visual para el estado */
+.info-value .inline-flex {
+  display: inline-flex;
+  align-items: center;
+}
