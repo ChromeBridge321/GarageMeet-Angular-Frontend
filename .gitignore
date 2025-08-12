@@ -64,5 +64,3 @@ deploy.sh
 DEPLOYMENT-GUIDE.md
 .github/workflows/deploy.yml
 .dockerignore
-src/eviroments/environment.prod.ts
-src/eviroments/environment.dev.ts
