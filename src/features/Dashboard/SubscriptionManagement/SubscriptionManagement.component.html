@@ -1,14 +1,9 @@
-<div class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50 xl:mx-70">
+<div class="mx-5 mt-5 lg:mx-20">
   <!-- Page Header -->
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-3xl font-bold text-gray-800">Mi Suscripción</h1>
-    <p-button
-      [routerLink]="['/pricing']"
-      label="Ver Planes"
-      icon="pi pi-eye"
-      severity="secondary"
-      [outlined]="true"
-    ></p-button>
+    <p-button [routerLink]="['/pricing']" label="Ver Planes" icon="pi pi-eye" severity="secondary"
+      [outlined]="true"></p-button>
   </div>
 
   <!-- Loading State -->
@@ -24,18 +19,13 @@
       <p class="text-gray-600 mb-6">
         Suscríbete a uno de nuestros planes para acceder a todas las funcionalidades del dashboard.
       </p>
-      <p-button
-        [routerLink]="['/pricing']"
-        label="Ver Planes Disponibles"
-        icon="pi pi-shopping-cart"
-        severity="success"
-        size="large"
-      ></p-button>
+      <p-button [routerLink]="['/pricing']" label="Ver Planes Disponibles" icon="pi pi-shopping-cart" severity="success"
+        size="large"></p-button>
     </div>
   </div>
 
   <!-- Subscription Details -->
-  <div *ngIf="!loading() && subscriptionStatus()?.has_subscription" class="space-y-6">
+  <div *ngIf="!loading() && subscriptionStatus()?.has_subscription" class="mb-24">
     <!-- Main Subscription Card -->
     <p-card>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -45,10 +35,8 @@
             <h3 class="text-2xl font-bold text-gray-800">
               {{ subscriptionStatus()?.subscription?.plan?.name }}
             </h3>
-            <p-badge
-              [value]="getStatusLabel(subscriptionStatus()?.subscription?.status || '')"
-              [severity]="getStatusBadgeClass(subscriptionStatus()?.subscription?.status || '')"
-            ></p-badge>
+            <p-badge [value]="getStatusLabel(subscriptionStatus()?.subscription?.status || '')"
+              [severity]="getStatusBadgeClass(subscriptionStatus()?.subscription?.status || '')"></p-badge>
           </div>
 
           <p class="text-gray-600 mb-4">
@@ -69,7 +57,7 @@
             <h4 class="font-semibold text-gray-800 mb-2">Características incluidas:</h4>
             <ul class="space-y-2">
               <li *ngFor="let feature of subscriptionStatus()?.subscription?.plan?.features"
-                  class="flex items-center text-gray-700">
+                class="flex items-center text-gray-700">
                 <i class="pi pi-check text-green-500 mr-2"></i>
                 {{ feature }}
               </li>
@@ -85,10 +73,8 @@
           <div class="space-y-3 mb-6">
             <div class="flex justify-between">
               <span class="text-gray-600">Estado:</span>
-              <p-badge
-                [value]="getStatusLabel(subscriptionStatus()?.subscription?.status || '')"
-                [severity]="getStatusBadgeClass(subscriptionStatus()?.subscription?.status || '')"
-              ></p-badge>
+              <p-badge [value]="getStatusLabel(subscriptionStatus()?.subscription?.status || '')"
+                [severity]="getStatusBadgeClass(subscriptionStatus()?.subscription?.status || '')"></p-badge>
             </div>
 
             <div class="flex justify-between">
@@ -101,7 +87,7 @@
             <div class="flex justify-between">
               <span class="text-gray-600">Acceso al dashboard:</span>
               <span [class]="subscriptionStatus()?.can_access_dashboard ? 'text-green-600' : 'text-red-600'"
-                    class="font-medium">
+                class="font-medium">
                 {{ subscriptionStatus()?.can_access_dashboard ? 'Permitido' : 'Restringido' }}
               </span>
             </div>
@@ -109,13 +95,14 @@
 
           <!-- Cancellation Warning -->
           <div *ngIf="subscriptionStatus()?.subscription?.cancel_at_period_end"
-               class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
+            class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-4">
             <div class="flex items-start">
               <i class="pi pi-exclamation-triangle text-orange-500 mr-3 mt-1"></i>
               <div>
                 <h5 class="font-semibold text-orange-800 mb-1">Suscripción cancelada</h5>
                 <p class="text-orange-700 text-sm">
-                  Tu suscripción terminará el {{ formatDate(subscriptionStatus()?.subscription?.current_period_end || '') }}.
+                  Tu suscripción terminará el {{ formatDate(subscriptionStatus()?.subscription?.current_period_end ||
+                  '') }}.
                   Después de esta fecha perderás el acceso a varias funciones del dashboard.
                 </p>
               </div>
@@ -125,39 +112,18 @@
           <!-- Action Buttons -->
           <div class="space-y-3">
             <!-- Cancel Subscription Button -->
-            <p-button
-              *ngIf="!subscriptionStatus()?.subscription?.cancel_at_period_end"
-              label="Cancelar Suscripción"
-              icon="pi pi-times"
-              severity="danger"
-              [outlined]="true"
-              class="w-full"
-              (click)="cancelSubscription()"
-              [disabled]="actionLoading()"
-              [loading]="actionLoading()"
-            ></p-button>
+            <p-button *ngIf="!subscriptionStatus()?.subscription?.cancel_at_period_end" label="Cancelar Suscripción"
+              icon="pi pi-times" severity="danger" [outlined]="true" class="w-full" (click)="cancelSubscription()"
+              [disabled]="actionLoading()" [loading]="actionLoading()"></p-button>
 
             <!-- Resume Subscription Button -->
-            <p-button
-              *ngIf="subscriptionStatus()?.subscription?.cancel_at_period_end"
-              label="Reactivar Suscripción"
-              icon="pi pi-check"
-              severity="success"
-              class="w-full"
-              (click)="resumeSubscription()"
-              [disabled]="actionLoading()"
-              [loading]="actionLoading()"
-            ></p-button>
+            <p-button *ngIf="subscriptionStatus()?.subscription?.cancel_at_period_end" label="Reactivar Suscripción"
+              icon="pi pi-check" severity="success" class="w-full" (click)="resumeSubscription()"
+              [disabled]="actionLoading()" [loading]="actionLoading()"></p-button>
 
             <!-- Change Plan Button -->
-            <p-button
-              [routerLink]="['/pricing']"
-              label="Cambiar Plan"
-              icon="pi pi-refresh"
-              severity="info"
-              [outlined]="true"
-              class="w-full"
-            ></p-button>
+            <p-button [routerLink]="['/pricing']" label="Cambiar Plan" icon="pi pi-refresh" severity="info"
+              [outlined]="true" class="w-full"></p-button>
           </div>
         </div>
       </div>
@@ -183,16 +149,10 @@
 
     <!-- Payment Methods Card -->
     <p-card>
-      <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center justify-between mb-4 ">
         <h3 class="text-xl font-bold text-gray-800">Métodos de Pago</h3>
-        <p-button
-          [routerLink]="['/panel/metodos-pago/listar']"
-          label="Gestionar Métodos de Pago"
-          icon="pi pi-credit-card"
-          severity="secondary"
-          [outlined]="true"
-          size="small"
-        ></p-button>
+        <p-button [routerLink]="['/panel/metodos-pago/listar']" label="Gestionar Métodos de Pago"
+          icon="pi pi-credit-card" severity="secondary" [outlined]="true" size="small"></p-button>
       </div>
 
       <div class="text-gray-600">
@@ -205,8 +165,5 @@
   <p-toast position="top-right"></p-toast>
 
   <!-- Confirmation Dialog -->
-  <p-confirmDialog
-    [style]="{ width: '90vw', maxWidth: '500px' }"
-    [baseZIndex]="10000"
-  ></p-confirmDialog>
+  <p-confirmDialog [style]="{ width: '90vw', maxWidth: '500px' }" [baseZIndex]="10000"></p-confirmDialog>
 </div>

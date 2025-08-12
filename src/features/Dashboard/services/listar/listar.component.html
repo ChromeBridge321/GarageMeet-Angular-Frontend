@@ -136,35 +136,6 @@
           placeholder="Ej: Cambio de aceite, Balanceo de llantas..."
           class="w-full" />
       </div>
-
-      <div class="form-group">
-        <label for="description">Descripción</label>
-        <textarea
-          id="description"
-          pInputTextarea
-          [(ngModel)]="serviceForm.description"
-          name="description"
-          rows="3"
-          placeholder="Describe el servicio que ofreces..."
-          class="w-full">
-        </textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="price">Precio (opcional)</label>
-        <p-inputNumber
-          id="price"
-          [(ngModel)]="serviceForm.price"
-          name="price"
-          mode="currency"
-          currency="USD"
-          locale="en-US"
-          [min]="0"
-          [maxFractionDigits]="2"
-          placeholder="0.00"
-          class="w-full">
-        </p-inputNumber>
-      </div>
     </form>
   </div>
 

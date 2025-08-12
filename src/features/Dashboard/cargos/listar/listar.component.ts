@@ -136,7 +136,6 @@ export class ListarComponent implements OnInit {
       this.showErrorMessage('Necesitas una suscripción activa para eliminar cargos');
       return;
     }
-
     this.confirmationService.confirm({
       message: '¿Está seguro de que desea eliminar este cargo?',
       header: 'Confirmar eliminación',
