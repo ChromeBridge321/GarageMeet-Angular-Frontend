@@ -66,3 +66,5 @@ DEPLOYMENT-GUIDE.md
 .dockerignore
 TROUBLESHOOTING-BUILD.md
 SOLUCION-ERROR-BUILD.md
+ArvhicosExtra/Dockerfile
+ArvhicosExtra/DEPLOY.md
