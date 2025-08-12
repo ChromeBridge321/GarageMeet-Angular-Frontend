@@ -10,6 +10,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { MenuModule } from 'primeng/menu';
 import { Toast } from 'primeng/toast';
 import { TieredMenu } from 'primeng/tieredmenu';
+import { Menu } from 'primeng/menu';
 @Component({
   selector: 'app-panel',
   imports: [DrawerModule,
@@ -18,7 +19,7 @@ import { TieredMenu } from 'primeng/tieredmenu';
     CommonModule,
     RouterOutlet,
     RouterLink,
-    MenuModule,
+    Menu,
     Toast,
     TieredMenu
   ],
@@ -73,111 +74,87 @@ export class PanelComponent implements OnInit {
     ];
     this.itemsMenu = [
       {
+        separator: true
+      },
+      {
         label: 'Citas',
         icon: 'pi pi-calendar',
-        items: [
-          {
-            label: 'Administrar Citas',
-            icon: 'pi pi-calendar',
-            routerLink: '/panel/citas',
-          }
-        ]
+        routerLink: '/panel/citas',
+
+      },
+      {
+        separator: true
       },
       {
         label: 'Cargos',
         icon: 'pi pi-briefcase',
         routerLink: './cargos',
-        items: [
-          {
-            label: 'Listado',
-            icon: 'pi pi-align-justify',
-            routerLink: './cargos',
-          }
-        ]
+
+      },
+      {
+        separator: true
       },
       {
         label: 'Empleados',
         icon: 'pi pi-users',
-        items: [
-          {
-            label: 'Listado',
-            icon: 'pi pi-align-justify',
-            routerLink: './empleados',
-          },
-          {
-            label: 'Registrar',
-            icon: 'pi pi-pen-to-square',
-            routerLink: './empleados/crear',
-          },
-        ]
+        routerLink: './empleados',
+      },
+      {
+        separator: true
       },
       {
         label: 'Clientes',
         icon: 'pi pi-user',
-        items: [
-          {
-            label: 'Listado',
-            icon: 'pi pi-align-justify',
-            routerLink: './clientes',
-          },
-          {
-            label: 'Registrar',
-            icon: 'pi pi-pen-to-square',
-            routerLink: './clientes/crear',
-          },
-          {
-            label: 'Vehiculos',
-            icon: 'pi pi-car',
-            routerLink: './clientes/vehiculos',
-          },
-        ]
+        routerLink: './clientes',
+
+      },
+      {
+        separator: true
+      },
+      {
+        label: 'Vehiculos',
+        icon: 'pi pi-car',
+        routerLink: './clientes/vehiculos',
+      },
+      {
+        separator: true
       },
 
       {
         label: 'Tipos de Pago',
         icon: 'pi pi-money-bill',
-        items: [
-          {
-            label: 'Listado',
-            icon: 'pi pi-align-justify',
-            routerLink: './tipos-pago',
-          }
-        ]
+        routerLink: './tipos-pago',
+
+      },
+      {
+        separator: true
       },
       {
         label: 'Piezas',
         icon: 'pi pi-cog',
-        items: [
-          {
-            label: 'Gestión de Piezas',
-            icon: 'pi pi-list',
-            routerLink: './piezas',
-          }
-        ]
+        routerLink: './piezas',
+
+      },
+      {
+        separator: true
       },
       {
         label: 'Servicios',
         icon: 'pi pi-wrench',
-        items: [
-          {
-            label: 'Gestión de Servicios',
-            icon: 'pi pi-list',
-            routerLink: './servicios',
-          }
-        ]
+        routerLink: './servicios',
+
+      },
+      {
+        separator: true
       },
       {
         label: 'Ventas',
         icon: 'pi pi-shopping-cart',
-        items: [
-          {
-            label: 'Gestión de Ventas',
-            icon: 'pi pi-list',
-            routerLink: './ventas',
-          }
-        ]
-      }
-
+        routerLink: './ventas',
+      },
+      {
+        separator: true
+      },
     ]
   }
 }

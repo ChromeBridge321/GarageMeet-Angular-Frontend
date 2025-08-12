@@ -14,7 +14,7 @@
 
   <div class="dashboard-card-content">
     <!-- Barra de control -->
-    <div class="flex justify-content-between align-items-center mb-4">
+    <div class="flex items-center justify-content-between align-items-center mb-4">
       <div class="flex align-items-center gap-3">
         <p-button
           icon="pi pi-filter-slash"
@@ -25,7 +25,7 @@
           pTooltip="Limpiar todos los filtros aplicados">
         </p-button>
       </div>
-      <div class="flex align-items-center gap-2">
+      <div class="ps-4 flex align-items-center gap-2">
         <span class="text-sm text-gray-600">{{ paymentTypes.length }} tipo(s) de pago total(es)</span>
       </div>
     </div>
@@ -37,7 +37,8 @@
       [loading]="loading"
       [paginator]="true"
       [rows]="10"
-      [rowsPerPageOptions]="[5, 10, 20, 50]"
+      [rowsPerPageOptions]="[5, 10]"
+      paginatorDropdownAppendTo="body"
       [globalFilterFields]="['name']"
       #dt1>
       <ng-template #header>
