@@ -1,16 +1,13 @@
 <!-- Crear Cliente Form -->
-<form class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50" [formGroup]="saleeForm" (ngSubmit)="createEmployee(autocompleteServices.value, autocompletePieces.value)">
+<form class="mx-5 mt-5" [formGroup]="saleeForm" (ngSubmit)="createEmployee(autocompleteServices.value, autocompletePieces.value)">
 
   <!-- Page Title -->
   <div class="font-bold flex text-4xl justify-center items-center mt-5">
     <h1>Registrar Venta</h1>
   </div>
-  <div class="w-full flex flex-row mt-2">
-    <!-- Personal Information Row -->
-    <!-- paymentType Information Row -->
-    <!-- paymentType Selection -->
-    <div class=" w-1/2">
-      <label for="paymentTypes_id">Tipo de pago</label>
+  <div class="w-full flex flex-col md:flex-row mt-2">
+    <div class="w-full md:w-1/2">
+      <label class="font-bold" for="paymentTypes_id">Tipo de pago</label>
       <p-select fluid="true" [options]="paymentTypes" optionLabel="name" [filter]="true"
         filterBy="name" [showClear]="true" placeholder="Seleccionar tipo de pago" formControlName="payment_types_id" optionValue="payment_types_id">
         <ng-template let-paymentType #item>
@@ -20,11 +17,11 @@
         </ng-template>
       </p-select>
     </div>
-    <div class="w-1/30"></div>
+    <div class="hidden md:block w-1/30"></div>
     <!-- employee Information Row -->
     <!-- employee Selection -->
-    <div class="w-1/2">
-      <label for="employees_id">Empleado</label>
+    <div class="w-full md:w-1/2">
+      <label class="font-bold" for="employees_id">Empleado</label>
       <p-select fluid="true" [options]="employees" optionValue="employees_id" optionLabel="fullName" [filter]="true"
         filterBy="fullName" [showClear]="true" placeholder="Seleccionar empleado" formControlName="employees_id">
         <ng-template let-employee #item>
@@ -38,10 +35,10 @@
     </div>
   </div>
 
-  <div class="w-full flex flex-row mt-2">
+  <div class="w-full flex flex-col md:flex-row mt-2">
     <!-- vehicle Selection -->
-    <div class="w-1/2">
-      <label for="vehicles_id">vehicles</label>
+    <div class="w-full md:w-1/2">
+      <label class="font-bold" for="vehicles_id">Vehiculo</label>
       <p-select fluid="true" [options]="vehicles" optionLabel="clientInfo" optionValue="vehicles_id" [filter]="true"
         filterBy="clientInfo" [showClear]="true" placeholder="Seleccionar vehículo" formControlName="vehicles_id">
         <ng-template let-vehicle #item>
@@ -51,10 +48,10 @@
         </ng-template>
       </p-select>
     </div>
-    <div class="w-1/30"></div>
+    <div class="hidden md:block w-1/30"></div>
     <!-- date Field -->
-    <div class="w-1/2">
-      <label for="date">Fecha</label>
+    <div class="w-full md:w-1/2">
+      <label class="font-bold" for="date">Fecha</label>
       <p-datepicker [showButtonBar]="true" placeholder="Año-Mes-Día" dateFormat="yy-mm-dd" #datepicker fluid="true" formControlName="date" />
     </div>
   </div>
@@ -88,16 +85,15 @@
   </div>
 
 
-  <div class=" w-full flex flex-row mt-2">
+  <div class=" w-full md:flex md:flex-row mt-2">
     <!-- price Field -->
-    <div class="w-1/2">
+    <div class="w-full md:w-1/2">
       <label class=" font-bold" for="price">Precio</label>
       <input type="text" class="w-full" pInputText id="price" autocomplete="off" formControlName="price" />
-
     </div>
-    <div class="w-1/30"></div>
+    <div class="hidden md:block w-1/30"></div>
     <!-- tax Field -->
-    <div class="w-1/2">
+    <div class="hidden md:block w-1/2">
     </div>
   </div>
 

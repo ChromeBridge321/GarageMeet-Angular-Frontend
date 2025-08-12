@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { MenuModule } from 'primeng/menu';
 import { Toast } from 'primeng/toast';
+import { TieredMenu } from 'primeng/tieredmenu';
 @Component({
   selector: 'app-panel',
   imports: [DrawerModule,
@@ -19,6 +20,7 @@ import { Toast } from 'primeng/toast';
     RouterLink,
     MenuModule,
     Toast,
+    TieredMenu
   ],
   templateUrl: './panel.component.html',
   styleUrl: './panel.component.css',
@@ -46,19 +48,30 @@ export class PanelComponent implements OnInit {
     });
 
     this.items = [
-    ];
-    this.itemsMenu = [
       {
         label: 'Taller',
-        icon: 'pi pi-warehouse',
-        items: [
-          {
-            label: 'Información',
-            icon: 'pi pi-file-edit',
-            routerLink: './taller',
-          },
-        ]
+        routerLink: './taller'
       },
+      {
+        label: 'Administrar Suscripción',
+        routerLink: '/panel/suscripcion',
+      },
+
+      {
+        label: 'Listado de Metodos de Pago',
+        routerLink: '/panel/metodos-pago/listar',
+      },
+      {
+        separator: true
+      },
+      {
+        label: 'Cerrar Sesión',
+        icon: 'pi pi-sign-out',
+        command: () => this.authService.logout()
+      },
+
+    ];
+    this.itemsMenu = [
       {
         label: 'Citas',
         icon: 'pi pi-calendar',
@@ -163,46 +176,7 @@ export class PanelComponent implements OnInit {
             routerLink: './ventas',
           }
         ]
-      },
-      {
-        label: 'Suscripción',
-        icon: 'pi pi-bell',
-        items: [
-          {
-            label: 'Administrar Suscripción',
-            icon: 'pi pi-cog',
-            routerLink: '/panel/suscripcion',
-          }
-        ]
-      },
-      {
-        label: 'Metodos de Pago',
-        icon: 'pi pi-credit-card',
-        items: [
-          {
-            label: 'Agregar Metodo de Pago',
-            icon: 'pi pi-plus',
-            routerLink: '/panel/metodos-pago/agregar',
-          },
-          {
-            label: 'Listado de Metodos de Pago',
-            icon: 'pi pi-list',
-            routerLink: '/panel/metodos-pago/listar',
-          }
-        ]
-      },
-      {
-        label: 'Cerrar Sesión',
-        icon: 'pi pi-sign-out',
-        styleClass: 'text-red-500',
-        items: [
-          {
-            label: 'Cerrar Sesión',
-            icon: 'pi pi-sign-out',
-            command: () => this.authService.logout()
-          }
-        ]
-      },
+      }
 
     ]
   }
