@@ -57,7 +57,7 @@ export class SalesService {
   }
 
   create(sale: CreateSale) {
-    return this.http.post<CreateSale>(`${this.baseUrl}/create`, sale, { headers: this.getHeaders() });
+    return this.http.post<CreateSale>(`${this.baseUrl}/crear`, sale, { headers: this.getHeaders() });
   }
 
   getSaleById(services_sales_id: number, mechanical_workshops_id: number) {
