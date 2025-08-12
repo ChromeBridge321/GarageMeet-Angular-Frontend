@@ -42,6 +42,11 @@
             class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-blue-500/25">
             Comenzar ahora
           </button>
+          <a [href]="downloadUrl" download="GarageMeetMobile.apk"
+            class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/25 flex items-center justify-center gap-2">
+            <i class="pi pi-download text-lg"></i>
+            Descargar App
+          </a>
         </div>
       </div>
     </div>
@@ -378,6 +383,90 @@
                 <p class="text-blue-300 font-medium">Filosofía GarageMeet</p>
                 <p class="text-blue-400/60 text-sm">Excelencia en cada detalle</p>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Descarga la App Section -->
+  <section class="relative bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-900 py-16 sm:py-20 lg:py-32 overflow-hidden">
+    <div
+      class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-900/20 via-zinc-900/50 to-zinc-950">
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <div class="space-y-6">
+          <span
+            class="inline-block px-6 py-3 bg-green-500/10 text-green-400 rounded-full text-lg font-medium border border-green-500/20">
+            <i class="pi pi-mobile text-xl mr-2"></i>
+            Aplicación Móvil
+          </span>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight">
+            Descarga nuestra
+            <span class="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">App Móvil</span>
+          </h2>
+
+          <p class="text-lg sm:text-xl lg:text-2xl max-w-3xl mx-auto text-gray-300 leading-relaxed">
+            Lleva GarageMeet contigo a donde vayas. Gestiona tu taller desde tu dispositivo móvil
+            con nuestra aplicación nativa para Android.
+          </p>
+        </div>
+
+        <div class="mt-12 flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a [href]="downloadUrl" download="GarageMeetMobile.apk"
+            class="group relative overflow-hidden bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold px-10 py-5 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-green-500/25 flex items-center gap-4">
+            <div class="absolute inset-0 bg-gradient-to-r from-green-400/20 to-green-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <i class="pi pi-download text-2xl relative z-10"></i>
+            <div class="relative z-10 text-left">
+              <div class="text-xl font-bold">Descargar APK</div>
+              <div class="text-green-100 text-sm">Para dispositivos Android</div>
+            </div>
+          </a>
+
+          <div class="text-center sm:text-left space-y-2">
+            <p class="text-gray-400 text-sm">
+              <i class="pi pi-info-circle mr-2"></i>
+              Versión actual: 1.0.0
+            </p>
+            <p class="text-gray-400 text-sm">
+              <i class="pi pi-shield mr-2"></i>
+              Aplicación segura y verificada
+            </p>
+          </div>
+        </div>
+
+        <!-- Features de la app móvil -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="group">
+            <div class="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 border border-zinc-700/50 hover:border-green-500/30 transition-all duration-500 hover:transform hover:-translate-y-2">
+              <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <i class="pi pi-calendar text-white text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Gestión de Citas</h3>
+              <p class="text-gray-300">Administra las citas de tu taller desde cualquier lugar</p>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 border border-zinc-700/50 hover:border-green-500/30 transition-all duration-500 hover:transform hover:-translate-y-2">
+              <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <i class="pi pi-bell text-white text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Notificaciones</h3>
+              <p class="text-gray-300">Recibe alertas instantáneas sobre nuevas citas y updates</p>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="bg-gradient-to-br from-zinc-800/50 to-zinc-900/50 backdrop-blur-sm rounded-2xl p-6 border border-zinc-700/50 hover:border-green-500/30 transition-all duration-500 hover:transform hover:-translate-y-2">
+              <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <i class="pi pi-sync text-white text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-3">Sincronización</h3>
+              <p class="text-gray-300">Datos sincronizados en tiempo real con la plataforma web</p>
             </div>
           </div>
         </div>

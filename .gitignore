@@ -64,3 +64,5 @@ deploy.sh
 DEPLOYMENT-GUIDE.md
 .github/workflows/deploy.yml
 .dockerignore
+TROUBLESHOOTING-BUILD.md
+SOLUCION-ERROR-BUILD.md
