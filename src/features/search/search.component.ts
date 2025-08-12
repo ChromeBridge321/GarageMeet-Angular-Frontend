@@ -18,7 +18,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { CreaCita } from '../Dashboard/appointments/models/citas.model';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-
+import { Button } from 'primeng/button';
 interface AutoCompleteCompleteEvent {
   originalEvent: Event;
   query: string;
@@ -26,7 +26,7 @@ interface AutoCompleteCompleteEvent {
 
 @Component({
   selector: 'app-search',
-  imports: [CommonModule, NavComponent, ButtonModule, ReactiveFormsModule, AutoCompleteModule, FormsModule, ToastModule, DialogModule, InputTextModule, InputTextarea, ProgressSpinnerModule],
+  imports: [CommonModule, NavComponent, ButtonModule, ReactiveFormsModule, AutoCompleteModule, FormsModule, ToastModule, DialogModule, InputTextModule, InputTextarea, ProgressSpinnerModule, Button],
   templateUrl: './search.component.html',
   styleUrl: 'search.component.css',
   providers: [MessageService]

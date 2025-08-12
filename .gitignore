@@ -40,3 +40,29 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Electron
+/dist-electron
+/electron-assets
+*.log
+test-docker.ps1
+start-electron.bat
+DOMAIN-CONFIG.md
+ELECTRON-README.md
+main.js
+package-lock.json
+package.json
+package-lock.json
+package.json
+RESUMEN-DOCKER-COOLIFY.md
+server-setup.sh
+build-desktop.bat
+bundle-analysis.json
+COOLIFY-CONFIG.md
+deploy-test.sh
+deploy.sh
+DEPLOYMENT-GUIDE.md
+.github/workflows/deploy.yml
+.dockerignore
+src/eviroments/environment.prod.ts
+src/eviroments/environment.dev.ts

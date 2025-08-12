@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  garagemeet-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        API_URL: https://api.garagemeet.site/api
+        DOMAIN_URL: https://api.garagemeet.site
+        STRIPE_KEY: pk_test_51RqxPyPlCUIY9G9QSqCypLJICRQgY5k6iP1WD5Po8X4OYgsMwfif8wL5rcW76pubYFx630gNtlW686pqB8yK2wYj00TxtibWDq
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+      - API_URL=https://api.garagemeet.site/api
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+# Para desarrollo local con backend también:
+  # garagemeet-backend:
+  #   image: php:8.2-apache
+  #   ports:
+  #     - "8000:80"
+  #   volumes:
+  #     - ../GarageMeet-Mechanicals-Service:/var/www/html
+  #   depends_on:
+  #     - mysql
+  #   environment:
+  #     - DB_HOST=mysql
+  #     - DB_DATABASE=garagemeet
+  #     - DB_USERNAME=root
+  #     - DB_PASSWORD=password
+
+  # mysql:
+  #   image: mysql:8.0
+  #   ports:
+  #     - "3306:3306"
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=password
+  #     - MYSQL_DATABASE=garagemeet
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+
+# volumes:
+#   mysql_data:
