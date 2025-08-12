@@ -43,20 +43,19 @@ Thumbs.db
 
 # Electron
 /dist-electron
+/dist-desktop
+/dist-installer
 /electron-assets
 *.log
 test-docker.ps1
-start-electron.bat
 DOMAIN-CONFIG.md
 ELECTRON-README.md
-main.js
 package-lock.json
 package.json
 package-lock.json
 package.json
 RESUMEN-DOCKER-COOLIFY.md
 server-setup.sh
-build-desktop.bat
 bundle-analysis.json
 COOLIFY-CONFIG.md
 deploy-test.sh

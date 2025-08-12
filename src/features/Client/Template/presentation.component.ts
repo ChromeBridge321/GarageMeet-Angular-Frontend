@@ -12,4 +12,6 @@ import { environment } from '../../../eviroments/environment.dev';
 export class PresentationComponent {
   // URL del backend para descargar el APK (desde environment)
   public readonly downloadUrl = environment.downloadUrl;
+  // URL para descargar la aplicación de escritorio
+  public readonly desktopDownloadUrl = 'https://github.com/ChromeBridge321/GarageMeet-Angular-Frontend/releases/download/v1.0.0/GarageMeet-Desktop-v1.0.0.zip';
 }
