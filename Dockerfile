@@ -2,8 +2,8 @@
 FROM node:18-alpine AS build
 
 # Variables de entorno para el build
-ARG API_URL=https://garagemeet.site/api
-ARG DOMAIN_URL=https://garagemeet.site
+ARG API_URL=https://api.garagemeet.site/api
+ARG DOMAIN_URL=https://api.garagemeet.site
 ARG STRIPE_KEY=pk_test_51RqxPyPlCUIY9G9QSqCypLJICRQgY5k6iP1WD5Po8X4OYgsMwfif8wL5rcW76pubYFx630gNtlW686pqB8yK2wYj00TxtibWDq
 
 # Establecer directorio de trabajo
