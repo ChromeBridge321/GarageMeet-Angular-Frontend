@@ -46,8 +46,10 @@
         <tr>
           <th>N.</th>
           <th pSortableColumn="date">
-            Fecha
-            <p-sortIcon field="date"></p-sortIcon>
+            <div class="flex flex-column gap-2">
+              <span>Fecha</span>
+              <p-columnFilter type="date" field="date" display="menu" class="ml-auto"></p-columnFilter>
+            </div>
           </th>
           <th pSortableColumn="price">
             Total
@@ -65,10 +67,7 @@
         </tr>
         <tr>
           <th></th>
-          <th>
-            <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'date', 'contains')"
-                   placeholder="Filtrar por fecha" class="w-full" />
-          </th>
+          <th></th>
           <th>
             <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'price', 'contains')"
                    placeholder="Filtrar por total" class="w-full" />
