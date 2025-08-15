@@ -6,7 +6,8 @@
       pRipple
       [routerLink]="canModifyData ? ['/panel/empleados/crear'] : null"
       (click)="!canModifyData && showSubscriptionError()"
-      label="Crear Empleado"
+      label="Nuevo Empleado"
+      icon="pi pi-plus"
       [disabled]="!canModifyData"
       pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear empleados' : 'Crear un nuevo empleado'}}"
       tooltipPosition="top"

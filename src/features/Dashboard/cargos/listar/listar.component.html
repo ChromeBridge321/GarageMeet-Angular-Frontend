@@ -5,7 +5,8 @@
       type="button"
       pRipple
       (click)="showDialog(false)"
-      label="Crear Cargo"
+      label="Nuevo Cargo"
+      icon="pi pi-plus"
       [disabled]="!canModifyData"
       pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear cargos' : 'Crear un nuevo cargo'}}"
       tooltipPosition="top"
@@ -73,19 +74,17 @@
                 icon="pi pi-pencil"
                 severity="secondary"
                 size="small"
-                [text]="true"
                 [disabled]="!canModifyData"
                 pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para editar' : 'Editar Cargo'}}"
                 tooltipPosition="top"
               />
               <p-button
-                (click)="delete(position.positions_id)"
+                (click)="deletePosition(position)"
                 type="button"
                 pRipple
                 icon="pi pi-trash"
                 severity="danger"
                 size="small"
-                [text]="true"
                 [disabled]="!canModifyData"
                 pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para eliminar' : 'Eliminar Cargo'}}"
                 tooltipPosition="top"
@@ -115,7 +114,4 @@
       </div>
     </form>
   </p-dialog>
-  <!-- Toast Messages -->
-  <p-confirmDialog />
-  <p-toast />
 </div>

@@ -5,7 +5,8 @@
       type="button"
       pRipple
       (click)="showDialog(false)"
-      label="Crear Tipo de Pago"
+      label="Nuevo Tipo de Pago"
+      icon="pi pi-plus"
       [disabled]="!canModifyData"
       pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear tipos de pago' : 'Crear un nuevo tipo de pago'}}"
       tooltipPosition="top"

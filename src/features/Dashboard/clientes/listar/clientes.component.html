@@ -6,7 +6,8 @@
       pRipple
       [routerLink]="canModifyData ? ['/panel/clientes/crear'] : null"
       (click)="!canModifyData && showSubscriptionError()"
-      label="Crear Cliente"
+      label="Nuevo Cliente"
+      icon="pi pi-plus"
       [disabled]="!canModifyData"
       pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear clientes' : 'Crear un nuevo cliente'}}"
       tooltipPosition="top"

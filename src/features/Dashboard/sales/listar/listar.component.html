@@ -6,7 +6,8 @@
       pRipple
       [routerLink]="canModifyData ? ['/panel/ventas/crear'] : null"
       (click)="!canModifyData && showSubscriptionError()"
-      label="Crear Venta"
+      icon="pi pi-plus"
+      label="Nueva Venta"
       [disabled]="!canModifyData"
       pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear ventas' : 'Crear una nueva venta'}}"
       tooltipPosition="top"
@@ -150,7 +151,7 @@
 
   <ng-template pTemplate="header">
     <div class="flex align-items-center gap-3">
-      <div class="bg-green-100 text-green-600 w-10 h-10 flex align-items-center justify-content-center border-round">
+      <div class="bg-green-100 text-green-600 size-auto text-center border-round px-5 py-4 rounded-xl">
         <i class="pi pi-shopping-cart text-xl"></i>
       </div>
       <div>
@@ -203,7 +204,7 @@
       </div>
       <div class="bg-purple-50 border border-purple-200 border-round p-4">
         <div class="flex align-items-center gap-3">
-          <div class="bg-purple-100 text-purple-600 w-12 h-12 flex align-items-center justify-content-center border-round">
+          <div class="bg-purple-100 text-purple-600 size-auto text-center border-round px-5 py-4 rounded-xl">
             <i class="pi pi-user text-xl"></i>
           </div>
           <div>
@@ -224,11 +225,11 @@
           <h4 class="text-lg font-semibold text-gray-800 m-0">Vehículo Atendido</h4>
         </div>
       </div>
-      <div class="bg-orange-50 border border-orange-200 border-round p-4">
-        <div class="grid">
-          <div class="col-12 md:col-8">
-            <div class="flex align-items-center gap-3">
-              <div class="bg-orange-100 text-orange-600 w-12 h-12 flex align-items-center justify-content-center border-round">
+      <div class="bg-orange-50 border border-orange-200 border-round p-4 ">
+        <div class="flex flex-col justify-center items-center md:flex-row">
+          <div class="w-full">
+            <div class="flex w-full">
+              <div class="me-2 bg-orange-100 text-orange-600 size-auto text-center border-round px-5 py-4 rounded-xl">
                 <i class="pi pi-car text-xl"></i>
               </div>
               <div>
@@ -239,7 +240,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12 md:col-4">
+          <div class="w-full pt-4 md:pt-0">
             <div class="info-item">
               <span class="info-label">Placas</span>
               <span class="info-value font-medium text-orange-800">
@@ -263,7 +264,7 @@
       <div class="pieces-container">
         <div class="piece-item" *ngFor="let piece of saleDetails.pieces">
           <div class="flex align-items-center gap-3 p-3 bg-red-50 border border-red-200 border-round">
-            <div class="bg-red-100 text-red-600 w-8 h-8 flex align-items-center justify-content-center border-round">
+            <div class="bg-red-100 text-red-600 size-auto text-center border-round p-3 rounded-xl">
               <i class="pi pi-cog"></i>
             </div>
             <span class="font-medium text-red-800">{{ piece.name }}</span>
@@ -276,14 +277,14 @@
     <div class="info-section" *ngIf="saleDetails.services && saleDetails.services.length > 0">
       <div class="section-header mb-3">
         <div class="flex align-items-center gap-2">
-          <i class="pi pi-wrench text-blue-600"></i>
+          <i class="pi pi-wrench text-blue-600" ></i>
           <h4 class="text-lg font-semibold text-gray-800 m-0">Servicios Realizados</h4>
         </div>
       </div>
       <div class="services-container">
         <div class="service-item" *ngFor="let service of saleDetails.services">
           <div class="flex align-items-center gap-3 p-3 bg-blue-50 border border-blue-200 border-round">
-            <div class="bg-blue-100 text-blue-600 w-8 h-8 flex align-items-center justify-content-center border-round">
+            <div class="bg-blue-100 text-blue-600 size-auto text-center border-round p-3 rounded-xl">
               <i class="pi pi-wrench"></i>
             </div>
             <span class="font-medium text-blue-800">{{ service.name }}</span>

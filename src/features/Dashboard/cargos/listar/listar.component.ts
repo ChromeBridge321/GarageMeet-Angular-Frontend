@@ -15,6 +15,7 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, FormsModule, Validators } 
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialog } from "primeng/confirmdialog";
+import { Position } from '../../empleados/models/empleados.model';
 @Component({
   selector: 'app-listar',
   imports: [TableModule, Button, Dialog, InputTextModule, ReactiveFormsModule, FormsModule, Toast, ConfirmDialog, TooltipModule],
@@ -88,6 +89,7 @@ export class ListarComponent implements OnInit {
         subTitle: 'Registrar un nuevo cargo'
       }
 
+
     }
   }
   listar() {
@@ -115,7 +117,9 @@ export class ListarComponent implements OnInit {
           this.showSuccessMessage('Cargo creado exitosamente');
           this.visible = false;
           this.listar();
-          this.positionForm.reset();
+          this.positionForm.patchValue({
+            name: '',
+          });
         },
         error: (error) => {
           error = error.error.error;
@@ -130,12 +134,8 @@ export class ListarComponent implements OnInit {
     );
   }
 
-  delete(positions_id: number) {
-    // Verificar suscripción antes de eliminar
-    if (!this.subscriptionService.canAccessDashboard()) {
-      this.showErrorMessage('Necesitas una suscripción activa para eliminar cargos');
-      return;
-    }
+  deletePosition(position: Position) {
+
     this.confirmationService.confirm({
       message: '¿Está seguro de que desea eliminar este cargo?',
       header: 'Confirmar eliminación',
@@ -143,9 +143,22 @@ export class ListarComponent implements OnInit {
       acceptLabel: 'Sí, eliminar',
       rejectLabel: 'Cancelar',
       accept: () => {
-        this.cargosService.delete(positions_id).subscribe(() => {
-          this.listar();
-          this.showSuccessMessage('Cargo eliminado con éxito');
+        this.cargosService.delete(position.positions_id).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Éxito',
+              detail: 'Cargo eliminado correctamente'
+            });
+            this.listar();
+          },
+          error: (error) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'No se pudo eliminar el cargo'
+            });
+          }
         });
       }
     });
@@ -173,10 +186,13 @@ export class ListarComponent implements OnInit {
     this.cargosService.update(positionData).subscribe({
       next: () => {
         this.showSuccessMessage('Cargo actualizado exitosamente.');
+
         setTimeout(() => {
           this.visible = false;
           this.listar();
-          this.positionForm.reset();
+          this.positionForm.patchValue({
+            name: '',
+          });
         }, 1000);
       },
       error: (error) => {

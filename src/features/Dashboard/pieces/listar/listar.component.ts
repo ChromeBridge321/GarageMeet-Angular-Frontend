@@ -209,6 +209,8 @@ export class ListarComponent implements OnInit {
       message: `¿Estás seguro de que quieres eliminar la pieza "${piece.name}"?`,
       header: 'Confirmar Eliminación',
       icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Sí, eliminar',
+      rejectLabel: 'Cancelar',
       accept: () => {
         this.piecesService.delete(piece.pieces_id, this.mechanicalWorkshopId!).subscribe({
           next: () => {
