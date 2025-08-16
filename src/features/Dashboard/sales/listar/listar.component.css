@@ -1,0 +1,297 @@
+/* Estilos personalizados para el componente de ventas */
+
+.p-datatable {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  background: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  border: none;
+  padding: 1rem;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.p-datatable .p-datatable-tbody > tr:hover {
+  background: #f8f9fa;
+}
+
+.p-dialog {
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.p-dialog .p-dialog-header {
+  background: #fff;
+  border-bottom: 1px solid #e9ecef;
+  border-radius: 12px 12px 0 0;
+  padding: 1.5rem;
+}
+
+.p-dialog .p-dialog-content {
+  padding: 1.5rem;
+  background: #fff;
+}
+
+.p-dialog .p-dialog-footer {
+  background: #fff;
+  border-top: 1px solid #e9ecef;
+  border-radius: 0 0 12px 12px;
+  padding: 1rem 1.5rem;
+}
+
+.p-button {
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.p-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.p-dropdown, .p-calendar, .p-inputnumber, .p-multiselect {
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.p-dropdown:hover, .p-calendar:hover, .p-inputnumber:hover, .p-multiselect:hover {
+  border-color: #007bff;
+}
+
+.p-dropdown:focus, .p-calendar:focus, .p-inputnumber:focus, .p-multiselect:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.p-inputtext:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* Personalización de la tabla */
+.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+  background: #fafafa;
+}
+
+.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+  background: #fff;
+}
+
+/* Botones de acción */
+.p-button.p-button-text {
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.p-button.p-button-text:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .p-dialog {
+    width: 95vw !important;
+    margin: 1rem;
+  }
+
+  .grid.grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Loading overlay */
+.p-datatable-loading-overlay {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Toast styling */
+.p-toast {
+  z-index: 9999;
+}
+
+/* Form validation styling */
+.ng-invalid.ng-touched {
+  border-color: #dc3545 !important;
+}
+
+.text-red-600 {
+  color: #dc2626;
+  font-size: 0.875rem;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* MultiSelect styling */
+.p-multiselect-panel {
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.p-multiselect-item {
+  padding: 0.75rem 1rem;
+  transition: background-color 0.2s;
+}
+
+.p-multiselect-item:hover {
+  background: #f8f9fa;
+}
+
+.p-multiselect-item.p-highlight {
+  background: #007bff;
+  color: white;
+}
+
+/* Estilos para el modal de detalles de venta */
+::ng-deep .sale-details-dialog .p-dialog-content {
+  padding: 1.5rem;
+}
+
+::ng-deep .sale-details-dialog .p-dialog-header {
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Contenido del modal */
+.sale-details-content {
+  color: #374151;
+}
+
+/* Secciones de información */
+.info-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-header {
+  border-bottom: 2px solid #f3f4f6;
+  padding-bottom: 0.5rem;
+}
+
+/* Elementos de información */
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: #111827;
+  word-break: break-word;
+}
+
+/* Contenedores de piezas y servicios */
+.pieces-container,
+.services-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.piece-item,
+.service-item {
+  transition: transform 0.2s ease-in-out;
+}
+
+.piece-item:hover,
+.service-item:hover {
+  transform: translateX(4px);
+}
+
+/* Grid responsivo */
+.grid {
+  margin: 0;
+}
+
+.grid > .col-12,
+.grid > .col-6,
+.grid > .col-8,
+.grid > .col-4 {
+  padding: 0.5rem;
+}
+
+/* Animaciones */
+.info-section {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.info-section:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.info-section:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.info-section:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsivo para el modal */
+@media (max-width: 768px) {
+  ::ng-deep .sale-details-dialog .p-dialog {
+    width: 95vw !important;
+    margin: 0.5rem;
+  }
+
+  ::ng-deep .sale-details-dialog .p-dialog-content {
+    padding: 1rem;
+  }
+
+  ::ng-deep .sale-details-dialog .p-dialog-header {
+    padding: 1rem;
+  }
+
+  .pieces-container,
+  .services-container {
+    grid-template-columns: 1fr;
+  }
+
+  .info-item {
+    margin-bottom: 1rem;
+  }
+}
+
+/* Mejoras en el footer del modal */
+::ng-deep .sale-details-dialog .p-dialog-footer {
+  padding: 1rem 1.5rem;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* Estilos para iconos en secciones */
+.section-header i {
+  font-size: 1.1rem;
+}

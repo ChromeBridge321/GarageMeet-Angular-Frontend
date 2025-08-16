@@ -1,23 +1,24 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { AuthResponse } from '../models/authResponse';
+import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // Signals para estado reactivo (Angular 17+)
-  private readonly authState = signal<AuthResponse | null>(null);  public token = computed(() => {
+  router = inject(Router);
+  private readonly authState = signal<AuthResponse | null>(null);
+   public token = computed(() => {
     // Prefer token in authState, fallback to extract from stored response
     if (this.authState()?.access_token) {
       return this.authState()?.access_token;
     }
-
     // Extract token from stored AuthResponse
     const storedResponse = this.getSecureStorage('authResponse');
     return storedResponse?.access_token || sessionStorage.getItem('authToken');
   });
   public isLoggedIn = computed(() => !!this.token());
-  public currentUser = computed(() => this.authState());
-
+  //public currentUser = computed(() => this.authState());
   // Computed signals para acceso reactivo a datos específicos
   public user = computed(() => this.getUserData());
   public mechanicalWorkshop = computed(() => this.getMechanicalWorkshopData());
@@ -31,16 +32,6 @@ export class AuthService {
   // Método para obtener los datos de autenticación completos
   public getAuthData(): AuthResponse | null {
     return this.authState();
-  }
-
-  // Método para obtener información específica del token
-  public getTokenInfo(): { token: string | null; type: string | null; expiresIn: number | null } {
-    const authData = this.getAuthData();
-    return {
-      token: authData?.access_token || null,
-      type: authData?.token_type || null,
-      expiresIn: authData?.expires_in || null
-    };
   }
 
   // Método para verificar si el token ha expirado (si tienes expires_in)
@@ -67,6 +58,12 @@ export class AuthService {
 
     // Fallback a almacenamiento (ya filtrado)
     return this.getSecureStorage('userData');
+  }
+
+  // Método para obtener el tipo de usuario
+  public getUserType(): string | null {
+    const authStateUser = this.authState()?.user;
+    return authStateUser?.type_user || null;
   }
 
   // Método para obtener datos del taller mecánico
@@ -116,7 +113,6 @@ export class AuthService {
   }  // Métodos públicos
   setAuthState(response: AuthResponse): void {
     // Store full response in memory
-    console.log('Setting auth state:', response);
     this.authState.set(response);
 
     // Store the complete AuthResponse in sessionStorage
@@ -147,6 +143,7 @@ export class AuthService {
     this.clearSecureStorage('authResponse');
     this.clearSecureStorage('userData');
     this.clearSecureStorage('mechanicalWorkshopData');
+    this.router.navigate(['/login']);
   }
 
   // Almacenamiento seguro (abstracción)

@@ -1,12 +1,30 @@
 {
   "name": "garage-meet",
   "version": "0.0.0",
+  "description": "GarageMeet - Aplicación de gestión para talleres mecánicos",
+  "author": "GarageMeet Team",
+  "main": "main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "electron": "electron .",
+    "electron-dev": "set NODE_ENV=development && electron .",
+    "electron-pack": "electron-builder",
+    "electron-package": "electron-packager . GarageMeet --platform=win32 --arch=x64 --out=dist-electron --overwrite",
+    "electron-package-clean": "npx electron-packager \"./dist/garage-meet/browser\" \"GarageMeet\" --platform=win32 --arch=x64 --out=dist-desktop --overwrite --app-version=1.0.0 --executable-name=\"GarageMeet\"",
+    "build-electron": "ng build --configuration production && electron-builder",
+    "build-electron-dev": "ng build && electron-builder",
+    "build-simple": "ng build --configuration production && npm run electron-package",
+    "build-desktop": "npm run build:prod && npm run prepare-electron && npm run electron-package-clean",
+    "build-installer": "npm run build:prod && npm run prepare-electron && npm run electron-pack",
+    "build-portable": "npm run build:prod && npm run prepare-electron && npx electron-builder --win portable",
+    "build-all": "npm run build:prod && npm run prepare-electron && npx electron-builder --win",
+    "prepare-electron": "powershell -Command \"& { Copy-Item 'main-electron-template.js' 'dist/garage-meet/browser/main-electron.js' -Force; Copy-Item 'public/favicon.ico' 'dist/garage-meet/browser/favicon.ico' -Force; '{\\\"name\\\":\\\"garage-meet-desktop\\\",\\\"version\\\":\\\"1.0.0\\\",\\\"description\\\":\\\"GarageMeet Desktop Application\\\",\\\"main\\\":\\\"main-electron.js\\\",\\\"author\\\":\\\"GarageMeet Team\\\",\\\"license\\\":\\\"MIT\\\"}' | Out-File 'dist/garage-meet/browser/package.json' -Encoding utf8 }\"",
+    "dist": "npm run build:prod && npm run electron-pack"
   },
   "private": true,
   "dependencies": {
@@ -18,6 +36,7 @@
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
     "@primeng/themes": "^19.1.2",
+    "@stripe/stripe-js": "^7.8.0",
     "@tailwindcss/postcss": "^4.1.6",
     "postcss": "^8.5.3",
     "primeicons": "^7.0.0",
@@ -32,6 +51,9 @@
     "@angular/cli": "^19.2.10",
     "@angular/compiler-cli": "^19.2.0",
     "@types/jasmine": "~5.1.0",
+    "electron": "^37.2.6",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2",
     "jasmine-core": "~5.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -39,5 +61,47 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
+  },
+  "build": {
+    "appId": "com.garagemeet.desktop",
+    "productName": "GarageMeet",
+    "directories": {
+      "output": "dist-installer"
+    },
+    "files": [
+      "dist/garage-meet/browser/**/*"
+    ],
+    "extraMetadata": {
+      "main": "main-electron.js"
+    },
+    "nodeGypRebuild": false,
+    "buildDependenciesFromSource": false,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "public/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "installerIcon": "public/favicon.ico",
+      "uninstallerIcon": "public/favicon.ico",
+      "installerHeaderIcon": "public/favicon.ico",
+      "deleteAppDataOnUninstall": false,
+      "runAfterFinish": true
+    },
+    "portable": {
+      "artifactName": "GarageMeet-Portable-${version}.exe"
+    }
   }
 }

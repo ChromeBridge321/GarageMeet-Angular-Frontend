@@ -1,0 +1,137 @@
+<!-- Crear Cliente Form -->
+<form class="mx-5 mt-5 sm:mx-10 md:mx-20 lg:mx-50" [formGroup]="saleeForm" (ngSubmit)="updateSale(autocompleteServices.value, autocompletePieces.value)">
+
+  <!-- Page Title -->
+  <div class="font-bold flex text-4xl justify-center items-center mt-5">
+    <h1>Actualizar Venta</h1>
+  </div>
+  <div class="w-full flex flex-row mt-2">
+    <!-- Personal Information Row -->
+    <!-- paymentType Information Row -->
+    <!-- paymentType Selection -->
+    <div class=" w-1/2">
+      <label for="paymentTypes_id">Tipo de pago</label>
+      <p-select fluid="true" [options]="paymentTypes" optionLabel="name" [filter]="true" filterBy="name"
+        [showClear]="true" placeholder="Seleccionar tipo de pago" formControlName="payment_types_id"
+        optionValue="payment_types_id">
+        <ng-template let-paymentType #item>
+          <div class="flex items-center gap-2">
+            <div>{{ paymentType.name }}</div>
+          </div>
+        </ng-template>
+      </p-select>
+    </div>
+    <div class="w-1/30"></div>
+    <!-- employee Information Row -->
+    <!-- employee Selection -->
+    <div class="w-1/2">
+      <label for="employees_id">Empleado</label>
+      <p-select fluid="true" [options]="employees" optionValue="employees_id" optionLabel="fullName" [filter]="true"
+        filterBy="fullName" [showClear]="true" placeholder="Seleccionar empleado" formControlName="employees_id">
+        <ng-template let-employee #item>
+          <div class="flex items-center gap-2">
+            <div>
+              {{ employee.fullName }}
+            </div>
+          </div>
+        </ng-template>
+      </p-select>
+    </div>
+  </div>
+
+  <div class="w-full flex flex-row mt-2">
+    <!-- vehicle Selection -->
+    <div class="w-1/2">
+      <label for="vehicles_id">vehicles</label>
+      <p-select fluid="true" [options]="vehicles" optionLabel="clientInfo" optionValue="vehicles_id" [filter]="true"
+        filterBy="clientInfo" [showClear]="true" placeholder="Seleccionar vehículo" formControlName="vehicles_id">
+        <ng-template let-vehicle #item>
+          <div class="flex items-center gap-2">
+            <div>{{ vehicle.clientInfo }}</div>
+          </div>
+        </ng-template>
+      </p-select>
+    </div>
+    <div class="w-1/30"></div>
+    <!-- date Field -->
+    <div class="w-1/2">
+      <label for="date">Fecha</label>
+      <p-datepicker [showButtonBar]="true" placeholder="Año-Mes-Día" dateFormat="yy-mm-dd" #datepicker fluid="true"
+        formControlName="date" />
+    </div>
+  </div>
+
+  <div class="w-full flex flex-row mt-5">
+    <div class="w-1/2 bg-zinc-100 rounded-xl p-4 mx-2">
+      <h1 class="font-bold text-xl">Piezas Actuales</h1>
+      <ul>
+        <li *ngFor="let piece of sale?.pieces">
+          - {{ piece.name }}
+        </li>
+      </ul>
+    </div>
+    <div class="w-1/2 bg-zinc-100 rounded-xl p-4 mx-2">
+      <h1 class="font-bold text-xl">Servicios Actuales</h1>
+      <ul>
+        <li *ngFor="let service of sale?.services">
+          - {{ service.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="w-full flex flex-col mt-2">
+    <!-- pieces Information Row -->
+    <!-- pieces Selection -->
+    <div class="w-full">
+      <label for="multiple-ac-1" class="font-bold mb-2 block">Piezas</label>
+      <p-autocomplete placeholder="Buscar piezas" #autocompletePieces multiple fluid="true" [delay]="200"
+        [forceSelection]="true" [suggestions]="pieces" (completeMethod)="searchPieces($event)" [optionLabel]="'name'">
+        <ng-template let-piece pTemplate="item">
+          {{ piece.name}}
+        </ng-template>
+      </p-autocomplete>
+
+    </div>
+
+    <!-- services Selection -->
+    <div class="w-full">
+      <label for="multiple-ac-1" class="font-bold mb-2 block">Servicios</label>
+      <p-autocomplete placeholder="Buscar servicios" #autocompleteServices multiple fluid="true" [delay]="200"
+        [forceSelection]="true" [suggestions]="services" (completeMethod)="searchServices($event)"
+        [optionLabel]="'name'">
+        <ng-template let-service pTemplate="item">
+          {{ service.name}}
+        </ng-template>
+      </p-autocomplete>
+
+    </div>
+  </div>
+
+
+  <div class=" w-full flex flex-row mt-2">
+    <!-- price Field -->
+    <div class="w-1/2">
+      <label class=" font-bold" for="price">Precio</label>
+      <input type="text" class="w-full" pInputText id="price" autocomplete="off" formControlName="price" />
+
+    </div>
+    <div class="w-1/30"></div>
+    <!-- tax Field -->
+    <div class="w-1/2">
+    </div>
+  </div>
+
+
+
+
+  <!-- Toast Messages -->
+  <p-toast />
+
+  <!-- Action Buttons -->
+  <div class="flex justify-end gap-4 mt-8">
+
+    <p-button type="button" pRipple [routerLink]="['/panel/ventas']" label="Volver" severity="secondary" />
+
+    <p-button type="submit" pRipple label="Actualizar" severity="success" />
+  </div>
+</form>

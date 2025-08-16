@@ -1,0 +1,133 @@
+<div class="dashboard-card">
+  <div class="dashboard-card-header">
+    <h3 class="dashboard-title">Clientes</h3>
+    <p-button
+      type="button"
+      pRipple
+      [routerLink]="canModifyData ? ['/panel/clientes/crear'] : null"
+      (click)="!canModifyData && showSubscriptionError()"
+      label="Nuevo Cliente"
+      icon="pi pi-plus"
+      [disabled]="!canModifyData"
+      pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para crear clientes' : 'Crear un nuevo cliente'}}"
+      tooltipPosition="top"
+    />
+  </div>
+
+  <div class="dashboard-card-content">
+    <!-- Barra de control -->
+    <div class="flex items-center justify-content-between align-items-center mb-4">
+      <div class="flex align-items-center">
+        <p-button
+          icon="pi pi-filter-slash"
+          label="Limpiar Filtros"
+          severity="secondary"
+          size="small"
+          (onClick)="limpiarFiltros(dt1)"
+          pTooltip="Limpiar todos los filtros aplicados">
+        </p-button>
+      </div>
+      <div class="ps-4 flex align-items-center">
+        <span class="text-sm text-gray-600">{{ clients.length }} cliente(s) total(es)</span>
+      </div>
+    </div>
+
+    <p-table
+      showGridlines
+      [value]="clients"
+      [tableStyle]="{ 'min-width': 'auto' }"
+      [loading]="loading"
+      [globalFilterFields]="['person.name', 'person.last_name', 'person.cellphone_number', 'person.email', 'vehicles.0.make', 'vehicles.0.model']"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 20, 50]"
+      paginatorDropdownAppendTo="body"
+      #dt1>
+
+      <ng-template #header>
+        <tr>
+          <th>N.</th>
+          <th pSortableColumn="person.name">
+            Nombre
+            <p-sortIcon field="person.name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="person.cellphone_number">
+            Teléfono
+            <p-sortIcon field="person.cellphone_number"></p-sortIcon>
+          </th>
+          <th pSortableColumn="person.email">
+            Correo
+            <p-sortIcon field="person.email"></p-sortIcon>
+          </th>
+          <th pSortableColumn="vehicles.0.make">
+            Vehículo
+            <p-sortIcon field="vehicles.0.make"></p-sortIcon>
+          </th>
+          <th>Acciones</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>
+            <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'person.name', 'contains')"
+                   placeholder="Filtrar por nombre" class="w-full" />
+          </th>
+          <th>
+            <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'person.cellphone_number', 'contains')"
+                   placeholder="Filtrar por teléfono" class="w-full" />
+          </th>
+          <th>
+            <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'person.email', 'contains')"
+                   placeholder="Filtrar por correo" class="w-full" />
+          </th>
+          <th>
+            <input pInputText type="text" (input)="dt1.filter($any($event.target).value, 'vehicles.0.make', 'contains')"
+                   placeholder="Filtrar por vehículo" class="w-full" />
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+
+      <ng-template #body let-client let-index="rowIndex">
+        <tr>
+          <td>{{ index + 1 }}</td>
+          <td>{{ client.person.name + ' ' + client.person.last_name }}</td>
+          <td>{{ client.person.cellphone_number }}</td>
+          <td>{{ client.person.email }}</td>
+          <td>{{ client.vehicles[0]?.make + ' ' + client.vehicles[0]?.model }}</td>
+          <td>
+            <div class="flex gap-2">
+              <p-button
+                type="button"
+                pRipple
+                [routerLink]="canModifyData ? ['/panel/clientes/editar/', client.clients_id] : null"
+                (click)="!canModifyData && showSubscriptionError()"
+                icon="pi pi-pencil"
+                severity="secondary"
+                size="small"
+                [text]="true"
+                [disabled]="!canModifyData"
+                pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para editar' : 'Editar Cliente'}}"
+                tooltipPosition="top"
+              />
+              <p-button
+                type="button"
+                pRipple
+                icon="pi pi-trash"
+                severity="danger"
+                size="small"
+                [text]="true"
+                [disabled]="!canModifyData"
+                pTooltip="{{!canModifyData ? 'Necesitas una suscripción activa para eliminar' : 'Eliminar Cliente'}}"
+                tooltipPosition="top"
+                (click)="delete(client.person.peoples_id)"
+              />
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-toast />
+<p-confirmDialog />

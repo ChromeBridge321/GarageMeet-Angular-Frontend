@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Menubar } from 'primeng/menubar';
 import { MenuItem } from 'primeng/api';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-nav',
   imports: [Menubar, RouterLink, RouterLinkActive, CommonModule],
@@ -12,6 +12,10 @@ import { CommonModule } from '@angular/common';
 })
 export class NavComponent implements OnInit {
   items: MenuItem[] | undefined;
+  style = {
+    'border': 'none !important',
+  };
+  authService = inject(AuthService);
   ngOnInit() {
     this.items = [
       {
@@ -24,20 +28,36 @@ export class NavComponent implements OnInit {
       },
       {
         label: 'Planes',
-        command: () => this.scrollToSection('Planes')
+        routerLink: '/pricing',
       },
       {
         label: 'Talleres',
-        routerLink:'/search'
+        routerLink: '/search'
       },
       {
-        label: 'Iniciar sesión',
-        icon: 'pi pi-sign-in',
-        routerLink:'/login'
+        label: 'Contacto',
+        command: () => this.scrollToSection('Contacto')
       },
+      {
+        label: 'Panel',
+        routerLink: '/panel',
+        visible: this.authService.isLoggedIn() && this.authService.getUserType() === 'Admin'
+      },
+      {
+        label: 'Iniciar Sesión',
+        routerLink: '/login',
+        icon: 'pi pi-sign-in',
+        visible: !this.authService.isLoggedIn()
+      },
+      {
+        label: 'Cerrar Sesión',
+        icon: 'pi pi-sign-out',
+        visible: this.authService.isLoggedIn() && this.authService.getUserType() == 'User',
+        command: () => this.authService.logout()
+
+      }
     ];
   }
-
   scrollToSection(sectionId: string) {
     const element = document.getElementById(sectionId);
     if (element) {

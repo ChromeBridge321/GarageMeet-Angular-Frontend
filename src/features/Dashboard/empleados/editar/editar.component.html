@@ -1,0 +1,110 @@
+<!-- Crear Cliente Form -->
+<form class="mx-5 mt-5" [formGroup]="employeeForm" (ngSubmit)="updateEmployee()">
+
+  <!-- Page Title -->
+  <div class="font-bold flex text-4xl justify-center items-center mt-5">
+    <h1>Editar Empleado</h1>
+  </div>
+
+  <!-- Personal Information Row -->
+  <div class="flex justify-center items-start mt-8 w-full">
+    <!-- Name Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input type="text" class="w-full" pInputText id="name" autocomplete="off" formControlName="name" />
+        <label class="w-full" for="name">Nombre</label>
+      </p-floatlabel>
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('name')?.invalid && (employeeForm.get('name')?.dirty || employeeForm.get('name')?.touched)">
+        El nombre es requerido
+      </small>
+    </div>
+
+    <!-- Last Name Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input type="text" class="w-full" pInputText id="last_name" autocomplete="off" formControlName="last_name" />
+        <label class="w-full" for="last_name">Apellidos</label>
+      </p-floatlabel>
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('last_name')?.invalid && (employeeForm.get('last_name')?.dirty || employeeForm.get('last_name')?.touched)">
+        Los apellidos son requeridos
+      </small>
+    </div>
+  </div>
+
+  <!-- Contact Information Row -->
+  <div class="flex justify-center items-start mt-8 w-full">
+    <!-- Phone Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <p-inputmask [style]="{'width': '100%'}" id="cellphone_number" autocomplete="off"
+          formControlName="cellphone_number" mask="(999) 999-9999" />
+        <label class="w-full" for="cellphone_number">Número de Teléfono</label>
+      </p-floatlabel>
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('cellphone_number')?.invalid && (employeeForm.get('cellphone_number')?.dirty || employeeForm.get('cellphone_number')?.touched)">
+        El teléfono es requerido
+      </small>
+    </div>
+
+    <!-- Email Field -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input type="email" class="w-full" pInputText id="email" autocomplete="off" formControlName="email" />
+        <label class="w-full" for="email">Correo</label>
+      </p-floatlabel>
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('email')?.invalid && (employeeForm.get('email')?.dirty || employeeForm.get('email')?.touched)">
+        El correo es requerido
+      </small>
+    </div>
+  </div>
+
+  <!-- Position Information Row -->
+  <div class="flex justify-center items-start mt-8 w-full">
+    <!-- Positions Selection -->
+    <div class="mx-3 w-1/2">
+      <p-floatlabel>
+        <input readonly type="text" class="w-full" pInputText id="positions_name" autocomplete="off"
+          formControlName="positions_name" />
+        <label class="w-full" for="positions_name">Cargo Actual</label>
+      </p-floatlabel>
+    </div>
+
+    <div class="mx-3 w-1/2">
+      <p-select *ngIf="visible1" class="w-full" [options]="positions" optionLabel="name" optionValue="positions_id" [filter]="true"
+        filterBy="name" [showClear]="true" placeholder="Selecciona un cargo nuevo" formControlName="new_positions_id">
+
+        <ng-template let-position #item>
+          <div class="flex items-center gap-2">
+            <div>{{ position.name }}</div>
+          </div>
+        </ng-template>
+      </p-select>
+      <small class="text-red-500"
+        *ngIf="employeeForm.get('new_new_positions_id')?.invalid && (employeeForm.get('new_positions_id')?.dirty || employeeForm.get('new_positions_id')?.touched)">
+        El cargo es requerido
+      </small>
+    </div>
+  </div>
+
+  <!-- Toast Messages -->
+  <p-toast />
+
+  <!-- Action Buttons -->
+  <div class="flex justify-end gap-4 mt-8">
+
+    <p-button type="button" pRipple [routerLink]="['/panel/empleados']" label="Volver"
+      severity="secondary" />
+
+    <p-button type="submit" pRipple label="Actualizar" severity="success" />
+  </div>
+  <div *ngIf="visible2"
+    class=" flex justify-center items-center px-8 italic text-center mt-8 border-2 border-amber-200 bg-amber-100 rounded-2xl h-20 w-full">
+    <h5>
+      Parece que no tienes ningún cargo registrado. Por favor, crea un cargo antes de actualizar un empleado. <br />
+      <a class="text-blue-500 hover:underline" [routerLink]="['/panel/cargos']">Crear Cargo</a>
+    </h5>
+  </div>
+</form>
