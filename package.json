@@ -15,18 +15,22 @@
     "electron-dev": "set NODE_ENV=development && electron .",
     "electron-pack": "electron-builder",
     "electron-package": "electron-packager . GarageMeet --platform=win32 --arch=x64 --out=dist-electron --overwrite",
-    "electron-package-clean": "npx electron-packager \"./dist/garage-meet/browser\" \"GarageMeet\" --platform=win32 --arch=x64 --out=dist-desktop --overwrite --app-version=1.0.0 --executable-name=\"GarageMeet\"",
+    "electron-package-clean": "pnpm exec electron-packager \"./dist/garage-meet/browser\" \"GarageMeet\" --platform=win32 --arch=x64 --out=dist-desktop --overwrite --app-version=1.0.0 --executable-name=\"GarageMeet\"",
     "build-electron": "ng build --configuration production && electron-builder",
     "build-electron-dev": "ng build && electron-builder",
-    "build-simple": "ng build --configuration production && npm run electron-package",
-    "build-desktop": "npm run build:prod && npm run prepare-electron && npm run electron-package-clean",
-    "build-installer": "npm run build:prod && npm run prepare-electron && npm run electron-pack",
-    "build-portable": "npm run build:prod && npm run prepare-electron && npx electron-builder --win portable",
-    "build-all": "npm run build:prod && npm run prepare-electron && npx electron-builder --win",
+    "build-simple": "ng build --configuration production && pnpm run electron-package",
+    "build-desktop": "pnpm run build:prod && pnpm run prepare-electron && pnpm run electron-package-clean",
+    "build-installer": "pnpm run build:prod && pnpm run prepare-electron && pnpm run electron-pack",
+    "build-portable": "pnpm run build:prod && pnpm run prepare-electron && pnpm exec electron-builder --win portable",
+    "build-all": "pnpm run build:prod && pnpm run prepare-electron && pnpm exec electron-builder --win",
     "prepare-electron": "powershell -Command \"& { Copy-Item 'main-electron-template.js' 'dist/garage-meet/browser/main-electron.js' -Force; Copy-Item 'public/favicon.ico' 'dist/garage-meet/browser/favicon.ico' -Force; '{\\\"name\\\":\\\"garage-meet-desktop\\\",\\\"version\\\":\\\"1.0.0\\\",\\\"description\\\":\\\"GarageMeet Desktop Application\\\",\\\"main\\\":\\\"main-electron.js\\\",\\\"author\\\":\\\"GarageMeet Team\\\",\\\"license\\\":\\\"MIT\\\"}' | Out-File 'dist/garage-meet/browser/package.json' -Encoding utf8 }\"",
-    "dist": "npm run build:prod && npm run electron-pack"
+    "dist": "pnpm run build:prod && pnpm run electron-pack"
   },
   "private": true,
+  "packageManager": "pnpm@11.24.0",
+  "engines": {
+    "node": "22.12.x"
+  },
   "dependencies": {
     "@angular/animations": "^19.2.10",
     "@angular/common": "^19.2.0",
