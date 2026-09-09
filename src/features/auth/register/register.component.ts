@@ -2,13 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterDTO } from '../models/auth.dto';
 import { RegisterService } from '../services/register.service';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule, CommonModule, RouterModule, Toast],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink, Toast],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   providers: [MessageService]

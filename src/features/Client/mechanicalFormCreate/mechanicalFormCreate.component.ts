@@ -21,6 +21,7 @@ interface AutoCompleteCompleteEvent {
   selector: 'app-mechanical-form-create',
   imports: [CommonModule, ReactiveFormsModule, RouterLink, AutoComplete, FormsModule, InputTextModule, InputMask, Toast],
   templateUrl: './mechanicalFormCreate.component.html',
+  styleUrls: ['./mechanicalFormCreate.component.css'],
   providers: [MessageService]
 })
 export class MechanicalFormCreateComponent implements OnInit {

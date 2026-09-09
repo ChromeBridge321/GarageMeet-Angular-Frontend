@@ -1,177 +1,138 @@
 <p-toast />
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 p-4">
-  <div class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-2xl animate-fade-in-up">
-    <!-- Back Button -->
-    <div class="mb-6">
-      <a routerLink="/"
-        class="inline-flex items-center text-zinc-600 hover:text-zinc-800 transition-colors duration-200">
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-        </svg>
-        Regresar al inicio
+
+<main class="auth-page" aria-labelledby="workshop-title">
+  <section class="auth-form-panel auth-form-panel--workshop">
+    <div class="auth-form-content auth-form-content--wide auth-form-content--workshop">
+      <a routerLink="/" class="auth-brand" aria-label="GarageMeet, ir al inicio">
+        GarageMeet
       </a>
-    </div>
 
-    <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-zinc-900 mb-2">Registrar Taller Mecánico</h1>
-      <p class="text-zinc-600">Únete a nuestra red de talleres profesionales</p>
-    </div>
-
-
-    <form [formGroup]="mechanicalForm" (ngSubmit)="createMechanical()" class="space-y-6">
-      <!-- Workshop Name Field -->
-      <div>
-        <label for="name" class="text-md-center font-semibold text-zinc-700 mb-2">
-          Nombre del Taller
-        </label>
-        <input fluid="true" type="text" id="name" formControlName="name" pInputText
-          placeholder="Nombre de tu taller mecánico" />
-        <small class="text-red-500"
-          *ngIf="mechanicalForm.get('name')?.invalid && (mechanicalForm.get('name')?.dirty || mechanicalForm.get('name')?.touched)">
-          El nombre es requerido
-        </small>
-      </div>
-
-      <!-- Email Field -->
-      <div>
-        <label for="email" class="block text-md-center font-semibold text-zinc-700 mb-2">
-          Correo Electrónico
-        </label>
-        <input fluid="true" type="text" id="email" formControlName="email" pInputText
-          placeholder="Correo electrónico" />
-        <small class="text-red-500"
-          *ngIf="mechanicalForm.get('email')?.invalid && (mechanicalForm.get('email')?.dirty || mechanicalForm.get('email')?.touched)">
-          El correo electrónico es requerido
-        </small>
-      </div>
-
-      <!-- Phone Field -->
-      <div>
-        <label for="cellphone_number" class="block text-md-center font-semibold text-zinc-700 mb-2">
-          Número de Teléfono
-        </label>
-        <p-inputmask
-          [style]="{'width': '100%'}"
-          id="cellphone_number"
-          autocomplete="off"
-          formControlName="cellphone_number"
-          mask="(999) 999-9999"
-          placeholder="(999) 999-9999"
-          />
-        <small class="text-red-500"
-          *ngIf="mechanicalForm.get('cellphone_number')?.invalid && (mechanicalForm.get('cellphone_number')?.dirty || mechanicalForm.get('cellphone_number')?.touched)">
-          El número de teléfono es requerido
-        </small>
-      </div>
-
-      <!-- Municipality/borough field -->
-      <div class="w-full">
-        <label for="location" class="block text-md-center font-semibold text-zinc-700 mb-2">
-          Municipio o alcaldía del taller
-        </label>
-        <p-autocomplete inputId="location" placeholder="Ejemplo: Benito Juárez, Ciudad de México" class="w-full" size="large" #autocomplete [fluid]="true"
-          [delay]="200" [forceSelection]="true" [suggestions]="items" (completeMethod)="search($event)"
-          [(ngModel)]="selectedLocation" [ngModelOptions]="{ standalone: true }"
-          (onSelect)="onLocationSelected($event.value)" (onClear)="onLocationCleared()" [optionLabel]="'label'">
-          <ng-template let-location pTemplate="item">
-            {{ location.label }}
-          </ng-template>
-        </p-autocomplete>
-        <small class="text-zinc-500">Selecciona una opción existente; no se aceptan ubicaciones escritas manualmente.</small>
-        <small class="text-red-500" *ngIf="mechanicalForm.get('municipality_id')?.invalid && mechanicalForm.get('municipality_id')?.touched">
-          Selecciona un municipio o alcaldía válido
-        </small>
-      </div>
-
-      <!-- Address Field -->
-      <div>
-        <label for="address" class="block text-md-center font-semibold text-zinc-700 mb-2">
-          Dirección
-        </label>
-        <textarea class="w-full" pInputText id="address" formControlName="address" rows="3"
-          placeholder="Dirección completa del taller"></textarea>
-        <small class="text-red-500"
-          *ngIf="mechanicalForm.get('address')?.invalid && (mechanicalForm.get('address')?.dirty || mechanicalForm.get('address')?.touched)">
-          La dirección es requerida
-        </small>
-      </div>
-
-      <!-- Coordinates -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label for="latitude" class="block text-md-center font-semibold text-zinc-700 mb-2">
-            Latitud (opcional)
-          </label>
-          <input type="number" step="0.0000001" id="latitude" formControlName="latitude" pInputText
-            placeholder="19.432608" class="w-full" />
-        </div>
-        <div>
-          <label for="longitude" class="block text-md-center font-semibold text-zinc-700 mb-2">
-            Longitud (opcional)
-          </label>
-          <input type="number" step="0.0000001" id="longitude" formControlName="longitude" pInputText
-            placeholder="-99.133209" class="w-full" />
-        </div>
-      </div>
-
-      <!-- Google Maps Link Field -->
-      <div>
-        <label for="google_maps_link" class="block text-md-center font-semibold text-zinc-700 mb-2">
-          Enlace de Google Maps (Opcional)
-        </label>
-        <input fluid="true" type="url" id="google_maps_link" formControlName="google_maps_link" pInputText
-          placeholder="https://maps.app.goo.gl/..." />
-      </div>
-
-      <!-- Terms and Conditions -->
-      <div class="flex items-start text-md-center">
-        <input type="checkbox" id="terms" class="mr-3 mt-1 accent-zinc-600 w-4 h-4" required>
-        <label for="terms" class="text-zinc-700">
-          Acepto los
-          <a href="#"
-            class="text-zinc-800 hover:text-zinc-900 font-medium transition-colors duration-200 hover:underline">
-            términos y condiciones
-          </a>
-          para talleres mecánicos y la
-          <a href="#"
-            class="text-zinc-800 hover:text-zinc-900 font-medium transition-colors duration-200 hover:underline">
-            política de privacidad
-          </a>
-        </label>
-      </div>
-
-      <!-- Submit Button -->
-      <button type="submit" [disabled]="isLoading()"
-        [class]="'w-full py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-zinc-300 ' +
-                 (isLoading()
-                   ? 'bg-zinc-400 cursor-not-allowed text-white'
-                   : 'bg-gradient-to-r from-zinc-800 to-zinc-900 text-white hover:from-zinc-700 hover:to-zinc-800 transform hover:-translate-y-1 hover:shadow-xl')">
-        @if (isLoading()) {
-        <div class="flex items-center justify-center">
-          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-            </path>
-          </svg>
-          Registrando taller...
-        </div>
-        } @else {
-        Registrar Taller
-        }
-      </button>
-    </form>
-
-    <!-- Sign In Link -->
-    <div class="text-center pt-6 border-t border-zinc-200">
-      <p class="text-zinc-600">
-        ¿Ya tienes un taller registrado?
-        <a href="/login"
-          class="text-zinc-800 hover:text-zinc-900 font-semibold transition-colors duration-200 hover:underline">
-          Inicia sesión aquí
+      <div class="mt-10 sm:mt-14">
+        <a routerLink="/" class="auth-back">
+          <span aria-hidden="true">←</span>
+          Regresar al inicio
         </a>
-      </p>
+      </div>
+
+      <div class="mt-9 space-y-4">
+        <p class="auth-eyebrow">Únete a nuestra red</p>
+        <h1 id="workshop-title" class="auth-title">Registra tu<br class="sm:hidden" /> taller</h1>
+        <p class="auth-description">Completa los datos para que tu taller forme parte de GarageMeet.</p>
+      </div>
+
+      <form [formGroup]="mechanicalForm" (ngSubmit)="createMechanical()" class="auth-form auth-form--dense auth-form--workshop mt-8" novalidate>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
+          <div class="auth-field">
+            <label for="name">Nombre del taller</label>
+            <input class="auth-input" type="text" id="name" formControlName="name" autocomplete="organization"
+              placeholder="Nombre de tu taller mecánico">
+            <div class="auth-field-message" aria-live="polite">
+              <small class="auth-field-error" role="alert"
+                *ngIf="mechanicalForm.get('name')?.invalid && (mechanicalForm.get('name')?.dirty || mechanicalForm.get('name')?.touched)">
+                El nombre es requerido
+              </small>
+            </div>
+          </div>
+
+          <div class="auth-field">
+            <label for="email">Correo electrónico</label>
+            <input class="auth-input" type="email" id="email" formControlName="email" autocomplete="email"
+              placeholder="correo@taller.com">
+            <div class="auth-field-message" aria-live="polite">
+              <small class="auth-field-error" role="alert"
+                *ngIf="mechanicalForm.get('email')?.invalid && (mechanicalForm.get('email')?.dirty || mechanicalForm.get('email')?.touched)">
+                Introduce un correo electrónico válido
+              </small>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label for="cellphone_number">Número de teléfono</label>
+          <p-inputmask id="cellphone_number" formControlName="cellphone_number" mask="(999) 999-9999"
+            placeholder="(999) 999-9999" autocomplete="tel" [style]="{ width: '100%' }" />
+          <div class="auth-field-message" aria-live="polite">
+            <small class="auth-field-error" role="alert"
+              *ngIf="mechanicalForm.get('cellphone_number')?.invalid && (mechanicalForm.get('cellphone_number')?.dirty || mechanicalForm.get('cellphone_number')?.touched)">
+              Introduce un número de teléfono válido
+            </small>
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label for="location">Municipio o alcaldía del taller</label>
+          <p-autocomplete inputId="location" placeholder="Ejemplo: Benito Juárez, Ciudad de México"
+            class="w-full" [fluid]="true" [delay]="200" [forceSelection]="true" [suggestions]="items"
+            (completeMethod)="search($event)" [(ngModel)]="selectedLocation" [ngModelOptions]="{ standalone: true }"
+            (onSelect)="onLocationSelected($event.value)" (onClear)="onLocationCleared()" [optionLabel]="'label'">
+            <ng-template let-location pTemplate="item">{{ location.label }}</ng-template>
+          </p-autocomplete>
+          <small class="auth-helper">Selecciona una opción existente; no se aceptan ubicaciones escritas manualmente.</small>
+          <div class="auth-field-message" aria-live="polite">
+            <small class="auth-field-error" role="alert"
+              *ngIf="mechanicalForm.get('municipality_id')?.invalid && mechanicalForm.get('municipality_id')?.touched">
+              Selecciona un municipio o alcaldía válido
+            </small>
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label for="address">Dirección</label>
+          <textarea id="address" formControlName="address" rows="3" placeholder="Dirección completa del taller"></textarea>
+          <div class="auth-field-message" aria-live="polite">
+            <small class="auth-field-error" role="alert"
+              *ngIf="mechanicalForm.get('address')?.invalid && (mechanicalForm.get('address')?.dirty || mechanicalForm.get('address')?.touched)">
+              La dirección es requerida
+            </small>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
+          <div class="auth-field">
+            <label for="latitude">Latitud <span class="font-normal text-zinc-500">(opcional)</span></label>
+            <input class="auth-input" type="number" step="0.0000001" id="latitude" formControlName="latitude"
+              placeholder="19.432608" inputmode="decimal">
+          </div>
+          <div class="auth-field">
+            <label for="longitude">Longitud <span class="font-normal text-zinc-500">(opcional)</span></label>
+            <input class="auth-input" type="number" step="0.0000001" id="longitude" formControlName="longitude"
+              placeholder="-99.133209" inputmode="decimal">
+          </div>
+        </div>
+
+        <div class="auth-field">
+          <label for="google_maps_link">Enlace de Google Maps <span class="font-normal text-zinc-500">(opcional)</span></label>
+          <input class="auth-input" type="url" id="google_maps_link" formControlName="google_maps_link"
+            placeholder="https://maps.app.goo.gl/..." inputmode="url">
+        </div>
+
+        <label class="auth-legal">
+          <input type="checkbox" required class="mt-1 accent-blue-700" aria-label="Aceptar términos y política de privacidad">
+          <span>Acepto los términos y condiciones para talleres mecánicos y la política de privacidad.</span>
+        </label>
+
+        <button type="submit" class="auth-submit" [disabled]="isLoading()">
+          @if (isLoading()) {
+            <span role="status">Registrando taller...</span>
+          } @else {
+            <span>Registrar taller <span aria-hidden="true" class="ml-2 text-xl">→</span></span>
+          }
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        ¿Ya tienes un taller registrado?
+        <a routerLink="/login">Inicia sesión aquí</a>
+      </div>
     </div>
-  </div>
-</div>
+  </section>
+
+  <aside class="auth-visual" aria-label="GarageMeet para talleres">
+    <img src="/assets/images/garage-workshop-team.jpg" alt="Equipo trabajando en un taller mecánico" decoding="async">
+    <div class="auth-visual-content">
+      <div class="auth-visual-rule"></div>
+      <h2 class="auth-visual-title">Tu taller, en movimiento.</h2>
+      <p class="auth-visual-copy">Conecta tu operación con clientes y haz crecer tu negocio desde un solo lugar.</p>
+    </div>
+  </aside>
+</main>

@@ -1,3 +1,67 @@
 :host {
   display: block;
+  min-height: 100vh;
+  background: #09090b;
+}
+
+.pricing-page {
+  --pricing-border: rgb(63 63 70 / 0.7);
+}
+
+.pricing-hero {
+  min-height: 27rem;
+}
+
+.plan-card {
+  border-color: var(--pricing-border);
+}
+
+.plan-card:hover {
+  border-color: rgb(59 130 246 / 0.5);
+  box-shadow: 0 24px 60px rgb(2 6 23 / 0.35), 0 0 0 1px rgb(59 130 246 / 0.08);
+}
+
+.plan-card--popular {
+  border-color: rgb(59 130 246 / 0.65);
+  box-shadow: 0 20px 55px rgb(30 64 175 / 0.18), 0 0 0 1px rgb(59 130 246 / 0.1);
+}
+
+.plans-grid--single {
+  grid-template-columns: minmax(0, 34rem);
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .plan-card--popular {
+    transform: scale(1.02);
+  }
+}
+
+.payment-method:has(input:checked) {
+  border-color: rgb(59 130 246 / 0.7);
+  background: rgb(239 246 255 / 0.85);
+}
+
+@media (max-width: 640px) {
+  .pricing-hero {
+    min-height: 24rem;
+  }
+
+  :host ::ng-deep .pricing-dialog .p-dialog-content {
+    padding: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plan-card {
+    transition: none;
+  }
+
+  .plan-card:hover {
+    transform: none;
+  }
+
+  .plan-card--popular {
+    transform: none;
+  }
 }

@@ -213,17 +213,17 @@ export class SubscriptionPlansComponent implements OnInit, OnDestroy {
         style: {
           base: {
             fontSize: '16px',
-            color: '#424770',
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            color: '#172033',
+            fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
             fontSmoothing: 'antialiased',
             '::placeholder': {
-              color: '#aab7c4',
+              color: '#94a3b8',
             },
-            iconColor: '#666EE8',
+            iconColor: '#64748b',
           },
           invalid: {
-            iconColor: '#FFC7EE',
-            color: '#FFC7EE',
+            iconColor: '#b91c1c',
+            color: '#b91c1c',
           },
         },
         hidePostalCode: true,

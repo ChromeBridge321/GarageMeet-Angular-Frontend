@@ -2,6 +2,20 @@
 @import "primeicons/primeicons.css";
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--primary-blue-lighter, #93c5fd) !important;
+  outline-offset: 3px;
+}
+
 /* Configuración global de la fuente Inter */
 * {
   font-family: "Inter", sans-serif;
@@ -404,6 +418,71 @@ body {
   background: white !important;
 }
 
+/* Payment dialogs are appended to body by PrimeNG, so their visual theme
+   must be defined globally instead of in the component stylesheet. */
+.p-dialog.pricing-dialog {
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 1rem !important;
+  box-shadow: 0 25px 80px rgb(15 23 42 / 0.28) !important;
+  overflow: hidden !important;
+}
+
+.p-dialog.pricing-dialog .p-dialog-header,
+.p-dialog.pricing-dialog .p-dialog-content {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+.p-dialog.pricing-dialog .p-dialog-header {
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding: 1.5rem 1.5rem 1.25rem !important;
+}
+
+.p-dialog.pricing-dialog .p-dialog-title {
+  color: #0f172a !important;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.p-dialog.pricing-dialog .p-dialog-content {
+  padding: 1.5rem !important;
+}
+
+.p-dialog.pricing-dialog .p-radiobutton-box {
+  border-color: #94a3b8 !important;
+  background: #ffffff !important;
+}
+
+.p-dialog.pricing-dialog .p-radiobutton-checked .p-radiobutton-box {
+  border-color: #2563eb !important;
+  background: #2563eb !important;
+}
+
+.p-dialog.pricing-dialog .p-button:disabled {
+  border-color: #e2e8f0 !important;
+  background: #f8fafc !important;
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+
+.p-dialog.pricing-dialog .p-button.p-button-outlined:not(:disabled) {
+  border: 1px solid #cbd5e1 !important;
+  background: #ffffff !important;
+  color: #334155 !important;
+}
+
+.p-dialog.pricing-dialog .p-button.p-button-outlined:not(:disabled):hover {
+  border-color: #3b82f6 !important;
+  background: #eff6ff !important;
+  color: #1d4ed8 !important;
+}
+
+@media (max-width: 640px) {
+  .p-dialog.pricing-dialog .p-dialog-content {
+    padding: 1.25rem !important;
+  }
+}
+
 /* Responsive utilities */
 @media (max-width: 768px) {
   .dashboard-card-header {
@@ -419,5 +498,43 @@ body {
   .p-datatable .p-datatable-thead > tr > th,
   .p-datatable .p-datatable-tbody > tr > td {
     padding: 0.75rem 0.5rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 120ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .backdrop-blur-sm {
+    background-color: rgb(24 24 27 / 0.96) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  button,
+  a {
+    text-decoration-thickness: 0.12em;
+  }
+
+  .backdrop-blur-sm {
+    border-color: rgb(255 255 255 / 0.45) !important;
   }
 }
