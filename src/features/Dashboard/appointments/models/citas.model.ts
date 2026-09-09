@@ -28,11 +28,12 @@ export interface RESTCita {
 export interface Workshop {
   id:               number;
   users_id:         number;
-  states_id:        number;
-  cities_id:        number;
+  municipality_id:  number;
   name:             string;
   cellphone_number: string;
   email:            string;
   address:          string;
-  google_maps_link: string;
+  latitude:         number | null;
+  longitude:        number | null;
+  google_maps_link: string | null;
 }
