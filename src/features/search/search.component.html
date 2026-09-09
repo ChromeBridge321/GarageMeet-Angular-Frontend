@@ -15,7 +15,7 @@
       <div class="hidden w-full text-2xl text-center font-normal pb-2 sm:text-start md:text-xl md:block">
         <label class="text-zinc-700 font-semibold  w-full" for="taller">A</label>
       </div>
-      <button (click)="OnSearch(autocomplete.value)"
+      <button (click)="onSearch()"
         class="rounded-xl bg-red-500 p-6 flex justify-center items-center size-10 w-full sm:rounded-xl cursor-pointer hover:bg-red-600 transition-colors duration-300">
         <i class="pi pi-bullseye text-white" style="font-size: 1.5rem;"></i>
       </button>
@@ -26,16 +26,16 @@
       </div>
       <div class="w-full">
         <p-autocomplete class="xl:hidden" size="large" #autocomplete fluid [delay]="200" [forceSelection]="true"
-          [(ngModel)]="value" [suggestions]="items" (completeMethod)="search($event)" [optionLabel]="'name'">
-          <ng-template let-city pTemplate="item">
-            {{ city.name}}
+          [(ngModel)]="selectedLocation" [suggestions]="items" (completeMethod)="search($event)" [optionLabel]="'label'">
+          <ng-template let-location pTemplate="item">
+            {{ location.label }}
           </ng-template>
         </p-autocomplete>
 
         <p-autocomplete class="hidden xl:block" size="large" #autocomplete fluid [delay]="200" [forceSelection]="true"
-          [(ngModel)]="value" [suggestions]="items" (completeMethod)="search($event)" [optionLabel]="'name'">
-          <ng-template let-city pTemplate="item">
-            {{ city.name}}
+          [(ngModel)]="selectedLocation" [suggestions]="items" (completeMethod)="search($event)" [optionLabel]="'label'">
+          <ng-template let-location pTemplate="item">
+            {{ location.label }}
           </ng-template>
         </p-autocomplete>
       </div>
@@ -51,8 +51,8 @@
         <h3>{{ mechanic.name }}</h3>
       </div>
       <div class="flex justify-start items-center  flex-row w-full mb-2 lg:text-xl lg:mb-4">
-        <span class="bg-zinc-200 rounded-xl py-1 px-2 text-zinc-500 me-2">{{ mechanic.city.name }}</span>
-        <span class="bg-zinc-200 rounded-xl py-1 px-2 text-zinc-500">{{ mechanic.state.name }}</span>
+        <span *ngIf="mechanic.municipality" class="bg-zinc-200 rounded-xl py-1 px-2 text-zinc-500 me-2">{{ mechanic.municipality.name }}</span>
+        <span *ngIf="mechanic.state" class="bg-zinc-200 rounded-xl py-1 px-2 text-zinc-500">{{ mechanic.state.name }}</span>
       </div>
       <div class="flex justify-start w-full h-full flex-col lg:text-xl px-1">
         <p class="pb-1"><i class="pi pi-phone me-1" style="color: green;"></i> {{ mechanic.cellphone_number }}</p>
@@ -60,8 +60,8 @@
         <p class="pb-1"><i class="pi pi-map me-1" style="color: green;"></i> {{ mechanic.address }}</p>
       </div>
       <div class="w-full flex justify-between items-end pt-4 h-1/5">
-        <p-button class="w-1/2 mx-2" [fluid]="true" variant="text" [raised]="true" severity="secondary"><a
-            href="{{ mechanic.google_maps_link }}">Mapa</a></p-button>
+        <p-button *ngIf="mechanic.google_maps_link" class="w-1/2 mx-2" [fluid]="true" variant="text" [raised]="true" severity="secondary"><a
+            [href]="mechanic.google_maps_link" target="_blank" rel="noopener noreferrer">Mapa</a></p-button>
         <p-button (onClick)="agendarCita(mechanic.id)" class="w-1/2 mx-2" [fluid]="true" label="Agendar Cita"
           severity="contrast"></p-button>
       </div>

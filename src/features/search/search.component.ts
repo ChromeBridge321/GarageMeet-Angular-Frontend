@@ -9,8 +9,8 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextarea } from 'primeng/inputtextarea';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { CitiesService } from './services/cities.service';
-import { CitiesREST } from './models/cities.model';
+import { LocationsService } from './services/locations.service';
+import { LocationOption } from './models/location.model';
 import { MechanicalService } from './services/Mechanical.service';
 import { MechanicalREST } from './models/mechanicalW.model';
 import { AppointmentsService } from '../Dashboard/appointments/services/appointments.service';
@@ -32,16 +32,15 @@ interface AutoCompleteCompleteEvent {
   providers: [MessageService]
 })
 export class SearchComponent {
-  citiesService = inject(CitiesService);
+  locationsService = inject(LocationsService);
   mechanicalService = inject(MechanicalService);
   appointmentsService = inject(AppointmentsService);
   authService = inject(AuthService);
   messageService = inject(MessageService);
   fb = inject(FormBuilder);
 
-  items: any[] = [];
-  value: any;
-  city: CitiesREST | undefined;
+  items: LocationOption[] = [];
+  selectedLocation: LocationOption | null = null;
   mechanicals: MechanicalREST[] = [];
   ClientData = this.authService.getAuthData();
 
@@ -60,14 +59,23 @@ export class SearchComponent {
     });
   }
   search(event: AutoCompleteCompleteEvent) {
-    this.citiesService.searchCitiesByName(event.query).subscribe(cities => {
-      this.items = cities; //cities.map((item ) => item.city_name + ', ' + item.state_name);
+    if (event.query.trim().length < 2) {
+      this.items = [];
+      return;
+    }
+
+    this.locationsService.search(event.query).subscribe(locations => {
+      this.items = locations;
     });
   }
 
-  OnSearch(value: CitiesREST) {
-    if (!value || !value.states_id || !value.cities_id) { return; }
-    this.mechanicalService.getMechanicalWorkshopsByCity(value.states_id, value.cities_id).subscribe(mechanicals => {
+  onSearch(value: LocationOption | null = this.selectedLocation) {
+    if (!value?.id || !value.type) {
+      this.showErrorMessage('Selecciona un estado o municipio válido');
+      return;
+    }
+
+    this.mechanicalService.getMechanicalWorkshopsByLocation(value.type, value.id).subscribe(mechanicals => {
       console.log(mechanicals);
       this.mechanicals = mechanicals;
     });

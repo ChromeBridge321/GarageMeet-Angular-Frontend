@@ -1,24 +1,28 @@
 export interface MechanicalREST {
-  id:               number;
-  users_id:         null;
-  cities_id:        number;
-  states_id:        number;
-  name:             string;
+  id: number;
+  users_id: number;
+  municipality_id: number;
+  name: string;
   cellphone_number: string;
-  email:            string;
-  address:          string;
-  google_maps_link: string;
-  state:            State;
-  city:             City;
+  email: string;
+  address: string;
+  latitude: number | null;
+  longitude: number | null;
+  google_maps_link: string | null;
+  state: State | null;
+  municipality: Municipality | null;
 }
 
-export interface City {
-  cities_id: number;
+export interface Municipality {
+  id: number;
   name:      string;
+  official_code: string;
+  type: 'municipality' | 'alcaldia';
 }
 
 export interface State {
-  states_id: number;
+  id: number;
   name:      string;
+  official_code: string;
+  abbreviation: string | null;
 }
-

@@ -13,8 +13,11 @@ export class MechanicalService {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
   });
-  getMechanicalWorkshopsByCity(stateId: number, cityId: number): Observable<MechanicalREST[]> {
-    return this.http.get<MechanicalREST[]>(`${this.apiUrl}/getByStateAndCity/${stateId}/${cityId}`, { headers: this.headers });
+  getMechanicalWorkshopsByLocation(type: 'state' | 'municipality', locationId: number): Observable<MechanicalREST[]> {
+    return this.http.get<MechanicalREST[]>(
+      `${this.apiUrl}/by-location/${type}/${locationId}`,
+      { headers: this.headers }
+    );
   }
 
 }

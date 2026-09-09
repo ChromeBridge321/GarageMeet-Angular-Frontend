@@ -18,11 +18,25 @@ interface user {
 
 interface mechanical_workshop {
     id: number;
-    user_id: number;
-    cities_id: string;
+    users_id: number;
+    municipality_id: number;
     name: string;
     cellphone_number: string;
     email: string;
     address: string;
-    google_maps_link: string;
+    latitude: number | null;
+    longitude: number | null;
+    google_maps_link: string | null;
+    municipality: {
+        id: number;
+        name: string;
+        official_code: string;
+        type: 'municipality' | 'alcaldia';
+    } | null;
+    state: {
+        id: number;
+        name: string;
+        official_code: string;
+        abbreviation: string | null;
+    } | null;
 }
