@@ -73,6 +73,11 @@ export class MechanicalFormCreateComponent implements OnInit {
     });
   }
 
+  onLocationCleared() {
+    this.selectedLocation = null;
+    this.mechanicalForm.patchValue({ municipality_id: null });
+  }
+
   createMechanical() {
     if (!this.mechanicalForm.valid) {
       this.showErrorMessage('Por favor, corrige los errores en el formulario');

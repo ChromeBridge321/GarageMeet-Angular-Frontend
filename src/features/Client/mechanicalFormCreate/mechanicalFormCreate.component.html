@@ -72,7 +72,7 @@
         <p-autocomplete inputId="location" placeholder="Ejemplo: Benito Juárez, Ciudad de México" class="w-full" size="large" #autocomplete [fluid]="true"
           [delay]="200" [forceSelection]="true" [suggestions]="items" (completeMethod)="search($event)"
           [(ngModel)]="selectedLocation" [ngModelOptions]="{ standalone: true }"
-          (onSelect)="onLocationSelected($event.value)" [optionLabel]="'label'">
+          (onSelect)="onLocationSelected($event.value)" (onClear)="onLocationCleared()" [optionLabel]="'label'">
           <ng-template let-location pTemplate="item">
             {{ location.label }}
           </ng-template>
@@ -175,4 +175,3 @@
     </div>
   </div>
 </div>
-
